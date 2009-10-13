@@ -1,0 +1,58 @@
+<!--
+ ************************************************************************************************
+ * 
+ * Phoebius Framework
+ * 
+ ************************************************************************************************
+ * 
+ * Copyright notice
+ * 
+ ************************************************************************************************
+-->
+
+<!ENTITY % common SYSTEM "common.dtd">
+
+%common;
+
+<!ELEMENT document 
+	(
+		(
+			title, 
+			abstract?, 
+			(chapters|contents), 
+			authors?, 
+			version?,
+			refs*
+		)
+		| refs
+	)
+>
+
+	<!ELEMENT title (#PCDATA)*>
+	<!ELEMENT abstract (#PCDATA)*>
+	<!ELEMENT contents (#PCDATA|%parsable.class;)*>
+	<!ELEMENT chapters (chapter*)>
+		<!ELEMENT chapter (title, body)>
+			<!ELEMENT body (#PCDATA|%parsable.class;)*>
+	
+	<!ELEMENT authors (author)*>
+	<!ELEMENT author (#PCDATA)*>
+	<!ATTLIST author 
+		title			CDATA "Author"
+	>
+	
+	<!ELEMENT version (#PCDATA)*>
+	
+	<!ELEMENT refs (doc*, ref*)>
+		<!ELEMENT ref (#PCDATA)*>
+		<!ATTLIST ref
+			name			CDATA #REQUIRED
+			link			CDATA #REQUIRED
+		>
+		
+		<!ELEMENT doc (#PCDATA)*>
+		<!ATTLIST doc
+			name			CDATA #IMPLIED
+			file			CDATA #REQUIRED
+		>
+

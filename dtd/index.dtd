@@ -1,0 +1,46 @@
+<!--
+ ************************************************************************************************
+ * 
+ * Phoebius Framework
+ * 
+ ************************************************************************************************
+ * 
+ * Copyright notice
+ * 
+ ************************************************************************************************
+-->
+
+<!ELEMENT index (group*)>
+
+	<!--
+		Resulting items are ordered wrt to the definition
+	-->
+	<!ELEMENT group (ref*, doc*, include*)>
+	
+		<!-- 
+			Link to an xml document that implements dtd/document.dtd.
+			This document specifies the document title by itself
+		-->
+		<!ELEMENT doc (group*)>
+		<!ATTLIST doc
+			xml			CDATA #REQUIRED
+			link		CDATA #REQUIRED
+		>
+		
+		<!-- 
+			Absolute link to any location
+		-->
+		<!ELEMENT ref (group*)>
+		<!ATTLIST ref
+			name		CDATA #REQUIRED
+			link		CDATA #REQUIRED
+		>
+		
+		<!-- 
+			Include an xml document that implements dtd/index.dtd
+		-->
+		<!ELEMENT include (group*)>
+		<!ATTLIST include
+			xml			CDATA #REQUIRED
+		>
+

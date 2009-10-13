@@ -14,16 +14,14 @@
 
 %common;
 
-<!ELEMENT document 
-	(
-		title, 
-		abstract?, 
-		(chapters|contents), 
-		authors?, 
-		version?,
-		refs*
-	)
->
+<!ELEMENT document (
+	title, 
+	abstract?, 
+	(chapters|contents), 
+	authors?, 
+	version?,
+	refs*
+)>
 
 	<!ELEMENT title (#PCDATA)*>
 	

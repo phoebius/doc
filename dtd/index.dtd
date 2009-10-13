@@ -13,7 +13,7 @@
 <!ELEMENT index (group*)>
 
 	<!--
-		Resulting items are ordered wrt to the definition
+		Resulting items are ordered wrt the definition
 	-->
 	<!ELEMENT group (ref*, doc*, include*)>
 	

@@ -284,7 +284,8 @@
             </serialized>
         </options>
     </meta>
-    <projectTree name="src">
-        <folder path="./"/>
+    <projectTree name="project.xpr">
+        <folder path="./dtd/"/>
+        <folder path="./xml/"/>
     </projectTree>
 </project>

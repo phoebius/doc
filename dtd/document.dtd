@@ -16,30 +16,30 @@
 
 <!ELEMENT document 
 	(
-		(
-			title, 
-			abstract?, 
-			(chapters|contents), 
-			authors?, 
-			version?,
-			refs*
-		)
-		| refs
+		title, 
+		abstract?, 
+		(chapters|contents), 
+		authors?, 
+		version?,
+		refs*
 	)
 >
 
 	<!ELEMENT title (#PCDATA)*>
+	
 	<!ELEMENT abstract (#PCDATA)*>
-	<!ELEMENT contents (#PCDATA|%parsable.class;)*>
+	
+	<!ELEMENT contents (#PCDATA|%parsable.class;|title)*>
+	
 	<!ELEMENT chapters (chapter*)>
 		<!ELEMENT chapter (title, body)>
 			<!ELEMENT body (#PCDATA|%parsable.class;)*>
 	
 	<!ELEMENT authors (author)*>
-	<!ELEMENT author (#PCDATA)*>
-	<!ATTLIST author 
-		title			CDATA "Author"
-	>
+		<!ELEMENT author (#PCDATA)*>
+		<!ATTLIST author 
+			title			CDATA "Author"
+		>
 	
 	<!ELEMENT version (#PCDATA)*>
 	

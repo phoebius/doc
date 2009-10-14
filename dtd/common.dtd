@@ -10,7 +10,7 @@
  ************************************************************************************************
 -->
 
-<!ENTITY % html.class "b|i|u|s" >
+<!ENTITY % html.class "b|i|u|s">
 	<!ELEMENT b (#PCDATA)*>
 	<!ELEMENT i (#PCDATA)*>
 	<!ELEMENT u (#PCDATA)*>

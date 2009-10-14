@@ -27,15 +27,16 @@
 	
 	<!ELEMENT abstract (#PCDATA)*>
 	
-	<!ELEMENT contents (#PCDATA|%parsable.class;|title)*>
+	<!ELEMENT contents (p|title)*>
+		<!ELEMENT p (%parsable.class;)*>
 	
 	<!ELEMENT chapters (chapter*)>
 		<!ELEMENT chapter (title, body)>
-			<!ELEMENT body (#PCDATA|%parsable.class;)*>
+			<!ELEMENT body (p)*>
 	
 	<!ELEMENT authors (author)*>
 		<!ELEMENT author (#PCDATA)*>
-		<!ATTLIST author 
+		<!ATTLIST author
 			title			CDATA "Author"
 		>
 	

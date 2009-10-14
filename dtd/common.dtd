@@ -10,31 +10,40 @@
  ************************************************************************************************
 -->
 
-<!ENTITY % parsable.class  "link|code|file">
+<!ENTITY % html.class "b|i|u|s" >
+	<!ELEMENT b (#PCDATA)*>
+	<!ELEMENT i (#PCDATA)*>
+	<!ELEMENT u (#PCDATA)*>
+	<!ELEMENT s (#PCDATA)*>
 
-<!--
-	"to" may be:
-	 - link to xml documentation file
-	 - link to PHP class or method (using doxy notation)
-	 - link to any other location
--->
-<!ELEMENT link (#PCDATA)*>
-<!ATTLIST link
-	to			CDATA #REQUIRED
->
+<!ENTITY % parsable.class  "#PCDATA|ul|ol|link|code|file|%html.class;">
 
-<!ELEMENT code (#PCDATA)*>
-<!ATTLIST code
-	lang		(php|plain) "php"
-	pre			(true|false) "true"
-	title		CDATA #IMPLIED
->
+	<!ELEMENT ul (%parsable.class;|li)*>
+	<!ELEMENT ol (%parsable.class;|li)*>
+		<!ELEMENT li (%parsable.class;)*>
 
-<!ELEMENT file EMPTY>
-<!ATTLIST file
-	lang		(php|plain) "php"
-	pre			(true|false) "true"
-	title		CDATA #IMPLIED
-	path		CDATA #REQUIRED
->
+	<!--
+		"to" may be:
+		 - link to xml documentation file
+		 - link to PHP class or method (using doxy notation)
+		 - link to any other location
+	-->
+	<!ELEMENT link (%parsable.class;)*>
+	<!ATTLIST link
+		to			CDATA #REQUIRED
+	>
+	
+	<!ELEMENT code (#PCDATA)*>
+	<!ATTLIST code
+		lang		(php|plain) "php"
+		type		(inline|pre) "inline"
+		title		CDATA #IMPLIED
+	>
+	
+	<!ELEMENT file EMPTY>
+	<!ATTLIST file
+		lang		(php|plain) "php"
+		title		CDATA #IMPLIED
+		path		CDATA #REQUIRED
+	>
 

@@ -10,37 +10,37 @@
  ************************************************************************************************
 -->
 
-<!ELEMENT index (group)*>
+<!ENTITY % reference.class "ref|doc|include">
 
-	<!--
-		Resulting items are ordered wrt the definition
+<!--
+	Resulting items are ordered wrt the definition
+-->
+<!ELEMENT index (%reference.class;)?>
+
+	<!-- 
+		Link to an xml document that implements dtd/document.dtd.
+		This document specifies the document title by itself
 	-->
-	<!ELEMENT group (ref|doc|include)*>
+	<!ELEMENT doc (%reference.class;)*>
+	<!ATTLIST doc
+		uri			CDATA #IMPLIED
+		xml			CDATA #REQUIRED
+	>
 	
-		<!-- 
-			Link to an xml document that implements dtd/document.dtd.
-			This document specifies the document title by itself
-		-->
-		<!ELEMENT doc (group)*>
-		<!ATTLIST doc
-			xml			CDATA #REQUIRED
-			link		CDATA #REQUIRED
-		>
-		
-		<!-- 
-			Absolute link to any location
-		-->
-		<!ELEMENT ref (group)*>
-		<!ATTLIST ref
-			name		CDATA #REQUIRED
-			link		CDATA #REQUIRED
-		>
-		
-		<!-- 
-			Include an xml document that implements dtd/index.dtd
-		-->
-		<!ELEMENT include (group)*>
-		<!ATTLIST include
-			xml			CDATA #REQUIRED
-		>
+	<!-- 
+		Absolute link to any location
+	-->
+	<!ELEMENT ref (%reference.class;)*>
+	<!ATTLIST ref
+		name		CDATA #REQUIRED
+		link		CDATA #REQUIRED
+	>
+	
+	<!-- 
+		Include an xml document that implements dtd/index.dtd
+	-->
+	<!ELEMENT include EMPTY>
+	<!ATTLIST include
+		xml			CDATA #REQUIRED
+	>
 

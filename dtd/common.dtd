@@ -10,42 +10,41 @@
  ************************************************************************************************
 -->
 
-<!ENTITY % inline.class "#PCDATA|b|i|u|s">
-	<!ELEMENT b (%inline.class;)*>
-	<!ELEMENT i (%inline.class;)*>
-	<!ELEMENT u (%inline.class;)*>
-	<!ELEMENT s (%inline.class;)*>
-	
-<!ENTITY % linking.class "link" >
+<!ENTITY % html.class "#PCDATA|b|i|u|s" >
+	<!ELEMENT b (%html.class;)*>
+	<!ELEMENT i (%html.class;)*>
+	<!ELEMENT u (%html.class;)*>
+	<!ELEMENT s (%html.class;)*>
+
+<!ENTITY % inline.class "%html.class;|link|code|file">
 	<!--
 		"to" may be:
 		 - link to xml documentation file
 		 - link to PHP class or method (using doxy notation)
 		 - link to any other location
 	-->
-	<!ELEMENT link (%inline.class;)*>
+	<!ELEMENT link (%html.class;)*>
 	<!ATTLIST link
 		to			CDATA #REQUIRED
 	>
-
-<!ENTITY % lists.class "ul|ol" >	
-	<!ELEMENT ul (%inline.class;|%linking.class;|li)*>
-	<!ELEMENT ol (%inline.class;|%linking.class;|li)*>
-		<!ELEMENT li (%inline.class;|%linking.class;)*>
-
-<!ENTITY % parsable.class  "%inline.class;|code|file|%lists.class;|%linking.class;">
-
 	<!ELEMENT code (#PCDATA)*>
-	<!ATTLIST code
-		lang		(php|plain) "php"
-		type		(inline|pre) "inline"
-		title		CDATA #IMPLIED
-	>
-	
-	<!ELEMENT file EMPTY>
-	<!ATTLIST file
-		lang		(php|plain) "php"
-		title		CDATA #IMPLIED
-		path		CDATA #REQUIRED
-	>
+		<!ATTLIST code
+			lang		(php|xml|bash|plain) "plain"
+			type		(inline|pre) "inline"
+			title		CDATA #IMPLIED
+		>
+	<!ELEMENT source EMPTY>
+		<!ATTLIST source
+			lang		(php|xml|bash|plain) "plain"
+			title		CDATA #IMPLIED
+			path		CDATA #REQUIRED
+		>
 
+<!ENTITY % lists.class "ul|ol">
+	<!ELEMENT ul (%inline.class;|li)*>
+	<!ELEMENT ol (%inline.class;|li)*>
+		<!ELEMENT li (%inline.class;|%lists.class;)*>
+
+<!ENTITY % parsable.class  "%inline.class;|%lists.class;">
+
+	

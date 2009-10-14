@@ -11,6 +11,7 @@
 -->
 
 <!ENTITY % common SYSTEM "common.dtd">
+<!ENTITY % index SYSTEM "index.dtd">
 
 %common;
 
@@ -32,7 +33,7 @@
 	
 	<!ELEMENT chapters (chapter)*>
 		<!ELEMENT chapter (title|body)*>
-			<!ELEMENT body (p)*>
+			<!ELEMENT body (title|p)*>
 	
 	<!ELEMENT authors (author)*>
 		<!ELEMENT author (#PCDATA)*>
@@ -42,7 +43,7 @@
 	
 	<!ELEMENT version (#PCDATA)*>
 	
-	<!ELEMENT refs (doc|ref)*>
+	<!ELEMENT refs ((doc|ref)*|index)>
 		<!ELEMENT ref (#PCDATA)*>
 		<!ATTLIST ref
 			name			CDATA #REQUIRED
@@ -53,5 +54,11 @@
 		<!ATTLIST doc
 			name			CDATA #IMPLIED
 			file			CDATA #REQUIRED
+		>
+		
+		<!-- path to index xml file that implements dtd/index.dtd -->
+		<!ELEMENT index EMPTY>
+		<!ATTLIST index
+			path			CDATA #REQUIRED
 		>
 

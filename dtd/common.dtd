@@ -33,7 +33,7 @@
 	<!ELEMENT ol (%inline.class;|%linking.class;|li)*>
 		<!ELEMENT li (%inline.class;|%linking.class;)*>
 
-<!ENTITY % parsable.class  "%lists.class;|%inline.class;|%linking.class;|code|file">
+<!ENTITY % parsable.class  "%inline.class;|code|file|%lists.class;|%linking.class;">
 
 	<!ELEMENT code (#PCDATA)*>
 	<!ATTLIST code

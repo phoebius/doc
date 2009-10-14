@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE namespaces SYSTEM "../../dtd/ns.dtd">
+
+<namespaces>
+	<ns id="App">
+		<about>Application lifecycle wrappers over environment state</about>
+		<includes>
+			<ns id="Routing" name="Request routing">
+				<about>Prepares, routes and dispatches the request to the target request
+					handler</about>
+				<includes>
+					<ns id="Web">
+						<about>Handles web requests</about>
+					</ns>
+					<ns id="Exceptions">
+						<includes>
+							<ns id="RewriteRouting" />
+							<ns id="RouteHandle" />
+						</includes>
+					</ns>
+				</includes>
+			</ns>
+
+			<ns id="Server">
+				<about>Wrappers over server information</about>
+			</ns>
+
+			<ns id="Web">
+				<about>Wrappers over web-driven environments</about>
+			</ns>
+		</includes>
+	</ns>
+	<ns id="Core">
+		<about>Low-level framework's infrastructure</about>
+
+		<includes>
+			<ns id="Bootstrap">
+				<about>Internal handlers for automating dynamic library load</about>
+			</ns>
+
+			<ns id="Exceptions"></ns>
+
+			<ns id="Expression">
+				<about>Basic expression trees implementation</about>
+				<includes>
+					<ns id="LogicalOperators">
+						<about>Various logical operators used in expression trees for connecting subjects</about>
+					</ns>
+				</includes>
+			</ns>
+
+			<ns id="Patterns">
+				<about>Various base classes</about>
+			</ns>
+
+			<ns id="Types">
+				<about> Implementation of base types' wrappers</about>
+
+				<includes>
+					<ns id="BuiltIn">
+						<about>Wrappers over primitive types built in php core</about>
+					</ns>
+
+					<ns id="Complex">
+						<about>Wrappers over complex types</about>
+					</ns>
+
+				</includes>
+			</ns>
+		</includes>
+	</ns>
+	<ns id="Dal">
+		<about>Data abstraction layers</about>
+
+		<includes>
+			<ns id="Cache">
+				<about>Cache DAL</about>
+			</ns>
+
+			<ns id="DB">
+				<about>Unified RDBMS interfaces</about>
+
+				<includes>
+					<ns id="Exceptions"> </ns>
+
+					<ns id="Expression">
+						<about>Expression trees over SQL</about>
+					</ns>
+
+					<ns id="Query">
+						<about>OO wrappers over SQL queries</about>
+					</ns>
+
+					<ns id="Schema">
+						<about>OO wrappers over DB schema</about>
+					</ns>
+
+					<ns id="Sql">
+						<about>OO wrappers over various SQL particles</about>
+					</ns>
+
+					<ns id="Transaction">
+						<about>Unified RDBMS transaction interface</about>
+					</ns>
+
+				</includes>
+			</ns>
+		</includes>
+	</ns>
+
+	<ns id="Mvc">
+		<about>Model-view-controller implementation</about>
+		<includes>
+			<ns id="ActionResults">
+				<about>Wrappers over various results that actions produce while execution</about>
+			</ns>
+
+			<ns id="PhpLayout">
+				<about>Simple template engine based on raw PHP and classes</about>
+			</ns>
+
+			<ns id="Exceptions" />
+		</includes>
+	</ns>
+
+	<ns id="Orm">
+		<about>Object relational mapping engine - the heart of Phoebius framework</about>
+		<includes>
+			<ns id="Dao">
+				<about>Data access objects - a unified interface for accessing ORM objectes wherever
+					they are stored</about>
+			</ns>
+
+			<ns id="Domain">
+				<about>Implementation of ORM objects aggregator</about>
+				<includes>
+					<ns id="CodeGenerator"> </ns>
+
+					<ns id="Meta">
+						<about>Utilities to import data from various sources into internal graph
+							that reflects ORM entities, their properties and relations</about>
+					</ns>
+				</includes>
+			</ns>
+
+			<ns id="Exceptions" />
+
+			<ns id="Expression">
+				<about>Queries over ORM entities</about>
+			</ns>
+
+			<ns id="Map">
+				<about>Mapper of raw RDBMS (or any other source, accessed by DAO provider) data and
+					ORM objects' types</about>
+			</ns>
+
+			<ns id="Model">
+				<about>OO wrappers over internal representation of ORM objects' graph (inner
+					structures and dependencies)</about>
+			</ns>
+
+			<ns id="Types">
+				<about>O wrappers over various ORM entity property types</about>
+			</ns>
+
+		</includes>
+	</ns>
+
+	<ns id="Test">
+		<about>Base classes for framework unit tests</about>
+	</ns>
+
+	<ns id="Utils">
+		<about>Helper packages</about>
+		<includes>
+			<ns id="Cipher" />
+			<ns id="Image" />
+			<ns id="Net" />
+			<ns id="Stream" />
+			<ns id="Sys" />
+		</includes>
+	</ns>
+</namespaces>

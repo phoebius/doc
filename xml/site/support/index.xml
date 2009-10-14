@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE index SYSTEM "../../dtd/index.dtd">
+<!DOCTYPE index SYSTEM "../../../dtd/index.dtd">
 <index>
 	<ref name="Support" link="support/">
 		<doc xml="a-beginners-guide.xml"></doc>

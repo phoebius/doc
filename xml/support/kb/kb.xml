@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE document SYSTEM "file:/F:/Server/home/phoebius-doc/dtd/document.dtd">
+<document>
+	<title>The Knowledge Base</title>
+	<chapters>
+		<chapter>
+			<title>Abstract</title>
+			<body>
+				<p>
+					<ul>
+						<li>
+							<link to="abstract/"></link>
+						</li>
+					</ul>
+				</p>
+			</body>
+		</chapter>
+	</chapters>
+</document>

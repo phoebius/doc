@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE document SYSTEM "../../dtd/document.dtd">
+<document>
+	<title> Phoebius Roadmap </title>
+	<abstract> Phoebius framework in its current state already provides an innovative implementation
+		of features-in-demand, but besides them we have a lot of other ideas for improving the
+		product and extending the feature list. The source code repository is currently unpublished,
+		but if you wish to participate in development, feel free to contact us. </abstract>
+	<chapters>
+		<chapter>
+			<title>The stable releases</title>
+			<body>
+				<p>
+					<ul>
+						<li>v1.0 (released in November 1, 2009)</li>
+					</ul>
+				</p>
+			</body>
+		</chapter>
+		<chapter>
+			<title>The Current Branch (1.0)</title>
+			<body>
+				<p>
+					v1.2.1 is planned to be released at December 1, 2009, and will feature:
+					<ul>
+						<li>readonly container</li>
+						<li>enum code generator</li>
+					</ul>
+				</p>
+				<p>
+					v1.2.2 will introduce the distributed cache layer over data access
+					objects for speeding up the process of assembling the ORM entites 
+				</p>
+			</body>
+		</chapter>
+		<chapter>
+			<title>
+				The Development Branches
+			</title>
+			<body>
+				<p>The development branches are introduced to support the implementation of huge
+				long-run features.</p>
+				<title>
+					Branch 1.2-dev
+				</title>
+				<p>
+					<ul>
+						<li> criteria over Orm.Dao </li>
+						<li> Mvc: action filters </li>
+						<li> App.Routing full refactoring </li>
+						<li>MVC: view helpers </li>
+						<li>Session handler </li>
+					</ul>
+				</p>
+				<title>
+					Branch 1.4-dev
+				</title>
+				<p>
+					<ul>
+						<li>AJAX integration</li>
+						<li>forms</li>
+						<li>validation</li>
+					</ul>
+				</p>
+			</body>
+		</chapter>
+	</chapters>
+</document>

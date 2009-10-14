@@ -285,7 +285,6 @@
         </options>
     </meta>
     <projectTree name="project.xpr">
-        <folder path="./dtd/"/>
-        <folder path="./xml/"/>
+        <folder path="./"/>
     </projectTree>
 </project>

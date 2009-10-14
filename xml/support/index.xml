@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE index SYSTEM "../../dtd/index.dtd">
+<index>
+	<ref name="Support" link="support/">
+		<doc xml="a-beginners-guide.xml"></doc>
+		<include xml="manual/index.xml"></include>
+		<include xml="kb/index.xml"></include>
+		<ref name="API Documentation" link="/support/api/"></ref>
+		<ref name="Feedback" link="/feedback/"></ref>
+	</ref>
+</index>

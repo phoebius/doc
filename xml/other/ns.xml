@@ -50,19 +50,19 @@
 			</ns>
 
 			<ns id="Patterns">
-				<about>Various base classes</about>
+				<about>Base classes</about>
 			</ns>
 
 			<ns id="Types">
-				<about> Implementation of base types' wrappers</about>
+				<about>Object-oriented Type wrappers</about>
 
 				<includes>
 					<ns id="BuiltIn">
-						<about>Wrappers over primitive types built in php core</about>
+						<about>Primitive type wrappers</about>
 					</ns>
 
 					<ns id="Complex">
-						<about>Wrappers over complex types</about>
+						<about>Complex types</about>
 					</ns>
 
 				</includes>
@@ -74,7 +74,7 @@
 
 		<includes>
 			<ns id="Cache">
-				<about>Cache DAL</about>
+				<about>Cache abstraction</about>
 			</ns>
 
 			<ns id="DB">
@@ -100,7 +100,7 @@
 					</ns>
 
 					<ns id="Transaction">
-						<about>Unified RDBMS transaction interface</about>
+						<about>Transaction interface</about>
 					</ns>
 
 				</includes>
@@ -116,7 +116,8 @@
 			</ns>
 
 			<ns id="PhpLayout">
-				<about>Simple template engine based on raw PHP and classes</about>
+				<about>Simple template engine based on raw PHP and classes. Similar to ASP.NET's
+					System.Web.UI</about>
 			</ns>
 
 			<ns id="Exceptions" />
@@ -127,7 +128,7 @@
 		<about>Object relational mapping engine - the heart of Phoebius framework</about>
 		<includes>
 			<ns id="Dao">
-				<about>Data access objects - a unified interface for accessing ORM objectes wherever
+				<about>Data access objects - a unified interface for accessing ORM objects wherever
 					they are stored</about>
 			</ns>
 

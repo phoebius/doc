@@ -16,7 +16,7 @@
 	<!ELEMENT u (%html.class;)*>
 	<!ELEMENT s (%html.class;)*>
 
-<!ENTITY % inline.class "%html.class;|link|code|file">
+<!ENTITY % inline.class "%html.class;|link|code|source">
 	<!--
 		"to" may be:
 		 - link to xml documentation file

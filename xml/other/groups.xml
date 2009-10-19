@@ -63,7 +63,7 @@
 				</includes>
 			</group>
 
-			<group id="Pattergroup">
+			<group id="Patterns">
 				<about>Base classes</about>
 			</group>
 

@@ -1,184 +1,198 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE namespaces SYSTEM "../../dtd/ns.dtd">
+<!--
+ * ***********************************************************************************************
+ *
+ * Phoebius Framework
+ *
+ * **********************************************************************************************
+ *
+ * Copyright (c) 2009 phoebius.org
+ *
+ * All rights reserved.
+ *
+ *************************************************************************************************
+-->
 
-<namespaces>
-	<ns id="App">
+<!DOCTYPE groups SYSTEM "../../dtd/groups.dtd">
+
+<groups>
+	<group id="App">
 		<about>Application lifecycle wrappers over environment state</about>
 		<includes>
-			<ns id="Routing" name="Request routing">
+			<group id="Routing" name="Request routing">
 				<about>Prepares, routes and dispatches the request to the target request
 					handler</about>
 				<includes>
-					<ns id="Web">
+					<group id="Web">
 						<about>Handles web requests</about>
-					</ns>
-					<ns id="Exceptions">
+					</group>
+					<group id="Exceptions">
 						<includes>
-							<ns id="RewriteRouting" />
-							<ns id="RouteHandle" />
+							<group id="RewriteRouting" />
+							<group id="RouteHandle" />
 						</includes>
-					</ns>
+					</group>
 				</includes>
-			</ns>
+			</group>
 
-			<ns id="Server">
+			<group id="Server">
 				<about>Wrappers over server information</about>
-			</ns>
+			</group>
 
-			<ns id="Web">
+			<group id="Web">
 				<about>Wrappers over web-driven environments</about>
-			</ns>
+			</group>
 		</includes>
-	</ns>
-	<ns id="Core">
+	</group>
+	<group id="Core">
 		<about>Low-level framework's infrastructure</about>
 
 		<includes>
-			<ns id="Bootstrap">
+			<group id="Bootstrap">
 				<about>Internal handlers for automating dynamic library load</about>
-			</ns>
+			</group>
 
-			<ns id="Exceptions"></ns>
+			<group id="Exceptions"></group>
 
-			<ns id="Expression">
+			<group id="Expression">
 				<about>Basic expression trees implementation</about>
 				<includes>
-					<ns id="LogicalOperators">
+					<group id="LogicalOperators">
 						<about>Various logical operators used in expression trees for connecting subjects</about>
-					</ns>
+					</group>
 				</includes>
-			</ns>
+			</group>
 
-			<ns id="Patterns">
+			<group id="Pattergroup">
 				<about>Base classes</about>
-			</ns>
+			</group>
 
-			<ns id="Types">
+			<group id="Types">
 				<about>Object-oriented Type wrappers</about>
 
 				<includes>
-					<ns id="BuiltIn">
+					<group id="BuiltIn">
 						<about>Primitive type wrappers</about>
-					</ns>
+					</group>
 
-					<ns id="Complex">
+					<group id="Complex">
 						<about>Complex types</about>
-					</ns>
+					</group>
 
 				</includes>
-			</ns>
+			</group>
 		</includes>
-	</ns>
-	<ns id="Dal">
+	</group>
+	<group id="Dal">
 		<about>Data abstraction layers</about>
 
 		<includes>
-			<ns id="Cache">
+			<group id="Cache">
 				<about>Cache abstraction</about>
-			</ns>
+			</group>
 
-			<ns id="DB">
+			<group id="DB">
 				<about>Unified RDBMS interfaces</about>
 
 				<includes>
-					<ns id="Exceptions"> </ns>
+					<group id="Exceptions"> </group>
 
-					<ns id="Expression">
+					<group id="Expression">
 						<about>Expression trees over SQL</about>
-					</ns>
+					</group>
 
-					<ns id="Query">
+					<group id="Query">
 						<about>OO wrappers over SQL queries</about>
-					</ns>
+					</group>
 
-					<ns id="Schema">
+					<group id="Schema">
 						<about>OO wrappers over DB schema</about>
-					</ns>
+					</group>
 
-					<ns id="Sql">
+					<group id="Sql">
 						<about>OO wrappers over various SQL particles</about>
-					</ns>
+					</group>
 
-					<ns id="Transaction">
+					<group id="Transaction">
 						<about>Transaction interface</about>
-					</ns>
+					</group>
 
 				</includes>
-			</ns>
+			</group>
 		</includes>
-	</ns>
+	</group>
 
-	<ns id="Mvc">
+	<group id="Mvc">
 		<about>Model-view-controller implementation</about>
 		<includes>
-			<ns id="ActionResults">
+			<group id="ActionResults">
 				<about>Wrappers over various results that actions produce while execution</about>
-			</ns>
+			</group>
 
-			<ns id="PhpLayout">
+			<group id="PhpLayout">
 				<about>Simple template engine based on raw PHP and classes. Similar to ASP.NET's
 					System.Web.UI</about>
-			</ns>
+			</group>
 
-			<ns id="Exceptions" />
+			<group id="Exceptions" />
 		</includes>
-	</ns>
+	</group>
 
-	<ns id="Orm">
+	<group id="Orm">
 		<about>Object relational mapping engine - the heart of Phoebius framework</about>
 		<includes>
-			<ns id="Dao">
+			<group id="Dao">
 				<about>Data access objects - a unified interface for accessing ORM objects wherever
 					they are stored</about>
-			</ns>
+			</group>
 
-			<ns id="Domain">
+			<group id="Domain">
 				<about>Implementation of ORM objects aggregator</about>
 				<includes>
-					<ns id="CodeGenerator"> </ns>
+					<group id="CodeGenerator"> </group>
 
-					<ns id="Meta">
+					<group id="Meta">
 						<about>Utilities to import data from various sources into internal graph
 							that reflects ORM entities, their properties and relations</about>
-					</ns>
+					</group>
 				</includes>
-			</ns>
+			</group>
 
-			<ns id="Exceptions" />
+			<group id="Exceptions" />
 
-			<ns id="Expression">
+			<group id="Expression">
 				<about>Queries over ORM entities</about>
-			</ns>
+			</group>
 
-			<ns id="Map">
+			<group id="Map">
 				<about>Mapper of raw RDBMS (or any other source, accessed by DAO provider) data and
 					ORM objects' types</about>
-			</ns>
+			</group>
 
-			<ns id="Model">
+			<group id="Model">
 				<about>OO wrappers over internal representation of ORM objects' graph (inner
 					structures and dependencies)</about>
-			</ns>
+			</group>
 
-			<ns id="Types">
+			<group id="Types">
 				<about>O wrappers over various ORM entity property types</about>
-			</ns>
+			</group>
 
 		</includes>
-	</ns>
+	</group>
 
-	<ns id="Test">
+	<group id="Test">
 		<about>Base classes for framework unit tests</about>
-	</ns>
+	</group>
 
-	<ns id="Utils">
+	<group id="Utils">
 		<about>Helper packages</about>
 		<includes>
-			<ns id="Cipher" />
-			<ns id="Image" />
-			<ns id="Net" />
-			<ns id="Stream" />
-			<ns id="Sys" />
+			<group id="Cipher" />
+			<group id="Image" />
+			<group id="Net" />
+			<group id="Stream" />
+			<group id="Sys" />
 		</includes>
-	</ns>
-</namespaces>
+	</group>
+</groups>

@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * ***********************************************************************************************
+ *
+ * Phoebius Framework
+ *
+ * **********************************************************************************************
+ *
+ * Copyright (c) 2009 phoebius.org
+ *
+ * All rights reserved.
+ *
+ *************************************************************************************************
+-->
+
 <!DOCTYPE document SYSTEM "../../dtd/document.dtd">
+
 <document>
 	<title> Phoebius Roadmap </title>
 	<abstract> Phoebius framework in its current state already provides an innovative implementation

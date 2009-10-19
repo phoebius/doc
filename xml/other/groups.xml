@@ -26,12 +26,7 @@
 					<group id="Web">
 						<about>Handles web requests</about>
 					</group>
-					<group id="Exceptions">
-						<includes>
-							<group id="RewriteRouting" />
-							<group id="RouteHandle" />
-						</includes>
-					</group>
+					<group id="Exceptions"></group>
 				</includes>
 			</group>
 

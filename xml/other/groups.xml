@@ -58,6 +58,10 @@
 				</includes>
 			</group>
 
+			<group id="FS">
+				<about>Classes related to filesystem items</about>
+			</group>
+
 			<group id="Patterns">
 				<about>Base classes</about>
 			</group>

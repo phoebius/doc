@@ -18,15 +18,14 @@
 <document>
 	<title>Phoebius Featured Highlights</title>
 	<chapters>
-		<chapter>
-			<title> Unified infrastructure </title>
-			<body>
-				<title>Standardizing the development process</title>
-				<p> Phoebius framework defines a <b>common filesystem layout</b> and coding style,
-					so applications based on framework are meant to look similar and thus
-					application maintainability decreases. </p>
+		<chapter title="Unified infrastructure">
+			<subchapter title="Standardizing the development process">
+				<p>Phoebius framework defines a <b>common filesystem layout</b> and coding style, so
+					applications based on framework are meant to look similar and thus application
+					maintainability decreases.</p>
+			</subchapter>
 
-				<title>Predictable control flow</title>
+			<subchapter title="Predictable control flow">
 				<p> An application logic is <b>exception-centric</b>: every PHP error/warning/notice
 					is converted to an exception. Such a concept helps to avoid tons of unnoticeable
 					inconsistencies (like an access to the undefined index of an array, etc) and
@@ -38,9 +37,10 @@
 					Explicit and unambiguous type hints are specified for most method arguments.
 					Moreover, explicit type hints and type checks are used even for primitive
 					build-in types (integer, boolean, etc): in Mvc package an implicit type casts
-					are used; in other packages primitive type assertions are used here and there. </p>
-
-				<title>Testing the packages</title>
+					are used; in other packages primitive type assertions are used here and there.
+				</p>
+			</subchapter>
+			<subchapter title="Testing the packages">
 				<p> Phoebius framework is easily <b>testable</b>, because being a true-OO
 					application it minimizes the coupling between classes and packages and provides
 					the <b>ability to mock any object</b> that is passed even into the framework
@@ -49,13 +49,12 @@
 					cohesion of interfaces; it is also possible to replace the contextual objects
 					(e.g. IWebRequest, IWebResponse) with your own implementations that produce
 					custom results, log and check the calls and do much more. </p>
-			</body>
+			</subchapter>
+
 		</chapter>
 
-		<chapter>
-			<title>Meta-programming</title>
-			<body>
-				<title>Dealing with the complexity </title>
+		<chapter title="Meta-programming">
+			<subchapter title="Dealing with the complexity">
 				<p> Phoebius framework helps the developers to solve the tasks in context of project
 					domain abstracting away from database tables and entries. This dramatically
 					increases the development process, due the logic of the code becomes simpler
@@ -67,8 +66,9 @@
 					application becomes truly application programming, but not a low-level
 					programming: you operate the essenses of the real world instead of database
 					records.</p>
+			</subchapter>
 
-				<title>Code generation</title>
+			<subchapter title="Code generation">
 				<p> The project domain is used as a predicate when generate a code of the classes
 					that implement lots typical developers tasks varying from project to project: <ul>
 						<li>querying entities against the used storage (typically, it is a RDBMS)
@@ -82,8 +82,9 @@
 							operations over defined essences</li>
 					</ul>
 				</p>
+			</subchapter>
 
-				<title>Scalability</title>
+			<subchapter title="Scalability">
 				<p> Phoebius ORM abstracts away from the database records, giving only the PHP
 					objects to the end-developer: project domain entities are classes, entity
 					properties are classes too. Therefore the ability to implement different
@@ -96,27 +97,23 @@
 							supported and transparently handled by the framework from scratch) </li>
 					</ol>
 				</p>
-			</body>
+			</subchapter>
 		</chapter>
-		<chapter>
-			<title>Application Logic</title>
-			<body>
-				<p> Phoebius MVC subsystem has an architecture similar to the ASP.NET MVC. By
-					default it provides a ready-to-use toolset to make request handlers splitted
-					into separate actions with automated casting of incoming parameters to even
-					complex objects. </p>
-				<p> Separation of application logic and presentation is achieved by Mvc.PhpLayout -
-					a simplified ASP.NET System.Web.UI implementation, which is able to link markup
-					scripts with classes. </p>
-				<p> Routing package aims to provide a unified ability to rewrite and map requests to
-					eliminate a necessity of using different webserver-specific tools (Apache
-					mod_rewrite, nginx config, etc). It is needed to make a development process less
-					obscure by using the object-oriented interface which features the independence
-					from the environment (and thus the simplicity of deployment), possibility to
-					test request matches, ability to create complex criteria of matching the
-					requests (e.g. closures, etc). Moreover, it has a close integration with MVC so
-					you can route requests directly to MVC actions/commands. </p>
-			</body>
+		<chapter title="Application Logic">
+			<p> Phoebius MVC subsystem has an architecture similar to the ASP.NET MVC. By default it
+				provides a ready-to-use toolset to make request handlers splitted into separate
+				actions with automated casting of incoming parameters to even complex objects. </p>
+			<p> Separation of application logic and presentation is achieved by Mvc.PhpLayout - a
+				simplified ASP.NET System.Web.UI implementation, which is able to link markup
+				scripts with classes. </p>
+			<p> Routing package aims to provide a unified ability to rewrite and map requests to
+				eliminate a necessity of using different webserver-specific tools (Apache
+				mod_rewrite, nginx config, etc). It is needed to make a development process less
+				obscure by using the object-oriented interface which features the independence from
+				the environment (and thus the simplicity of deployment), possibility to test request
+				matches, ability to create complex criteria of matching the requests (e.g. closures,
+				etc). Moreover, it has a close integration with MVC so you can route requests
+				directly to MVC actions/commands. </p>
 		</chapter>
 	</chapters>
 </document>

@@ -18,10 +18,13 @@
 
 %common;
 
+<!ENTITY % contents.class "%parsable.class;|p">
+	<!ELEMENT p (%parsable.class;)*>
+
 <!ELEMENT document (
 	title, 
 	abstract?, 
-	(chapters|contents), 
+	chapters, 
 	authors?, 
 	version?,
 	refs*
@@ -29,14 +32,17 @@
 
 	<!ELEMENT title (#PCDATA)*>
 	
-	<!ELEMENT abstract (#PCDATA)*>
-	
-	<!ELEMENT contents (p|title)*>
-		<!ELEMENT p (%parsable.class;)*>
+	<!ELEMENT abstract (%contents.class;)*>
 	
 	<!ELEMENT chapters (chapter)*>
-		<!ELEMENT chapter (title|body)*>
-			<!ELEMENT body (title|p)*>
+		<!ELEMENT chapter (%contents.class;|subchapter)*>
+		<!ATTLIST chapter
+			title			CDATA #IMPLIED
+		>
+			<!ELEMENT subchapter (%contents.class;)* >
+				<!ATTLIST subchapter
+					title			CDATA #IMPLIED
+				>
 	
 	<!ELEMENT authors (author)*>
 		<!ELEMENT author (#PCDATA)*>
@@ -46,7 +52,7 @@
 	
 	<!ELEMENT version (#PCDATA)*>
 	
-	<!ELEMENT refs ((doc|ref)*|index)>
+	<!ELEMENT refs (doc|ref)*>
 		<!ELEMENT ref (#PCDATA)*>
 		<!ATTLIST ref
 			name			CDATA #REQUIRED
@@ -55,13 +61,7 @@
 		
 		<!ELEMENT doc (#PCDATA)*>
 		<!ATTLIST doc
-			name			CDATA #IMPLIED
+			name			CDATA #REQUIRED
 			file			CDATA #REQUIRED
 		>
 		
-		<!-- path to index xml file that implements dtd/index.dtd -->
-		<!ELEMENT index EMPTY>
-		<!ATTLIST index
-			path			CDATA #REQUIRED
-		>
-

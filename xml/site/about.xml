@@ -17,19 +17,22 @@
 
 <document>
 	<title>About Phoebius Framework</title>
-	<contents>
-		<p>Phoebius is PHP5 framework for complex web-services.</p>
+	<chapters>
+		<chapter>
 
-		<p> It's goal is the minimization of risks and costs of software development by shifting the
-			developers' attention to the context of application logic. You just define a project
-			domain and then apply the programming code against it. The bootstrapping, mapping,
-			testing and deployment is carried by the framework thus cutting the number of potential
-			inconsistencies. Nevertheless, having a truly object-oriented architecture, Phoebius
-			provides an ability to configure and re-implement an interface of at least any
-			application layer within the framework stack. </p>
+			<p>Phoebius is PHP5 framework for complex web-services.</p>
 
-		<p> Phoebius framework is an open-source project, published under the terms of the LGPL. </p>
+			<p> It's goal is the minimization of risks and costs of software development by shifting
+				the developers' attention to the context of application logic. You just define a
+				project domain and then apply the programming code against it. The bootstrapping,
+				mapping, testing and deployment is carried by the framework thus cutting the number
+				of potential inconsistencies. Nevertheless, having a truly object-oriented
+				architecture, Phoebius provides an ability to configure and re-implement an
+				interface of at least any application layer within the framework stack. </p>
 
+			<p> Phoebius framework is an open-source project, published under the terms of the LGPL. </p>
 
-	</contents>
+		</chapter>
+
+	</chapters>
 </document>

@@ -18,17 +18,5 @@
 <document>
 	<title>The Knowledge Base</title>
 	<chapters>
-		<chapter>
-			<title>Abstract</title>
-			<body>
-				<p>
-					<ul>
-						<li>
-							<link to="abstract/"></link>
-						</li>
-					</ul>
-				</p>
-			</body>
-		</chapter>
 	</chapters>
 </document>

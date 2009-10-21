@@ -23,7 +23,6 @@
 
 <!ELEMENT document (
 	title, 
-	abstract?, 
 	chapters, 
 	authors?, 
 	version?,
@@ -31,8 +30,6 @@
 )>
 
 	<!ELEMENT title (#PCDATA)*>
-	
-	<!ELEMENT abstract (%contents.class;)*>
 	
 	<!ELEMENT chapters (chapter)*>
 		<!ELEMENT chapter (%contents.class;|subchapter)*>

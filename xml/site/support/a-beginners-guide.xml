@@ -16,9 +16,8 @@
 <!DOCTYPE document SYSTEM "../../../dtd/document.dtd">
 
 <document>
-	<title />
+	<title>A Beginners' Guide</title>
 	<chapters>
-
 		<chapter title="Introduction">
 			<p> First of all, welcome to Phoebius framework. We see Phoebius as something that
 				developers needed to produce complex web-services natively featured everything that

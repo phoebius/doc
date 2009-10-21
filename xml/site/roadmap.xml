@@ -17,30 +17,29 @@
 
 <document>
 	<title> Phoebius Roadmap </title>
-	<abstract> <p>Phoebius framework in its current state already provides an innovative implementation
-		of features-in-demand, but besides them we have a lot of other ideas for improving the
-		product and extending the feature list. The source code repository is currently unpublished,
-		but if you wish to participate in development, feel free to contact us.</p> </abstract>
 	<chapters>
+		<chapter>
+			<p>Phoebius framework in its current state already provides an innovative implementation
+				of features-in-demand, but besides them we have a lot of other ideas for improving
+				the product and extending the feature list. The source code repository is currently
+				unpublished, but if you wish to participate in development, feel free to contact
+				us.</p>
+		</chapter>
 		<chapter title="The stable releases">
-				<p>
-					<ul>
-						<li>v1.0 (released in November 1, 2009)</li>
-					</ul>
-				</p>
+			<p>
+				<ul>
+					<li>v1.0 (released in November 1, 2009)</li>
+				</ul>
+			</p>
 		</chapter>
 		<chapter title="The Current Branch (1.0)">
-				<p>
-					v1.2.1 is planned to be released at December 1, 2009, and will feature:
-					<ul>
-						<li>readonly container</li>
-						<li>enum code generator</li>
-					</ul>
-				</p>
-				<p>
-					v1.2.2 will introduce the distributed cache layer over data access
-					objects for speeding up the process of assembling the ORM entites 
-				</p>
+			<p> v1.2.1 is planned to be released at December 1, 2009, and will feature: <ul>
+					<li>readonly container</li>
+					<li>enum code generator</li>
+				</ul>
+			</p>
+			<p> v1.2.2 will introduce the distributed cache layer over data access objects for
+				speeding up the process of assembling the ORM entites </p>
 		</chapter>
 		<chapter title="The Development Branches">
 			<p>The development branches are introduced to support the implementation of huge

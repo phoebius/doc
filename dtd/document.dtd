@@ -48,17 +48,4 @@
 		>
 	
 	<!ELEMENT version (#PCDATA)*>
-	
-	<!ELEMENT refs (doc|ref)*>
-		<!ELEMENT ref (#PCDATA)*>
-		<!ATTLIST ref
-			name			CDATA #REQUIRED
-			link			CDATA #REQUIRED
-		>
-		
-		<!ELEMENT doc (#PCDATA)*>
-		<!ATTLIST doc
-			name			CDATA #REQUIRED
-			file			CDATA #REQUIRED
-		>
 		

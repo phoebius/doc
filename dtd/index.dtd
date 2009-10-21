@@ -26,7 +26,6 @@
 	-->
 	<!ELEMENT doc (%reference.class;)*>
 	<!ATTLIST doc
-		uri			CDATA #IMPLIED
 		xml			CDATA #REQUIRED
 	>
 	

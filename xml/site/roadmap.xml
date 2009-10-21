@@ -17,10 +17,10 @@
 
 <document>
 	<title> Phoebius Roadmap </title>
-	<abstract> Phoebius framework in its current state already provides an innovative implementation
+	<abstract> <p>Phoebius framework in its current state already provides an innovative implementation
 		of features-in-demand, but besides them we have a lot of other ideas for improving the
 		product and extending the feature list. The source code repository is currently unpublished,
-		but if you wish to participate in development, feel free to contact us. </abstract>
+		but if you wish to participate in development, feel free to contact us.</p> </abstract>
 	<chapters>
 		<chapter title="The stable releases">
 				<p>

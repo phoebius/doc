@@ -25,8 +25,7 @@
 	title, 
 	chapters, 
 	authors?, 
-	version?,
-	refs*
+	version?
 )>
 
 	<!ELEMENT title (#PCDATA)*>

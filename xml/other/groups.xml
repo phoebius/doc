@@ -192,6 +192,7 @@
 			<group id="Net" />
 			<group id="Stream" />
 			<group id="Sys" />
+			<group id="Xml" />
 		</includes>
 	</group>
 </groups>

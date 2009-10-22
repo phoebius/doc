@@ -14,12 +14,10 @@
 -->
 
 <!ENTITY % common SYSTEM "common.dtd">
-<!ENTITY % index SYSTEM "index.dtd">
 
 %common;
 
-<!ENTITY % contents.class "p">
-	<!ELEMENT p (%parsable.class;)*>
+<!ELEMENT p (%parsable.class;)*>
 
 <!ELEMENT document (
 	title, 
@@ -31,11 +29,11 @@
 	<!ELEMENT title (#PCDATA)*>
 	
 	<!ELEMENT chapters (chapter)*>
-		<!ELEMENT chapter (%contents.class;|subchapter)*>
+		<!ELEMENT chapter (p|subchapter)*>
 		<!ATTLIST chapter
 			title			CDATA #IMPLIED
 		>
-			<!ELEMENT subchapter (%contents.class;)* >
+			<!ELEMENT subchapter (p)* >
 				<!ATTLIST subchapter
 					title			CDATA #IMPLIED
 				>
@@ -47,4 +45,7 @@
 		>
 	
 	<!ELEMENT version (#PCDATA)*>
+	<!ATTLIST version
+		direction			(eq|gt|gteq|lt|lteq) "gteq"
+	>
 		

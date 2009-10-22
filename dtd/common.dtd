@@ -13,34 +13,30 @@
  *************************************************************************************************
 -->
 
-<!ENTITY % html.class "#PCDATA|b|i|u|s" >
+<!ENTITY % html.class "#PCDATA|b|i|u|s|code" >
 	<!ELEMENT b (%html.class;)*>
 	<!ELEMENT i (%html.class;)*>
 	<!ELEMENT u (%html.class;)*>
 	<!ELEMENT s (%html.class;)*>
+	<!ELEMENT code (#PCDATA)*>
 
-<!ENTITY % inline.class "%html.class;|link|code|source">
+<!ENTITY % inline.class "%html.class;|link">
 	<!--
 		"to" may be:
 		 - link to xml documentation file
 		 - link to PHP class or method (using doxy notation)
-		 - link to any other location
+		 + link to any other location
 	-->
 	<!ELEMENT link (%html.class;)*>
 	<!ATTLIST link
 		to			CDATA #REQUIRED
 	>
-	<!ELEMENT code (#PCDATA)*>
-		<!ATTLIST code
-			lang		(php|xml|bash|plain) "plain"
-			type		(inline|pre) "inline"
+		
+<!ENTITY % block.class "code-block">
+	<!ELEMENT code-block (#PCDATA)*>
+		<!ATTLIST code-block
 			title		CDATA #IMPLIED
-		>
-	<!ELEMENT source EMPTY>
-		<!ATTLIST source
 			lang		(php|xml|bash|plain) "plain"
-			title		CDATA #IMPLIED
-			path		CDATA #REQUIRED
 		>
 
 <!ENTITY % lists.class "ul|ol">
@@ -48,6 +44,6 @@
 	<!ELEMENT ol (%inline.class;|li)*>
 		<!ELEMENT li (%inline.class;|%lists.class;)*>
 
-<!ENTITY % parsable.class  "%inline.class;|%lists.class;">
+<!ENTITY % parsable.class  "%inline.class;|%lists.class;|%block.class;">
 
 	

@@ -18,7 +18,7 @@
 <!--
 	Resulting items are ordered wrt the definition
 -->
-<!ELEMENT index (%reference.class;)?>
+<!ELEMENT index (%reference.class;)*>
 
 	<!-- 
 		Link to an xml document that implements dtd/document.dtd.
@@ -26,7 +26,10 @@
 	-->
 	<!ELEMENT doc (%reference.class;)*>
 	<!ATTLIST doc
-		xml			CDATA #REQUIRED
+		xml			CDATA #REQUIRED 
+		location	CDATA #IMPLIED
+		show-in-map	(true|false) "true"
+		inline-map	(true|false) "true"
 	>
 	
 	<!-- 
@@ -36,6 +39,8 @@
 	<!ATTLIST ref
 		name		CDATA #REQUIRED
 		link		CDATA #REQUIRED
+		show-in-map	(true|false) "true"
+		inline-map	(true|false) "true"
 	>
 	
 	<!-- 
@@ -44,5 +49,8 @@
 	<!ELEMENT include EMPTY>
 	<!ATTLIST include
 		xml			CDATA #REQUIRED
+		prefix		CDATA #REQUIRED
+		show-in-map	(true|false) "true"
+		inline-map	(true|false) "true"
 	>
 

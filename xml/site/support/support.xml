@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * ***********************************************************************************************
+ *
+ * Phoebius Framework
+ *
+ * **********************************************************************************************
+ *
+ * Copyright (c) 2009 phoebius.org
+ *
+ * All rights reserved.
+ *
+ *************************************************************************************************
+-->
+
+<!DOCTYPE document SYSTEM "../../../dtd/document.dtd">
+
+<document>
+	<title>Phoebius support page</title>
+	<chapters>
+		<chapter>
+			<p> Phoebius team tries its best to provide a comprehensive set of support, including
+				the step-to-step documentation and feedback. <asis><![CDATA[
+					<div class="block" style="margin-bottom:2em;" >
+					<div class="cn tl"></div>
+					<div class="cn tr"></div>
+					<div class="c">   
+						<div class="i">
+				]]>
+				</asis>
+				<link to="/support/a-beginners-guide.html">
+					<asis><![CDATA[
+								<img  class="icon" src="/images/icons/guide.gif" width="32" height="32" />
+								<h2>A Beginners' Guide</h2>
+								]]>
+					</asis>
+				</link>
+				<asis><![CDATA[
+							<p>
+								This handy reference is intended to introduce you the common principles of Phoebius,
+								and will pass you through a complete development of a sample application.</p>    
+						</div> 
+					</div>
+					<div class="cn bl"></div>
+					<div class="cn br"></div>
+				</div>   
+				
+				<div class="i">
+					<a href="/support/manual/">
+						<img  class="icon" src="/images/icons/documentation.gif" width="32" height="32" />
+						<h2>The Manual</h2>
+					</a>
+					<p>The Phoebius Manual is meant to be a detailed explanation of the framework architecture 
+						and internals.<br /><i>This document is in the development stage.</i></p>
+				</div>
+				<div class="i"> 
+					<a href="/support/kb/">
+						<img  class="icon" src="/images/icons/base.gif" width="32" height="32" />  
+						<h2>Knowledge Base</h2>  
+					</a>
+					<p>The Knowledge Base itself is the Phoebius cookbook, collecting the receipts and best practices 
+						of customizing the framework in implementing a non-standard functionality. This section is based on </p>
+				</div>
+				<div class="i"> 
+					<a href="/support/api/">
+						<img  class="icon" src="/images/icons/api.gif" width="32" height="32" />        
+						<h2>API Documentation</h2>
+					</a> 
+					<p>The framework API reference based on the comments within the code.</p>
+				</div>
+				<div class="i">
+					<a href="/feedback/">
+						<img  class="icon" src="/images/icons/request.gif" width="32" height="32" />      
+						<h2>Submit a Request</h2>
+					</a>
+					<p>Having a trouble with the framework? Want to suggest or participate? Feel free to feedback!</p> 
+				</div>
+				</div>
+					
+					]]>
+				</asis>
+			</p>
+		</chapter>
+	</chapters>
+</document>

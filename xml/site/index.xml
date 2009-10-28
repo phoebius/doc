@@ -16,10 +16,10 @@
 <!DOCTYPE index SYSTEM "../../dtd/index.dtd">
 
 <index>
-	<ref name="" link="/">
-		<include xml="support/index.xml"/>
-		<doc xml="about.xml"></doc>
-		<doc xml="highlights.xml"></doc>
-		<doc xml="roadmap.xml"></doc>
-	</ref>
+	<doc xml="/support/support.xml" location="/support/">
+		<include xml="support/index.xml" prefix="support"/>
+	</doc>
+	<doc xml="highlights.xml"></doc>
+	<doc xml="roadmap.xml"></doc>
+	<doc xml="about.xml"></doc>
 </index>

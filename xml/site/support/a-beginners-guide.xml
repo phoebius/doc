@@ -63,7 +63,7 @@ $app/
 /views
 /www
 	/index.php
-]]></code-block>>
+]]></code-block>
 			</p>
 			<p> The bootstrapping process of such application is the following: <ol>
 					<li>the incoming request is routed by a web-server to a file called
@@ -104,9 +104,8 @@ $app/
 			->setName('blog_db')
 	);
 
-?>
-]]>
-					</code-block> Here we have specified a development preset of the host (which maximizes the
+?>]]></code-block>
+				Here we have specified a development preset of the host (which maximizes the
 				application feedback by an error verbosity an detailed logging) and have defined a
 				default PostgreSQL database (you can specify MySQL swimmingly because the Phoebius
 				database abstraction layer uses the ANSI-SQL-unified query builder, so you needn't

@@ -128,11 +128,6 @@
 				<about>Wrappers over various results that actions produce while execution</about>
 			</group>
 
-			<group id="PhpLayout">
-				<about>Simple template engine based on raw PHP and classes. Similar to ASP.NET's
-					System.Web.UI</about>
-			</group>
-
 			<group id="Exceptions" />
 		</includes>
 	</group>
@@ -177,6 +172,24 @@
 				<about>O wrappers over various ORM entity property types</about>
 			</group>
 
+		</includes>
+	</group>
+	
+	<group id="UI">
+		<about>Object-oriented UI</about>
+		<includes>
+			<group id="Mvc">
+				<about><![CDATA[UI for MVC's views]]></about>
+				<includes>
+					<group id="Presentation">
+						<about>Connector for tying UI presentation and MVC's views</about>
+					</group>
+				</includes>
+			</group>
+			<group id="Presentation">
+				<about>Simple template engine based on raw PHP and classes. Similar to ASP.NET's
+					System.Web.UI</about>
+			</group>
 		</includes>
 	</group>
 

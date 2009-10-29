@@ -25,6 +25,9 @@
 	authors?, 
 	version?
 )>
+<!ATTLIST document
+	generate-contents		(true|false) "false"
+>
 
 	<!ELEMENT title (#PCDATA)*>
 	

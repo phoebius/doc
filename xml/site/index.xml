@@ -15,12 +15,12 @@
 
 <!DOCTYPE index SYSTEM "../../dtd/index.dtd">
 
-<index>
+<index menu-id="Support">
 	<doc xml="/support/support.xml" location="/support/">
 		<include xml="support/index.xml" prefix="support"/>
 	</doc>
 	<doc xml="highlights.xml"></doc>
 	<doc xml="roadmap.xml"></doc>
 	<doc xml="about.xml"></doc>
-	<doc xml="download.xml"></doc>
+	<doc xml="download.xml" menu-id="Download"></doc>
 </index>

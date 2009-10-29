@@ -19,6 +19,9 @@
 	Resulting items are ordered wrt the definition
 -->
 <!ELEMENT index (%reference.class;)*>
+<!ATTLIST index
+	menu-id		CDATA #IMPLIED
+>
 
 	<!-- 
 		Link to an xml document that implements dtd/document.dtd.
@@ -28,6 +31,7 @@
 	<!ATTLIST doc
 		xml			CDATA #REQUIRED 
 		location	CDATA #IMPLIED
+		menu-id		CDATA #IMPLIED
 		show-in-map	(true|false) "true"
 		inline-map	(true|false) "true"
 	>

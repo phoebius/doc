@@ -20,7 +20,7 @@
 -->
 <!ELEMENT index (%reference.class;)*>
 <!ATTLIST index
-	menu-id		CDATA #IMPLIED
+	site-part		(Support|Download|Blog|About) #IMPLIED
 >
 
 	<!-- 
@@ -31,7 +31,7 @@
 	<!ATTLIST doc
 		xml			CDATA #REQUIRED 
 		location	CDATA #IMPLIED
-		menu-id		CDATA #IMPLIED
+		site-part	(Support|Download|Blog|About) #IMPLIED
 		show-in-map	(true|false) "true"
 		inline-map	(true|false) "true"
 	>

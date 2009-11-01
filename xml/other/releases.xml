@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * ***********************************************************************************************
+ *
+ * Phoebius Framework
+ *
+ * **********************************************************************************************
+ *
+ * Copyright (c) 2009 phoebius.org
+ *
+ * All rights reserved.
+ *
+ *************************************************************************************************
+-->
+
+<!DOCTYPE releases SYSTEM "../../dtd/releases.dtd">
+
+<releases>
+	<release latest="true" page="/download.html">
+		<version>1.0</version>
+		<date>01.11.2009</date>
+		<about>
+			<p>This is the first public stable release, which allows you to play with various
+			useful features and take an impression about Phoebius&#146; ample opportunities of
+			growth.
+			</p>
+		</about>
+	</release>
+</releases>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * ***********************************************************************************************
+ *
+ * Phoebius Framework
+ *
+ * **********************************************************************************************
+ *
+ * Copyright (c) 2009 phoebius.org
+ *
+ * All rights reserved.
+ *
+ *************************************************************************************************
+-->
+
+<!ENTITY % common SYSTEM "common.dtd">
+
+%common;
+
+<!ELEMENT releases (
+	release
+)>
+
+	<!ELEMENT release (version, date, about)>
+	<!ATTLIST release
+		latest		(true|false) "true"
+		page		CDATA #IMPLIED
+	>
+	
+		<!ELEMENT version (#PCDATA)*>
+		
+		<!ELEMENT date (#PCDATA)*>
+		
+		<!ELEMENT about (p)>
+			<!ELEMENT p (%parsable.class;)*>
+

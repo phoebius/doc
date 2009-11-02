@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * ***********************************************************************************************
+ *
+ * Phoebius Framework
+ *
+ * **********************************************************************************************
+ *
+ * Copyright (c) 2009 phoebius.org
+ *
+ * All rights reserved.
+ *
+ *************************************************************************************************
+-->
+
+<!DOCTYPE document SYSTEM "../../dtd/document.dtd">
+
+<document>
+	<title>Sitemap</title>
+	<chapters>
+		<chapter>
+			<p>
+				<ul>
+					<li>
+						<link to="/support/">Support</link>
+						<ul>
+							<li><link to="/support/a-beginners-guide.html">A Beginners&#146; Guide</link></li>
+							<li><link to="/support/manual/">The Manual</link></li>
+							<li><link to="/support/kb/">Knowledge Base</link></li>
+							<li><link to="/support/api/">API Documentation</link></li>
+						</ul>
+					</li>
+					<li>
+						<link to="/roadmap.html">Development roadmap</link>
+					</li>
+					<li>
+						<link to="/download.html">Downloads</link>
+					</li>
+				</ul>
+			</p>
+		</chapter>
+	</chapters>
+</document>

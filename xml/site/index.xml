@@ -23,4 +23,5 @@
 	<doc xml="roadmap.xml"></doc>
 	<doc xml="about.xml" site-part="About"></doc>
 	<doc xml="download.xml" site-part="Download"></doc>
+	<doc xml="sitemap.xml"></doc>
 </index>

@@ -18,51 +18,44 @@
 <document>
 	<title> Phoebius Roadmap </title>
 	<chapters>
+
 		<chapter>
 			<p>Phoebius framework in its current state already provides an innovative implementation
 				of features-in-demand, but besides them we have a lot of other ideas for improving
-				the product and extending the feature list. The source code repository is currently
-				unpublished, but if you wish to participate in development, feel free to contact
-				us.</p>
+				the product and extending the feature list.</p>
 		</chapter>
-		<chapter title="The stable releases">
+
+		<chapter title="The Stable Releases">
 			<p>
 				<ul>
 					<li>v1.0 (released in November 1, 2009)</li>
 				</ul>
 			</p>
 		</chapter>
-		<chapter title="The Current Branch (1.0)">
-			<p> v1.2.1 is planned to be released at December 1, 2009, and will feature: <ul>
-					<li>readonly container</li>
-					<li>enum code generator</li>
-				</ul>
+
+		<chapter title="The Coming Releases">
+			<p> Near-future releases will provide and improved and extends project domain generators
 			</p>
-			<p> v1.2.2 will introduce the distributed cache layer over data access objects for
-				speeding up the process of assembling the ORM entites </p>
 		</chapter>
+
 		<chapter title="The Development Branches">
-			<p>The development branches are introduced to support the implementation of huge
-				long-run features.</p>
+			<p>The development branches are intended to hold the implementation of huge long-run
+				features.</p>
+
 			<subchapter title="Branch 1.2-dev">
-				<p>
-					<ul>
-						<li> criteria over Orm.Dao </li>
-						<li> Mvc: action filters </li>
-						<li> App.Routing full refactoring </li>
-						<li>MVC: view helpers </li>
-						<li>Session handler </li>
+				<p> Phoebius 1.2 will introduce a huge set of improvements of already-implemented
+					packages, among them: <ul>
+						<li>and improved Mvc's ActionBasedController</li>
+						<li>new and simplified URL routing system written from scratch</li>
+						<li>API to map data from various to ORM entities</li>
 					</ul>
 				</p>
 			</subchapter>
+
 			<subchapter title="Branch 1.4-dev">
-				<p>
-					<ul>
-						<li>AJAX integration</li>
-						<li>forms</li>
-						<li>validation</li>
-					</ul>
-				</p>
+				<p> Phoebius 1.4 is the playground for the integration. We are planning to support
+					AJAX, tying with external Javascript controls, automated form mapping and
+					validation.</p>
 			</subchapter>
 
 		</chapter>

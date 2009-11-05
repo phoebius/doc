@@ -45,5 +45,19 @@
 					]]>
 				</p>
 		</chapter>
+		
+		<chapter title="Samples">
+			<p> Framework is not enough to make life easier. We advice you to <link
+					to="http://git.phoebius.org/?p=phoebius-app.git;a=snapshot;sf=tgz"
+					>download</link> an application stub which offers a unified directory structure
+				and provides various bootstrapping scripts. After you do this, extract the contents
+				of the framework into a <code>/phoebius</code> directory.</p>
+			
+			<p>We think, that the best documentation is samples, therefore we develop phoebius.org
+				website completely on our framework, and provide a public access to its source code
+				repository: 
+				<link to="http://git.phoebius.org/?p=phoebius-site.git;a=summary"
+					>git.phoebius.org</link></p>
+		</chapter>
 	</chapters>
 </document>

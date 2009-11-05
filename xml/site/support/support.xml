@@ -20,22 +20,22 @@
 	<chapters>
 		<chapter>
 			<p> Phoebius team tries its best to provide a comprehensive set of support, including
-				the step-to-step documentation and feedback. <asis><![CDATA[
+				the step-to-step documentation and feedback. 
+				<![CDATA[
 					<div class="block" style="margin-bottom:2em;" >
 					<div class="cn tl"></div>
 					<div class="cn tr"></div>
 					<div class="c">   
 						<div class="i">
 				]]>
-				</asis>
+				
 				<link to="/support/a-beginners-guide.html">
-					<asis><![CDATA[
+					<![CDATA[
 								<img  class="icon" src="/images/icons/guide.gif" width="32" height="32" />
 								<h2>A Beginners&#146; Guide</h2>
 								]]>
-					</asis>
 				</link>
-				<asis><![CDATA[
+				<![CDATA[
 							<p>
 								This handy reference is intended to introduce you the common principles of Phoebius,
 								and will pass you through a complete development of a sample application.</p>    
@@ -78,7 +78,7 @@
 				</div>
 					
 					]]>
-				</asis>
+				
 			</p>
 		</chapter>
 	</chapters>

@@ -13,13 +13,12 @@
  *************************************************************************************************
 -->
 
-<!ENTITY % html.class "#PCDATA|b|i|u|s|code|asis" >
+<!ENTITY % html.class "#PCDATA|b|i|u|s|code" >
 	<!ELEMENT b (%html.class;)*>
 	<!ELEMENT i (%html.class;)*>
 	<!ELEMENT u (%html.class;)*>
 	<!ELEMENT s (%html.class;)*>
 	<!ELEMENT code (#PCDATA)*>
-	<!ELEMENT asis (#PCDATA)*>
 
 <!ENTITY % inline.class "%html.class;|link">
 	<!--

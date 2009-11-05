@@ -20,28 +20,29 @@
 	<chapters>
 		<chapter>
 				<p>
-					<asis><![CDATA[
+					<![CDATA[
 						<div class="i">
 							<p>
 								<a href="/src/phoebius-framework-v1.0.rar">
-									<img class="icon" src="images/icons/download.gif" width="32" height="32" />
 									<h2>Phoebius framework v1.0</h2>
+									
+									<img class="icon" src="images/icons/download.gif" width="32" height="32" />
 								</a>
 							</p>
 							
-							<p>The latest stable release is v0.2, branched out at June 1, 2009.</p>
+							<p>The latest stable release is v1.0, branched out at November 1, 2009.</p>
 							
 							<p>
-							It's features are: 
+							It&#146;s features are: 
 								<ul>
 									<li>the code generator</li>
 									<li>object relational mapping with scalable type system</li>
 									<li>data access objects with various relational patterns</li>
-									<li>MVC package</li>
+									<li>php-driven template engine similar to ASP.NET</li>
 								</ul>
 							</p>
 						</div>
-				]]></asis>
+					]]>
 				</p>
 		</chapter>
 	</chapters>

@@ -38,10 +38,6 @@
 			<group id="Server">
 				<about>Wrappers over server information</about>
 			</group>
-
-			<group id="Web">
-				<about>Wrappers over web-driven environments</about>
-			</group>
 		</includes>
 	</group>
 	<group id="Core">

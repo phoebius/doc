@@ -19,14 +19,19 @@
 	<group id="App">
 		<about>Application lifecycle wrappers over environment state</about>
 		<includes>
-			<group id="Routing" name="Request routing">
-				<about>Prepares, routes and dispatches the request to the target request
-					handler</about>
+			<group id="Web">
+				<about>Handles web requests</about>
 				<includes>
-					<group id="Web">
-						<about>Handles web requests</about>
+					<group id="Routing" name="Request routing">
+						<about>Prepares, routes and dispatches the request to the target request
+							handler</about>
+						<includes>
+							<group id="Rules" name="Request rules">
+								<about> Routing rules </about>
+							</group>
+							<group id="Exceptions" />
+						</includes>
 					</group>
-					<group id="Exceptions"></group>
 				</includes>
 			</group>
 
@@ -47,13 +52,14 @@
 				<about>Internal handlers for automating dynamic library load</about>
 			</group>
 
-			<group id="Exceptions"></group>
+			<group id="Exceptions" />
 
 			<group id="Expression">
 				<about>Basic expression trees implementation</about>
 				<includes>
 					<group id="LogicalOperators">
-						<about>Various logical operators used in expression trees for connecting subjects</about>
+						<about>Various logical operators used in expression trees for connecting
+							subjects</about>
 					</group>
 				</includes>
 			</group>
@@ -127,8 +133,6 @@
 			<group id="ActionResults">
 				<about>Wrappers over various results that actions produce while execution</about>
 			</group>
-
-			<group id="Exceptions" />
 		</includes>
 	</group>
 
@@ -174,7 +178,7 @@
 
 		</includes>
 	</group>
-	
+
 	<group id="UI">
 		<about>Object-oriented UI</about>
 		<includes>

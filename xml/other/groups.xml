@@ -50,16 +50,6 @@
 
 			<group id="Exceptions" />
 
-			<group id="Expression">
-				<about>Basic expression trees implementation</about>
-				<includes>
-					<group id="LogicalOperators">
-						<about>Various logical operators used in expression trees for connecting
-							subjects</about>
-					</group>
-				</includes>
-			</group>
-
 			<group id="FS">
 				<about>Classes related to filesystem items</about>
 			</group>
@@ -69,17 +59,11 @@
 			</group>
 
 			<group id="Types">
-				<about>Object-oriented Type wrappers</about>
-
+				<about>Object-oriented type wrappers</about>
 				<includes>
-					<group id="BuiltIn">
-						<about>Primitive type wrappers</about>
-					</group>
-
 					<group id="Complex">
 						<about>Complex types</about>
 					</group>
-
 				</includes>
 			</group>
 		</includes>
@@ -98,8 +82,8 @@
 				<includes>
 					<group id="Exceptions"> </group>
 
-					<group id="Expression">
-						<about>Expression trees over SQL</about>
+					<group id="Generator">
+						<about>Primary key generator abstraction</about>
 					</group>
 
 					<group id="Query">
@@ -107,7 +91,7 @@
 					</group>
 
 					<group id="Schema">
-						<about>OO wrappers over DB schema</about>
+						<about>OO wrappers over abstract database schema</about>
 					</group>
 
 					<group id="Sql">
@@ -120,6 +104,17 @@
 
 				</includes>
 			</group>
+		
+			<group id="Expression">
+				<about>Basic expression trees implementation</about>
+				<includes>
+					<group id="LogicalOperators">
+						<about>Various logical operators used in expression trees for connecting
+							subjects</about>
+					</group>
+				</includes>
+			</group>
+			
 		</includes>
 	</group>
 
@@ -143,9 +138,11 @@
 			<group id="Domain">
 				<about>Implementation of ORM objects aggregator</about>
 				<includes>
-					<group id="CodeGenerator"> </group>
+					<group id="CodeGenerator">
+						<about>Auxiliary classes for generating code of ORM-related entities</about>
+					</group>
 
-					<group id="Meta">
+					<group id="Notation">
 						<about>Utilities to import data from various sources into internal graph
 							that reflects ORM entities, their properties and relations</about>
 					</group>
@@ -166,6 +163,15 @@
 			<group id="Model">
 				<about>OO wrappers over internal representation of ORM objects' graph (inner
 					structures and dependencies)</about>
+			</group>
+			
+			<group id="Query">
+				<about>High-level interface to query ORM-related object</about>
+				<includes>
+					<group id="Projections">
+						<about>Sets of projections to obtain data from the database</about>
+					</group>
+				</includes>
 			</group>
 
 			<group id="Types">

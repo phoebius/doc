@@ -17,12 +17,11 @@
 
 <releases>
 	<release latest="true" page="/download.html">
-		<version>1.0</version>
-		<date>01.11.2009</date>
+		<version>1.0.0</version>
+		<date>2009/12/01</date>
 		<about>
-			<p>This is the first public stable release, which allows you to play with various
-			useful features and take an impression about Phoebius&#146; ample opportunities of
-			growth.
+			<p>This is the first public stable release, which already provides you a complete
+				and stable feature set for building complex full-stack web-applications.
 			</p>
 		</about>
 	</release>

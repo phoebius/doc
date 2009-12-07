@@ -16,34 +16,35 @@
 <!DOCTYPE document SYSTEM "../../../dtd/document.dtd">
 
 <document>
-	<title>A Beginners' Guide</title>
+	<title>A Beginners&#146; Guide</title>
 	<chapters>
 		<chapter title="Introduction">
-			<p> First of all, welcome to Phoebius framework. We see Phoebius as something that
-				developers needed to produce complex web-services natively featured everything that
-				well-known gurus of software development advised to all of us: principles of
+			<p> First of all, <i>welcome</i> to Phoebius framework. We see Phoebius as something
+				that developers needed to produce complex web-services natively featured everything
+				that well-known gurus of software development advised to all of us: principles of
 				cohesion and decoupling by Steve McConnell, patterns by Martin Fowler, and so on and
 				so forth. All this makes a resulting product more stable and less obscured, thus
 				minimizing costs of development, test and maintenance and delivering the pleasure to
 				developers, project managers and customers. </p>
 			<p> Phoebius framework is the best choice for the basis of long-run web applications
-				that meant to be deployed on high-loaded servers and should be scalable enough to
-				meet the requirements of extremely-changing real world. </p>
+				that meant to be scalable enough to meet the requirements of extremely-changing real
+				world. </p>
 			<p> In this tutorial we will develop a classic weblog, introducing you almost every
 				package of the framework and how it makes the life of the developer easier. </p>
 		</chapter>
 
 		<chapter title="Preparing the Environment">
-			<p> After <link to="/download.html">downloading</link> and application stud and
+			<p> After <link to="/download.html">downloading</link> and application stub and
 				extracting the Phoebius framework source to the corresponding directory, consider
-				that /www is mapped as web-server root and /tmp has enough permissions for writing. </p>
+				that <code>/www</code> is mapped as web-server root and <code>/tmp</code> has enough
+				permissions for writing. </p>
 			<p> Inside this tutorial we consider that an absolute path to our application is
 				<code>$app</code> (and it is mapped to the root of an application stub), and a path
-				to the framework core is <code>$base</code> (that points to the /phoebius
-				directory). Of course, you can locate them in any relation: <code>$app</code> can be
-				inside <code>$base</code> and <code>$base</code> can be inside <code>$app</code>;
-				the only requirement is the correct absolute path to the init script (that is
-				located at <code>$base/etc/app.init.php</code>). </p>
+				to the framework core is <code>$base</code> (that points to the
+				<code>/phoebius</code> directory). Of course, you can locate them in any relation:
+				<code>$app</code> can be inside <code>$base</code> and <code>$base</code> can be
+				inside <code>$app</code>; the only requirement is the correct absolute path to the
+				init script (that is located at <code>$base/etc/app.init.php</code>). </p>
 			<p> A typical application has the following structure: <code-block><![CDATA[
 / (aka $app)
 	/cfg
@@ -65,27 +66,27 @@
 						front-controller (it is <code>$app/www/index.php</code> by default, but this
 						script can be located anywhere you like - just assume that you have
 						specified the correct absolute paths to an init-script);</li>
-					<li>front-controller includes the framework's init-script
+					<li>front-controller loads the framework's init-script
 						<code>$base/etc/app.init.php</code>;</li>
-					<li>front-controller includes the application config
+					<li>front-controller loads the application config
 						<code>$app/etc/config.php</code>. An application config prepares everything
 						that does not depend on an environment where the application runs, e.g. a
 						custom path to a library classes (by default it is
 						<code>$app/lib:$app/var/lib</code>);</li>
-					<li>front-controller includes the host config (located at
-						<code>$app/cfg/<![CDATA[<slot name>]]>/config.php</code>). A host config can
-						differ over different environments (e.g. test, production, development,
-						etc), therefore it defines a host preset (which specifies the verbosity of
-						errors, and more), stores a database connection parameters, tunes a
-						web-server and does much more. The host configs are aggregated into the
-						application slots. The name of an application slot is determined from an
-						environment variable called <code>PHOEBIUS_APP_SLOT</code>. If not defined,
-						the "default" slot is used.</li>
+					<li>front-controller loads the host config (located at
+						<code>$app/cfg/&lt;slot name&gt;/config.php</code>). A host config
+						can differ over different environments (e.g. test, production, development,
+						etc), therefore it defines a host preset (the verbosity of errors, and
+						more), stores a database connection parameters, tunes a web-server and does
+						much more. The host configs are aggregated into the application slots. The
+						name of an application slot is determined from an environment variable
+						called <code>PHOEBIUS_APP_SLOT</code>. If not defined, the "default" slot is
+						used.</li>
 				</ol>
 			</p>
 			<p>For our simple blog application, all we need is a single database connection, so our
-				application config can be left untouched, and the default host config (
-				<code>$app/cfg/default/config.php</code>) can look similar to this: <code-block
+				application config can be left untouched, and the default host config
+				(<code>$app/cfg/default/config.php</code>) can look similar to this: <code-block
 					lang="php"><![CDATA[
 <?
 
@@ -103,8 +104,8 @@
 ?>]]></code-block> Here we have specified a development preset of the host (which maximizes the
 				application feedback by an error verbosity an detailed logging) and have defined a
 				default PostgreSQL database (you can specify MySQL swimmingly because the Phoebius
-				database abstraction layer uses the ANSI-SQL-unified query builder, so you needn't
-				to write SQL queries manually). </p>
+				database abstraction layer uses the ANSI-SQL-unified query builder, so you don't
+				need to write SQL queries manually). </p>
 		</chapter>
 
 		<chapter title="Defining a Project Domain">
@@ -112,10 +113,7 @@
 				schema, which is then translated to an internal representation (i.e. to a graph of
 				internal objects), called "ORM domain". ORM domain holds the information regarding
 				the application entities, mappings between entities and database schemas, and much
-				more. For now it is used to generate the code of the classes that simplify querying
-				entities against the storage (typically, an RDBMS). In future, this feature can be
-				expanded with packages that use an ORM domain graph to generate user input forms,
-				CRUD pages and so on forth. </p>
+				more. </p>
 			<p> So let's define the essences of our application. Our simple weblog is represented by
 				posts and comments. A Post contains the title, the text, the date, and the set of
 				Comments left to the post. A Comment contains the author, the text and the post this
@@ -154,17 +152,17 @@
 			<p> Then we tell the framework to produce the code according to the definition, by
 				calling the framework generator via the console and passing the absolute path to the
 				directory where the application resides: <code-block lang="bash"><![CDATA[
-# php $base/bin/make.php $app
+$ php $base/bin/make.php $app
 ]]></code-block> The real-world example: <code-block lang="bash"><![CDATA[	
-# php /www/phoebius.org/phoebius/bin/make.php /www/phoebius.org
+$ php /www/phoebius.org/phoebius/bin/make.php /www/phoebius.org
 ]]></code-block></p>
 			<p> Now you have a fresh set of autogenerated classes and files, that represent a
 				high-level abstraction over database schemas and framework internals. The most
 				important are: <ul>
-					<li><code>$app/lib/Domain/Post.php</code>, the class representing the Post
+					<li><code>$app/lib/Domain/Post.class.php</code>, the class representing the Post
 						entity;</li>
-					<li><code>$app/lib/Domain/Comment.php</code>, the class representing the Comment
-						entity; </li>
+					<li><code>$app/lib/Domain/Comment.class.php</code>, the class representing the
+						Comment entity; </li>
 					<li><code>$app/var/db/default.sql</code>, a SQL schema produced for the RDBMS
 						driver you have chosen in a host config and already queried against it. Push
 						it to the database you use.</li>
@@ -174,20 +172,21 @@
 
 		<chapter title="Routing the requests">
 			<p> Phoebius has a powerful routing package, which can route requests even using the
-				complex conditions. Consider, that our blog requires to handle the following types
-				of requests: <ul>
+				complex conditions and mapping variables to types. Consider, that our blog requires
+				to handle the following types of requests: <ul>
 					<li><code>/</code> -- the front page</li>
-					<li><code>/?skip=N</code> -- the list of previous posts starting with N, where N
-						is unsigned integer</li>
-					<li><code>/?post=M</code> -- a separate post with comments left to it and the
-						form for creating a new comment</li>
+					<li><code>/?skip=&lt;skip_count&gt;</code> -- the list of previous posts
+						starting with <code>skip_count</code>, where <code>skip_count</code> is
+						unsigned integer</li>
+					<li><code>/post/&lt;post_id&gt;</code> -- a separate page containing
+						post (identified by the <code>post_id</code>) with associated comments</li>
 				</ul>
 			</p>
-			<p> To route these requests we need to create a routing policy. The simplest way to do
-				that is to create a class that implements a framework's ChainedRoutingPolicy. Let's
-				call it BlogRoutingPolicy and locate it at our application library: <code-block
-					lang="php" title="$app/lib/App/Routing/BlogRoutingPolicy.class.php"><![CDATA[
-class BlogRoutingPolicy extends ChainedRoutingPolicy
+			<p> To route these requests we need to create a router. The simplest way to do that is
+				to create a class that implements a framework's ChainedRouter. Let's name it
+				BlogRouter and locate it at our application library: <code-block lang="php"
+					title="$app/lib/BlogRouter.class.php"><![CDATA[
+class BlogRouter extends ChainedRouter
 {
 	function __construct()
 	{
@@ -198,73 +197,22 @@ class BlogRoutingPolicy extends ChainedRoutingPolicy
 	
 	protected function fillRoutes()
 	{
-		$this->addRule(
+		$this->route(
 			'skip-posts',
-			RewriteRuleChain::create(array(
-				WebRequestRewriteRule::create()
-					->addRequestVariable('skip', 0),
-				
-				ParametricRewriteRule::create()
-					->setParameters(array(
-						MvcDispatcher::PARAMETER_CONTROLLER_NAME => 'Blog',
-						ActionBasedController::PARAMETER_ACTION => 'skipPosts'
-					))
-			))
+			'/?skip',
+			array('controller' => 'Blog', 'action' => 'skipPost') 
 		);
 		
-		$this->addRule(
+		$this->route(
 			'show-post',
-			RewriteRuleChain::create(array(
-				WebRequestRewriteRule::create()
-					->addRequestVariable('post'),
-				
-				ParametricRewriteRule::create()
-					->setParameters(array(
-						MvcDispatcher::PARAMETER_CONTROLLER_NAME => 'Blog',
-						ActionBasedController::PARAMETER_ACTION => 'showPost'
-					))
-			))
+			'/post/:id',
+			array('controller' => 'Blog', 'action' => 'showPost')
 		);
 		
-		$this->addRule(
-			'add-comment',
-			RewriteRuleChain::create(array(
-				WebRequestRewriteRule::create()
-					->addRequestVariable('post')
-					->addRequestVariable('comment')
-					->setRequestMethod(RequestMethod::post()),
-					
-				ParametricRewriteRule::create()
-					->setParameters(array(
-						MvcDispatcher::PARAMETER_CONTROLLER_NAME => 'Blog',
-						ActionBasedController::PARAMETER_ACTION => 'addComment'
-					))
-			))
-		);
-		
-		$this->addRule(
+		$this->route(
 			'front-page',
-				RewriteRuleChain::create(array(
-					WebUrlRewriteRule::create()
-						->setPattern('/'),
-					
-					ParametricRewriteRule::create()
-						->setParameters(array(
-							MvcDispatcher::PARAMETER_CONTROLLER_NAME => 'Blog',
-							ActionBasedController::PARAMETER_ACTION => 'frontPage'
-						))
-				))
-		);
-		
-		$this->addRule(
-			'404',
-				RewriteRuleChain::create(array(
-					ParametricRewriteRule::create()
-						->setParameters(array(
-							MvcDispatcher::PARAMETER_CONTROLLER_NAME => 'Blog',
-							ActionBasedController::PARAMETER_ACTION => 'errorPage'
-						))
-				))
+			'/',
+			array('controller' => 'Blog', 'action' => 'frontPage')
 		);
 	}
 }
@@ -272,28 +220,20 @@ class BlogRoutingPolicy extends ChainedRoutingPolicy
 			</p>
 			<p> As we are planning to use Mvc to handle the requests, we set an MvcDispatcher as the
 				default route dispatcher. Dispatcher is an application layer that is responsible for
-				routing the request to the corresponding handler. Than we fill the routing policy
-				with rules written in an object-oriented notation: for each rule we specify
-				everything that describes the route (e.g., request variables in our case) and import
-				additional parameters that describe the handler for the request that is matched by a
-				rule (e.g., a controller name and an action as we use action-based controller). </p>
-			<p>The routing policy has a natural prioritizing strategy: the firstly-added rule has a
-				higher priority than the last one. That's why the error-page rule is defined at the
-				end of the table (it matches every request). </p>
-			<p> Rules API is wide and thus can look quite obscure, but the set of rule classes is
-				well-documented. In future versions there will be a less-greedy way to define to
-				routing policy using XML or YAML. </p>
+				passing the request to the corresponding handler.</p>
+			<p>ChainerRouter uses natural prioritizing strategy: the firstly-added rule has higher
+				priority than the last one. That's why the route for front page is defined at the
+				end of the table as it uses less greedy set of rules. </p>
 		</chapter>
 
 		<chapter title="Handling requests with actions">
 
-			<p> In Mvc context, action is a procedure that is responsible for handling the request
-				and producing the result. Usually, action is a method of the controller class. Our
-				routing policy defined below specifies requests that should be dispatched by
-				MvcDispatcher and handled by the "Blog" controller. Therefore we define a class
+			<p> In Mvc context, an action is a procedure that is responsible for handling the
+				request and producing the result. Usually, action is a method of the controller
+				class. Our routing policy defined below specifies requests that should be dispatched
+				by MvcDispatcher and handled by the "Blog" controller. Therefore we define a class
 				BlogController with the following actions (consider the naming notation defined by
-				the base ActionBasedController class) that result an instance of IActionResult or
-				the string specifying the name of the view: <code-block lang="php"
+				the base ActionBasedController class): <code-block lang="php"
 					title="$app/lib/Mvc/Controllers/BlogController.class.php"><![CDATA[
 class BlogController extends ActionBasedController
 {
@@ -314,25 +254,10 @@ class BlogController extends ActionBasedController
 	}
 	
 	/**
-	* Request: /?post=M
+	* Request: /post/:id
 	* @return IActionResult
 	*/
-	function action_showPost(Post $post)
-	{
-	}
-	
-	/**
-	* Request: /?post=M
-	* @return IActionResult
-	*/
-	function action_addComment(Post $post, Comment $comment, IControllerContext $controllerContext)
-	{
-	}
-	
-	/**
-	* @return IActionResult
-	*/   
-	function action_errorPage()
+	function action_showPost(Integer $id)
 	{
 	}
 }
@@ -341,136 +266,74 @@ class BlogController extends ActionBasedController
 			<p> Each action handles the corresponding request, if matched. Noteworthy that
 				end-developers should not care about incoming parameter types: the framework
 				internals checks the compatibility of the request by itself. For example, the
-				request /?skip=20 will be passed to BlogController::action_skipPosts() but
-				/?skip=abc won't and the error will be raised. Integer here is the real object type,
-				like Post in BlogController::action_showPost() which is also correctly determined
-				and assembled by the provided identifier. </p>
+				request <code>/?skip=20</code> will be passed to
+				<code>BlogController::action_skipPosts()</code> but <code>/?skip=abc</code> won't.
+				Integer here is the <link to="/support/api/classInteger.html">defined type</link>.
+				Future releases will expose this functionality and will be able to treat incoming
+				variables as ORM-related entity property identifiers, obtaining identified entities
+				from the database. </p>
 
 		</chapter>
 		<chapter title="Applying a business logic">
 
 			<p> Now it is time to fill our actions with business logic. We will do this for every
 				action that handles the request. </p>
-			<p> The front page is simply a page with the latest N posts. Therefore we can just make
-				an internal redirection to an action that handles skip-posts request skipping zero
+			<p> The front page is simply a page with the latest posts. Therefore we can just make an
+				internal redirection to an action that handles skip-posts request skipping zero
 				posts: <code-block lang="php"><![CDATA[
 function action_frontPage()
 {
 	return $this->action_skipPosts(new Integer(0));
 }
-]]></code-block>
-			</p>
-			<p> The skipPosts action accepts the number of latest posts to be skipped, fetches the
-				specified number of posts from the storage and pushes them to a presentation layer.
-				So before we implement this action, we should firstly define the number of posts we
-				should push. We can do this by defining a constant inside Post class: <code-block
-					lang="php" title="$app/lib/Domain/Post.class.php"><![CDATA[
-class Post extends AutoPost
-{
-	const NUMBER_PER_PAGE = 25;
-}
-						]]></code-block>
-			</p>
-			<p> Secondly, we should create a presentation layer item -- a view, that will prepare an
-				HTML result based on a set of posts passed by the action using a model. View is a
-				simple PHP script, located at $app/views and postfixed with .view.php:
-				$app/views/posts.view.php. For now it does nothing so leave it empty. The code of an
-				action can be the following: <code-block lang="php"><![CDATA[
+]]></code-block> Action, that fetches the list of Post object, uses simple criteria over the entity
+				query language wrapper -- an <link to="/support/api/classEntityQuery.html"
+					>EntityQuery</link> class, and puts this list and the number of skipped posts to
+				a model (a transport between action and view) and return the name of the view, that
+				is automatically resolved by the action invoker. Notice, that we do not mix action's
+				business logic with any presentation logic: we pass the result of business logic
+				away to a view, which itself is responsible for presentation: <code-block lang="php"><![CDATA[
 function action_skipPosts(Integer $skip)
 {
 	$list = 
-		EntityQuery::create(Post::orm())
+		Post::query()
 			->setOffset($skip->getValue())
-			->setLimit(Post::NUMBER_PER_PAGE)
+			->setLimit(25)
 			->getList();
 	);
 	
-	$this->getModel()->addCollection(
+	return $this->view(
+		'posts',
 		array(
-			"posts" => $list,
-			"skip" => $skip->getValue()
+			'posts' => $list,
+			'skip' => (string) $skip
 		)
 	);
-	
-	return "posts";
 }						
-]]></code-block> Here we fetch the list of Posts by a simple criteria, executed against entity query
-				language wrapper -- an <link
-					to="http://phoebius-site/support/api/d1/d44/classEntityQuery.html"
-					>EntityQuery</link> class. Than we put this list and the number of skipped posts
-				to a model - a transport between action and view, and return the name of the view,
-				that is automatically resolved by the calling code. Notice, that we do not mix
-				action's business logic with any presentation logic - we pass the result of business
-				logic away to a view, which itself is responsible for presentation. </p>
-			<p> An action for the page with a separate Post as simple as you can imagine, because
-				mapping between the identifier passed via the query string and the class is
-				performed automatically by the ActionBasedController. All you need to do is just
-				pass it to a model and return the appropriate view: <code-block lang="php"><![CDATA[
-function action_showPost(Post $post)
-{
-	$postComments = 
-		EntityQuery::create(Comment::orm())
-			->andWhere(
-				Expression::eq('post', $post)
-			)
-			->getList();
-
-	$this->getModel()->addCollection(array(
-		'post' => $post,
-		'comments' => $postComments
-	);
-	
-	return "post";
-}						
-						]]></code-block>
+]]></code-block>
 			</p>
-			<p> We think, that the form for adding a new comment should be presented at same page
-				where the post and the comments are presented, but the code that acutally handles
-				the request for the new comment should be presented within the separate action.
-				Therefore we have decided to define a separate rule for it that looks for a /?post=M
-				request with "POST" request method and route it to another action, which accepts the
-				Post and a new Comment. A Post is assembled using the identifier that comes from the
-				query string, but how the Comment is assembled? The answer is trivial:
-				ActionBasedController looks for the set of incoming fields that can be mapped to the
-				Comment, like it maps the database records. All you need to do is map the raw names
-				of the fields when constructing the HTML form. Considering all that, the logic of
-				our action is easy: <code-block lang="php"><![CDATA[
-function action_addComment(Post $post, Comment $comment, IControllerContext $controllerContext)
+
+			<p> An action for the page with a separate Post is simple too. We access the Post object
+				by the specified ID and then obtain all the comments for the Post using the <link
+					to="/support/api/classEntityQuery.html">EntityQuery</link> criteria: <code-block
+					lang="php"><![CDATA[
+function action_showPost(Integer $id)
 {
-	$comment
-		->setPost($post)
-		->setTime(Timestamp::now());
-		
-	Comment::dao()->save($comment);
-	
-	return new RedirectToActionResult(
-		'Blog',
-		'showPost',
-		$controllerContext, 
+	$post = Post::dao()->getEntityById((string) $id);
+	$comments = 
+		Comment::query()
+			->where(Expression::eq('post', (string) $id))
+			->getList();
+			
+	return $this->view(
+		'post',
 		array(
-			'post' => $post->getId()
+			'post' => $post,
+			'comments' => $comments
 		)
 	);
 }						
-]]></code-block> After saving the newly-created comment, we make a redirection to the page we came
-				from. The correct way to do this is to use an action result for HTTP redirects (
-					<link to="/support/api/d3/d65/classRedirectResult.html">RedirectResult</link>,
-					<link to="/support/api/d3/d54/classRedirectToRouteResult.html"
-					>RedirectToRouteActionResult</link>, <link
-					to="/support/api/d8/d2b/classRedirectToActionResult.html"
-					>RedirectToActionResult</link>) to let the framework internals rely on routing
-				policy and check the resulting redirect integrity against the policy. For example,
-				if you forget to supply a "post" argument when redirecting to the separate post
-				page, framework will notify you about this fail. </p>
-			<p> The last action should handle every unrouted request (becase the routing policy rule
-				without the conditions matches any request), i.e. represent the 404 error page:
-					<code-block lang="php"><![CDATA[
-function action_errorPage()
-{
-	return "404";
-}						
-						]]></code-block> It just specifies the view that represents the page. </p>
-
+]]></code-block> Note that we reference to the name of the Comment object property ("post"), no
+				matter how the database column is named. </p>
 		</chapter>
 		<chapter title="Processing a resulting content">
 
@@ -479,8 +342,8 @@ function action_errorPage()
 				business and the presentation logic. The result of an action (a model, that itself
 				represents a produced data) is passed to a view. A view is a plain script that
 				produces the markup and injects the passed data within this markup.</p>
-			<p> A Phoebius <link to="/support/api/d9/d77/group__UI.html">UI</link> package is a view
-				engine that offers a wide range of features for easy management of a huge number of
+			<p> A Phoebius <link to="/support/api/group__UI.html">UI</link> package is a view engine
+				that offers a wide range of features for easy management of a huge number of
 				different views. It defines three different types of views: <ol>
 					<li>Master page view</li>
 					<li>Content page view</li>
@@ -510,15 +373,7 @@ $this->getDefaultContent();
 ?>
 ...static footer...
 ]]></code-block>
-				<code-block lang="php" title="$app/views/posts.view.php">
-					<![CDATA[
-
-extract(
-	$this->getVariables(array(
-		'posts', 'comments'
-	))
-);
-
+				<code-block lang="php" title="$app/views/posts.view.php"><![CDATA[
 <?
 
 $this->setMaster('master');
@@ -527,22 +382,35 @@ $this->setMaster('master');
 <h1>Blog posts</h1>
 <?
 
-foreach ($posts as $post) { ?>
+foreach ($this->posts as $post) { ?>
     <h1><?=$post->getTitle()?> <small><?=$post->getDate()->toFormattedString()?></small></h1>
     <br />
     <?=$post->getText()?>
-    <br />
-    <a href="/?post=<?=$post->getId()?>">Comments (<?=sizeof(comments)?>)</a>
     <hr />
 <? }
 
 ?>							
-						]]>
+]]>
+				</code-block><code-block lang="php" title="$app/views/post.view.php"><![CDATA[
+<?
+
+$this->setMaster('master');
+
+?>
+<h1><?=$this->post->getTitle()</h1>
+<?=$this->post->getText()?>							
+]]>
 				</code-block>
 			</p>
 			<p> Standard Phoebius distribution requires views to be located inside $app/views
-				directory. The naming pattern is <![CDATA[<view_name>]]>.view.php. </p>
+				directory. The naming pattern is <code>&lt;view_name&gt;.view.php</code>. </p>
 
+		</chapter>
+		<chapter title="Conclusion">
+			<p>
+				Phoebius framework is modern solution intended to quick building of applications
+				that require self-documenting stratified code of high quality.
+			</p>
 		</chapter>
 	</chapters>
 </document>

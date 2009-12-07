@@ -21,41 +21,43 @@
 		<chapter title="Unified infrastructure">
 			
 			<subchapter title="Standardizing the development process">
-				<p>Phoebius framework defines a <b>common filesystem layout</b> and coding style, so
-					applications based on framework are meant to look similar and thus application
-					maintainability decreases.</p>
+				<p>Phoebius framework defines a <b>common file system layout</b> and coding style,
+					so applications based on it are meant to similarly standardized.</p>
 			</subchapter>
 
 			<subchapter title="Predictable control flow">
 				<p> An application logic is <b>exception-centric</b>: every PHP error/warning/notice
 					is replaced the <link
-						to="/support/api/d8/d8a/classExecutionContextException.html"
+						to="/support/api/classExecutionContextException.html"
 						>exception</link>. Such a concept helps to avoid tons of unnoticeable
 					inconsistencies (like an access to an undefined index of an array, etc) and thus
 					making every usage of an internal PHP function strong enough and unambiguous. Of
-					course, this functionality can be explicitly turned off when using a third-party
+					course, this functionality can be explicitly 
+					<link to="/support/api/classExceptionizer.html#bc8fd10678ce163118dade48d4e7d3cf"
+						>turned</link> off when using a third-party
 					libraries that does not know about the exceptions or ignore notices and
 					warnings. </p>
 				<p> Though PHP is weakly-typed language, Phoebius framework propagates <b>strong
 						typing</b> wherever possible to provide more stable and predictable code.
 					Explicit and unambiguous type hints are specified in most of methods'
 					signatures. Moreover, explicit type hints and type checks are used even for
-					primitive build-in types (<link to="/support/api/d1/d84/classInteger.html"
-						>integer</link>, <link to="/support/api/d9/d31/classBoolean.html"
-						>boolean</link>, <link
-						to="/support/api/d9/d07/group__Core__Types__BuiltIn.html">etc</link>) which
+					primitive build-in types (<link to="/support/api/classInteger.html"
+						>integer</link>, <link to="/support/api/classBoolean.html"
+						>boolean</link>, 
+					<link to="/support/api/classPrimitive.html">etc</link>) which
 					allows to you define actions that accept external data of a narrow set of types.
 				</p>
 			</subchapter>
 			
 			<subchapter title="Testing the packages">
-				<p> Phoebius framework is <b>testable</b>, because being a true-OO
+				<p> Phoebius framework is <b>testable</b>, because being truly object-oriented
 					application it minimizes the coupling between classes and packages and provides
 					the <b>ability to mock any object</b> that is passed even into the framework
 					internals. It is possible to integrate unit testing and examine a separate
 					packages of Phoebius and an application based on Phoebius because of the great
 					cohesion of interfaces; it is also possible to replace the contextual objects
-					(e.g. IWebRequest, IWebResponse) with your own implementations that produce
+					(e.g. <link to="/support/api/classWebRequest.html">WebRequest</link>, 
+					<link to="/support/api/interfaceIWebResponse.html">IWebResponse</link>) with your own implementations that produce
 					custom results, log and check the calls and do much more. </p>
 			</subchapter>
 
@@ -65,9 +67,13 @@
 			
 			<subchapter title="Dealing with the complexity">
 				<p> Phoebius framework helps the developers to solve the tasks in context of project
-					domain abstracting away from database tables and entries. This dramatically
+					domain abstracting away from database tables and rows. This dramatically
 					increases the development process, due the logic of the code becomes simpler
-					minimizing the number of bugs and reducing the time required for debugging. </p>
+					minimizing the number of bugs and reducing the time required for debugging:
+					mostly-used operations, like constructing database queries or incoming
+					data checks, are performed by the
+					framework. </p>
+				
 				<p>Project domain is the set of entities and their properties that describes a
 					subject operated by a project. Entity is represented by an obvious PHP class
 					that contains private properties of various types and the corresponding getters
@@ -80,7 +86,7 @@
 				<p> The project domain is used as a subject when generating the classes that
 					implement lots of typical tasks varying from project to project: <ul>
 						<li>
-							<link to="/support/api/d1/d44/classEntityQuery.html">querying
+							<link to="/support/api/classEntityQuery.html">querying
 								entities</link> against the used storage (typically, it is a RDBMS)
 							and transparently mapping classes to the database schema of any
 							complexity;</li>
@@ -112,8 +118,9 @@
 			
 		</chapter>
 		
-		<chapter title="Application Logic">
-			<p> Phoebius MVC subsystem has an architecture similar to the ASP.NET MVC. By default it
+		<chapter title="Application logic">
+			<p> Phoebius MVC subsystem has an architecture similar to the 
+				<link to="http://asp.net/mvc">ASP.NET MVC</link>. By default it
 				provides a ready-to-use toolset to make request handlers splitted into separate
 				actions with automated casting of incoming parameters to even complex objects. </p>
 			<p> Separation of application logic and presentation is achieved by simple PHP-embed

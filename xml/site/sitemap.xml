@@ -27,11 +27,11 @@
 							<li><link to="/support/a-beginners-guide.html">A Beginners&#146; Guide</link></li>
 							<li><link to="/support/manual/">The Manual</link></li>
 							<li><link to="/support/kb/">Knowledge Base</link></li>
-							<li><link to="/support/api/">API Documentation</link></li>
+							<li><link to="/support/api/">API Browser</link></li>
 						</ul>
 					</li>
 					<li>
-						<link to="/roadmap.html">Development roadmap</link>
+						<link to="/roadmap.html">Development Roadmap</link>
 					</li>
 					<li>
 						<link to="/download.html">Downloads</link>

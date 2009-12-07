@@ -19,45 +19,62 @@
 	<title>Downloads</title>
 	<chapters>
 		<chapter>
-				<p>
-					<![CDATA[
+			<p>
+				<![CDATA[
 						<div class="i">
 							<p>
-								<a href="/src/phoebius-framework-v1.0.rar">
-									<h2>Phoebius framework v1.0</h2>
+								<a href="/src/phoebius-framework-v1.0.tar.gz">
+									<h2>Phoebius framework v1.0.0</h2>
 									
 									<img class="icon" src="images/icons/download.gif" width="32" height="32" />
 								</a>
 							</p>
 							
-							<p>The latest stable release is v1.0, branched out at November 1, 2009.</p>
+							<p>December 1, 2009</p>
 							
 							<p>
 							It&#146;s features are: 
 								<ul>
-									<li>the code generator</li>
 									<li>object relational mapping with scalable type system</li>
+									<li>ORM-related entities code generator</li>
 									<li>data access objects with various relational patterns</li>
-									<li>php-driven template engine similar to ASP.NET</li>
+									<li>PHP-driven template engine similar to ASP.NET 
+									(<a href="http://msdn.microsoft.com/en-us/library/system.web.ui.aspx">System.Web.UI namespace</a>)</li>
 								</ul>
 							</p>
 						</div>
 					]]>
-				</p>
+			</p>
 		</chapter>
 		
-		<chapter title="Samples">
-			<p> Framework is not enough to make life easier. We advice you to <link
-					to="http://git.phoebius.org/?p=phoebius-app.git;a=snapshot;sf=tgz"
-					>download</link> an application stub which offers a unified directory structure
-				and provides various bootstrapping scripts. After you do this, extract the contents
-				of the framework into a <code>/phoebius</code> directory.</p>
+		<chapter title="Samples and usage examples">
+			<p>
+				<link to="/">phoebius.org</link> is written completely at Phoebius. We have
+				published the development repository called "phoebius-site" so everyone can watch on
+				how Phoebius can be used more efficiently. We believe, that the best documentation
+				is the successful production-ready application, so you may visit <link
+					to="http://git.phoebius.org/?p=phoebius-site.git;a=summary">the online
+					repository</link> or download <link
+					to="http://git.phoebius.org/?p=phoebius-site.git;a=snapshot;sf=tgz">the latest
+					sources</link> of this website to see the framework in action. </p>
 			
-			<p>We think, that the best documentation is samples, therefore we develop phoebius.org
-				website completely on our framework, and provide a public access to its source code
-				repository: 
-				<link to="http://git.phoebius.org/?p=phoebius-site.git;a=summary"
-					>git.phoebius.org</link></p>
+			<p> Another good way to learn the concepts of the framework quickly is to get the
+				<link to="http://git.phoebius.org/?p=phoebius-app.git;a=snapshot;sf=tgz">stub for
+					the typical application</link> which offers a unified directory structure
+				and provides various bootstrapping scripts. It also contains a few examples
+				on how to define the project domain, query and pass ORM-related entities,
+				and use them inside MVC stack.</p>
+			
+			<p>Find more at our online repositories: 
+				<link to="http://git.phoebius.org/">
+					<![CDATA[
+						<img src="http://git.phoebius.org/git-logo.png" align="absmiddle" width="72" height="27" alt="git" style="position:absolute;left:-90px;" />
+					]]>
+					git.phoebius.org
+				</link>
+			
+			
+			</p>
 		</chapter>
 	</chapters>
 </document>

@@ -16,48 +16,38 @@
 <!DOCTYPE document SYSTEM "../../dtd/document.dtd">
 
 <document>
-	<title> Phoebius Roadmap </title>
+	<title> The Roadmap </title>
 	<chapters>
 
 		<chapter>
 			<p>Phoebius framework in its current state already provides an innovative implementation
 				of features-in-demand, but besides them we have a lot of other ideas for improving
 				the product and extending the feature list.</p>
-		</chapter>
-
-		<chapter title="The Stable Releases">
-			<p>
-				<ul>
-					<li>v1.0 (released in November 1, 2009)</li>
+			
+			<p> Near-future releases of 1.0 branch are intended to improve the existing codebase,
+				fixing possible inconsistencies and providing more useful features across existing
+				solution. Among them are: <ul>
+					<li>new composite types for properties of ORM-related entities</li>
+					<li>querying one-to-many and many-to-many associations</li>
+					<li>more MVC views&#146; helpers</li>
+					<li>logging inside autonomic build scripts</li>
+					<li>implicit session handling</li>
+					<li>API to handle incoming requests more precisely</li>
 				</ul>
 			</p>
-		</chapter>
-
-		<chapter title="The Coming Releases">
-			<p> Near-future releases will provide and improved and extends project domain generators
-			</p>
-		</chapter>
-
-		<chapter title="The Development Branches">
-			<p>The development branches are intended to hold the implementation of huge long-run
-				features.</p>
-
-			<subchapter title="Branch 1.2-dev">
-				<p> Phoebius 1.2 will introduce a huge set of improvements of already-implemented
-					packages, among them: <ul>
-						<li>and improved Mvc's ActionBasedController</li>
-						<li>new and simplified URL routing system written from scratch</li>
-						<li>API to map data from various to ORM entities</li>
-					</ul>
-				</p>
-			</subchapter>
-
-			<subchapter title="Branch 1.4-dev">
-				<p> Phoebius 1.4 is the playground for the integration. We are planning to support
-					AJAX, tying with external Javascript controls, automated form mapping and
-					validation.</p>
-			</subchapter>
-
+			
+			<p> At the same time we are planning a huge set of features based on Phoebius&#146;
+				heart - an ORM module - that are intended to automate more day-to-day routines the
+				developers need to code: <ul>
+					<li>transparent entity caching</li>
+					<li>querying composite types</li>
+					<li>mapping of forms to ORM-related entities</li>
+					<li>MVC filters</li>
+					<li>AJAX integration and implicit intercommunication between client-side
+						front-end and backend</li>
+				</ul> We support a feature-centric development, forking a separate branch for each
+				new feature, and then merging it back to master, so the upcoming releases are
+				produced as soon as major features are signed off. </p>
 		</chapter>
 	</chapters>
 </document>

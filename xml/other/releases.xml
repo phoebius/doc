@@ -17,8 +17,8 @@
 
 <releases>
 	<release latest="true" page="/download.html">
-		<version>1.0.0</version>
-		<date>2009/12/01</date>
+		<version>1.0.0.1</version>
+		<date>2009/12/07</date>
 		<about>
 			<p>This is the first public stable release, which already provides you a complete
 				and stable feature set for building complex full-stack web-applications.

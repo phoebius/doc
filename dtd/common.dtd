@@ -42,7 +42,7 @@
 <!ENTITY % lists.class "ul|ol">
 	<!ELEMENT ul (%inline.class;|li)*>
 	<!ELEMENT ol (%inline.class;|li)*>
-		<!ELEMENT li (%inline.class;|%lists.class;)*>
+		<!ELEMENT li (%inline.class;|%lists.class;|%block.class;)*>
 
 <!ENTITY % parsable.class  "%inline.class;|%lists.class;|%block.class;">
 

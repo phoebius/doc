@@ -55,11 +55,11 @@
 				is the successful production-ready application, so you may visit <link
 					to="http://git.phoebius.org/?p=phoebius-site.git;a=summary">the online
 					repository</link> or download <link
-					to="http://git.phoebius.org/?p=phoebius-site.git;a=snapshot;sf=tgz">the latest
+						to="/src/phoebius-site-latest.tar.gz">the latest
 					sources</link> of this website to see the framework in action. </p>
 			
 			<p> Another good way to learn the concepts of the framework quickly is to get the
-				<link to="http://git.phoebius.org/?p=phoebius-app.git;a=snapshot;sf=tgz">stub for
+				<link to="/src/phoebius-app-latest.tar.gz">stub for
 					the typical application</link> which offers a unified directory structure
 				and provides various bootstrapping scripts. It also contains a few examples
 				on how to define the project domain, query and pass ORM-related entities,

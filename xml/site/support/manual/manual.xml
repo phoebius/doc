@@ -16,7 +16,16 @@
 <!DOCTYPE document SYSTEM "../../../../dtd/document.dtd">
 
 <document>
-	<title>The Manual</title>
+	<title>Introduction</title>
 	<chapters>
+		<chapter title="Contents">
+			<p>
+				<ul>
+					<li>
+						ttt
+					</li>
+				</ul>
+			</p>
+		</chapter>
 	</chapters>
 </document>

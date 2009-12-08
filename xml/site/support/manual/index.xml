@@ -16,4 +16,6 @@
 <!DOCTYPE index SYSTEM "../../../../dtd/index.dtd">
 
 <index>
+	<doc xml="manual.xml" location=""></doc>
+	<doc xml="orm-type-system.xml"></doc>
 </index>

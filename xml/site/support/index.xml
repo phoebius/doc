@@ -17,12 +17,9 @@
 
 <index>
 	<doc xml="a-beginners-guide.xml"></doc>
-	<doc xml="manual/manual.xml" location="manual/">
+	<ref link="/support/manual/" name="The Manual">
 		<include xml="manual/index.xml" prefix="manual"></include>
-	</doc>
-	<doc xml="kb/kb.xml" location="kb/">
-		<include xml="kb/index.xml" prefix="kb"></include>
-	</doc>
-	<ref name="API Documentation" link="/support/api/"></ref>
+	</ref>
+	<ref name="API Browser" link="/support/api/"></ref>
 	<ref name="Feedback" link="/feedback/"></ref>
 </index>

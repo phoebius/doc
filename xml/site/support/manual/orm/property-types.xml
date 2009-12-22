@@ -13,10 +13,10 @@
 	*************************************************************************************************
 -->
 
-<!DOCTYPE document SYSTEM "../../../../dtd/document.dtd">
+<!DOCTYPE document SYSTEM "../../../../../dtd/document.dtd">
 
 <document>
-	<title>ORM type system</title>
+	<title>Property Types</title>
 	<chapters>
 		<chapter>
 			<p> Each ORM-related entity (aka a persistent object) may have properties of various

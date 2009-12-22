@@ -122,7 +122,7 @@
 				Firstly, write down the definition in a simple XML schema located at
 				<code>$app/var/schema.xml</code>: <code-block lang="xml"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE domain SYSTEM "abstract.dtd">
+<!DOCTYPE domain SYSTEM "../phoebius/share/Orm/Domain/Meta/Xml/abstract.dtd">
 
 <domain db-schema="default">
 	<entities>
@@ -391,8 +391,7 @@ foreach ($this->posts as $post) { ?>
 <? }
 
 ?>							
-]]>
-				</code-block><code-block lang="php" title="$app/views/post.view.php"><![CDATA[
+]]></code-block><code-block lang="php" title="$app/views/post.view.php"><![CDATA[
 <?
 
 $this->setMaster('master');
@@ -400,18 +399,15 @@ $this->setMaster('master');
 ?>
 <h1><?=$this->post->getTitle()</h1>
 <?=$this->post->getText()?>							
-]]>
-				</code-block>
+]]></code-block>
 			</p>
 			<p> Standard Phoebius distribution requires views to be located inside $app/views
 				directory. The naming pattern is <code>&lt;view_name&gt;.view.php</code>. </p>
 
 		</chapter>
 		<chapter title="Conclusion">
-			<p>
-				Phoebius framework is modern solution intended to quick building of applications
-				that require self-documenting stratified code of high quality.
-			</p>
+			<p> Phoebius framework is modern solution intended to quick building of applications
+				that require self-documenting stratified code of high quality. </p>
 		</chapter>
 	</chapters>
 </document>

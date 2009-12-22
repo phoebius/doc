@@ -13,16 +13,15 @@
  *************************************************************************************************
 -->
 
-<!DOCTYPE releases SYSTEM "../../dtd/releases.dtd">
+<!DOCTYPE document SYSTEM "../../../../../dtd/document.dtd">
 
-<releases>
-	<release latest="true" page="/download.html">
-		<version>1.0.1</version>
-		<date>2009/12/22</date>
-		<about>
-			<p>This important release unveils the rich possibilities of ORM providing the ability
-				to use composite property types. 
+<document>
+	<title>Object relational mapping</title>
+	<chapters>
+		<chapter>
+			<p>
+				In development
 			</p>
-		</about>
-	</release>
-</releases>
+		</chapter>
+	</chapters>
+</document>

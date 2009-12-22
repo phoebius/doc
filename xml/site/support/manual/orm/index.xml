@@ -13,16 +13,9 @@
  *************************************************************************************************
 -->
 
-<!DOCTYPE releases SYSTEM "../../dtd/releases.dtd">
+<!DOCTYPE index SYSTEM "../../../../../dtd/index.dtd">
 
-<releases>
-	<release latest="true" page="/download.html">
-		<version>1.0.1</version>
-		<date>2009/12/22</date>
-		<about>
-			<p>This important release unveils the rich possibilities of ORM providing the ability
-				to use composite property types. 
-			</p>
-		</about>
-	</release>
-</releases>
+<index>
+	<doc xml="orm.xml" location=""></doc>
+	<doc xml="property-types.xml"></doc>
+</index>

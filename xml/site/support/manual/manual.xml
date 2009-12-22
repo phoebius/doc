@@ -18,13 +18,44 @@
 <document>
 	<title>Introduction</title>
 	<chapters>
-		<chapter title="Contents">
+		<chapter>
 			<p>
+				Welcome to Phoebius framework development manual! It is intended for everyone
+				who wants to explore its reach feature-set and develop object-oriented
+				web-applications rapidly.
+			</p>
+			<p>
+				This manual covers various principles of the framework, functionality it provides
+				to implement the routines, and internal API that can be used to gracefully 
+				extend the existing functionality.
+			</p>
+			<p>
+				<i>Note, that this document is currently in development.</i>
+			</p>
+		</chapter>
+		<chapter title="Contents">
+			<p> The manual includes the following chapters: </p>
+			<p>
+				<b>Common principles:</b>
 				<ul>
-					<li>
-						ttt
-					</li>
+					<li>Configuration</li>
+					<li>Bootstrapping and lifetime</li>
+					<li>Using 3rd party libraries</li>
 				</ul>
+			</p>
+			<p>
+				<b>Object-relational mapping:</b>
+				<ul>
+					<li>Defining entities</li>
+					<li><link to="/support/manual/orm/property-types.html">Understanding property types</link></li>
+					<li>Querying entities</li>
+				</ul>
+			</p>
+			<p>
+				<b>Model-view-controller stack</b>
+					<ul>
+						<li>Overview</li>
+					</ul>
 			</p>
 		</chapter>
 	</chapters>

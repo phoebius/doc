@@ -17,5 +17,7 @@
 
 <index>
 	<doc xml="manual.xml" location=""></doc>
-	<doc xml="orm-type-system.xml"></doc>
+	<ref link="/support/manual/orm/" name="Object-relational mapping">
+		<include xml="orm/index.xml" prefix="orm"></include>
+	</ref>
 </index>

@@ -6,7 +6,7 @@
  *
  * **********************************************************************************************
  *
- * Copyright (c) 2009 phoebius.org
+ * Copyright (c) 2010 Scand Ltd.
  *
  * All rights reserved.
  *
@@ -16,125 +16,121 @@
 <!DOCTYPE document SYSTEM "../../dtd/document.dtd">
 
 <document>
-	<title>Featured Highlights</title>
+	<title>Highlights</title>
 	<chapters>
-		<chapter title="Unified infrastructure">
-			
-			<subchapter title="Standardizing the development process">
-				<p>Phoebius framework defines a <b>common file system layout</b> and coding style,
-					so applications based on it are meant to similarly standardized.</p>
-			</subchapter>
-
-			<subchapter title="Predictable control flow">
-				<p> An application logic is <b>exception-centric</b>: every PHP error/warning/notice
-					is replaced the <link
-						to="/support/api/classExecutionContextException.html"
-						>exception</link>. Such a concept helps to avoid tons of unnoticeable
-					inconsistencies (like an access to an undefined index of an array, etc) and thus
-					making every usage of an internal PHP function strong enough and unambiguous. Of
-					course, this functionality can be explicitly 
-					<link to="/support/api/classExceptionizer.html#bc8fd10678ce163118dade48d4e7d3cf"
-						>turned</link> off when using a third-party
-					libraries that does not know about the exceptions or ignore notices and
-					warnings. </p>
-				<p> Though PHP is weakly-typed language, Phoebius framework propagates <b>strong
-						typing</b> wherever possible to provide more stable and predictable code.
-					Explicit and unambiguous type hints are specified in most of methods'
-					signatures. Moreover, explicit type hints and type checks are used even for
-					primitive build-in types (<link to="/support/api/classInteger.html"
-						>integer</link>, <link to="/support/api/classBoolean.html"
-						>boolean</link>, 
-					<link to="/support/api/classPrimitive.html">etc</link>) which
-					allows to you define actions that accept external data of a narrow set of types.
+		<chapter>
+			<subchapter>
+				<p> According to <link to="http://phpframeworks.com">phpframeworks.com</link>, there
+					are some areas needed to be taken into consideration when choosing a suitable
+					PHP framework for product development. </p>
+				<p> Here you can see what features you take when choosing Phoebius. </p>
+				<p> Our goal is to provide a tool for domain manipulation, which can be easily
+					integrated with contiguous technologies. </p>
+				<p>
+					<![CDATA[
+					
+					<style type="text/css">
+						#comparison-sheet table,tr { background-color:#f0f0f0; }
+						#comparison-sheet th { font-size: 10pt; background-color:white; }
+						#comparison-sheet td { text-align:center; background-color:white;}
+						#comparison-sheet td.minus { color:red; }
+						#comparison-sheet td.plus { color:green; }
+					</style>
+					
+					<table width="100%" cellpadding="10" cellspacing="10" border="1" id="comparison-sheet">
+						<tr>
+							<th>PHP4</th>
+							<th>PHP5</th>
+							<th>MVC</th>
+							<th>Multiple DB’s</th>
+							<th>ORM</th>
+							<th>DB Objects</th>
+							<th>ORM</th>
+							<th>Templates</th>
+							<th>Caching</th>
+							<th>Validation</th>
+							<th>Ajax</th>
+							<th>Auth Module</th>
+							<th>Modules</th>
+							<th>EDP</th>
+						</tr>
+						<tr>
+							<td class="minus">&#150;</td>
+							<td class="plus">+</td>
+							<td class="plus">+</td>
+							<td class="plus">+</td>
+							<td class="plus">+</td>
+							<td class="plus">+</td>
+							<td class="plus">+</td>
+							<td class="plus">+</td>
+							<td class="minus">&#150;</td>
+							<td class="minus">&#150;</td>
+							<td class="minus">&#150;</td>
+							<td class="minus">&#150;</td>
+							<td class="minus">&#150;</td>
+							<td class="minus">&#150;</td>
+						</tr>
+					</table>
+						
+					]]>
 				</p>
 			</subchapter>
-			
-			<subchapter title="Testing the packages">
-				<p> Phoebius framework is <b>testable</b>, because being truly object-oriented
-					application it minimizes the coupling between classes and packages and provides
-					the <b>ability to mock any object</b> that is passed even into the framework
-					internals. It is possible to integrate unit testing and examine a separate
-					packages of Phoebius and an application based on Phoebius because of the great
-					cohesion of interfaces; it is also possible to replace the contextual objects
-					(e.g. <link to="/support/api/classWebRequest.html">WebRequest</link>, 
-					<link to="/support/api/interfaceIWebResponse.html">IWebResponse</link>) with your own implementations that produce
-					custom results, log and check the calls and do much more. </p>
+			<subchapter title="PHP version">
+				<p>Phoebius runs at PHP 5.2 or higher.</p>
 			</subchapter>
-
-		</chapter>
-
-		<chapter title="Meta-programming">
-			
-			<subchapter title="Dealing with the complexity">
-				<p> Phoebius framework helps the developers to solve the tasks in context of project
-					domain abstracting away from database tables and rows. This dramatically
-					increases the development process, due the logic of the code becomes simpler
-					minimizing the number of bugs and reducing the time required for debugging:
-					mostly-used operations, like constructing database queries or incoming
-					data checks, are performed by the
-					framework. </p>
-				
-				<p>Project domain is the set of entities and their properties that describes a
-					subject operated by a project. Entity is represented by an obvious PHP class
-					that contains private properties of various types and the corresponding getters
-					and setters. From now the development of an application becomes truly
-					application programming, but not a low-level programming: you operate the
-					essences of the real world instead of manipulating the database records.</p>
-			</subchapter>
-
-			<subchapter title="Code generation">
-				<p> The project domain is used as a subject when generating the classes that
-					implement lots of typical tasks varying from project to project: <ul>
-						<li>
-							<link to="/support/api/classEntityQuery.html">querying
-								entities</link> against the used storage (typically, it is a RDBMS)
-							and transparently mapping classes to the database schema of any
-							complexity;</li>
-						<li>processing user input with automated forms that check incoming data
-							against filters and then transparently map it to entities;</li>
-						<li>making a typification of incoming data from any source (e.g. XML to
-							entities);</li>
-						<li>generating the standard websites with CRUD (create-read-update-delete)
-							operations over defined essences.</li>
+			<subchapter title="ORM">
+				<p>Object-relational mapping is the most notable feature of Phoebius and it supports: <ul>
+						<li>XML entity definition and mapping</li>
+						<li>code generation</li>
+						<li>one-to-one, one-to-many, many-to-many and composite associations</li>
+						<li>complex types</li>
+						<li>...and much more</li>
 					</ul>
 				</p>
 			</subchapter>
-
-			<subchapter title="Scalability">
-				<p> Phoebius ORM abstracts away from the database records, giving only the PHP
-					objects to a developer: project domain entities are classes, entity
-					properties are classes too. Therefore the ability to implement different
-					patterns of development becomes important. ORM itself can transparently map
-					different database schemes to an obvious PHP classes: <ol>
-						<li> a column or even a set of columns to a class </li>
-						<li> foreign keys (computed even by the set of columns) to an entity (1:1
-							relation) </li>
-						<li> future version will support containers to an entry collections (both
-							1:* and *:* relations are supported and transparently handled by the
-							framework from scratch) </li>
-					</ol>
-				</p>
+			<subchapter title="Multiple DB’s">
+				<p>A database abstraction layer is implemented to support even any RDBMS as entity
+					storage. PostgreSQL and MySQL are now implemented.</p>
 			</subchapter>
-			
-		</chapter>
-		
-		<chapter title="Application logic">
-			<p> Phoebius MVC subsystem has an architecture similar to the 
-				<link to="http://asp.net/mvc">ASP.NET MVC</link>. By default it
-				provides a ready-to-use toolset to make request handlers splitted into separate
-				actions with automated casting of incoming parameters to even complex objects. </p>
-			<p> Separation of application logic and presentation is achieved by simple PHP-embed
-				template engine - a simplified ASP.NET System.Web.UI implementation, which is able
-				to link markup scripts with classes. </p>
-			<p> Routing package aims to provide a unified ability to rewrite and map requests to
-				eliminate a necessity of using different webserver-specific tools (Apache
-				mod_rewrite, nginx config, etc). It is needed to make a development process less
-				obscure by using the object-oriented interface which features the independence from
-				the environment (and thus the simplicity of deployment), possibility to test request
-				matches, ability to create complex criteria of matching the requests (e.g. closures,
-				etc), and implicitly map incoming data to classes. Moreover, it has a close
-				integration with MVC so you can route requests directly to MVC actions/commands.
-			</p>
+			<subchapter title="DB Objects">
+				<p>A <link to="http://martinfowler.com/eaaCatalog/tableDataGateway.html">table
+						gateway</link> is an ORM feature that allows the developer to define a
+					custom storage for any entity and query them transparently through the <link
+						to="/support/api/interfaceIOrmEntityAccessor.html">unified data access
+						interface</link>.</p>
+			</subchapter>
+			<subchapter title="MVC">
+				<p>Phoebius provides a feature-reach MVC stack which is similar to modern <link
+						to="http://www.asp.net/mvc/">ASP.NET MVC</link>.</p>
+			</subchapter>
+			<subchapter title="Templates">
+				<p>We believe that the best template engine is PHP itself. Thus Phoebius provides
+				an infrastructure to create templates in pure PHP using the environment which is
+				similar to ASP.NET templates.</p>
+			</subchapter>
+			<subchapter title="Caching">
+				<p>Caching is not currently implemented, but it is planned to be provided in future
+					versions as it is easy to integrate it in the existing solution as a separate
+					layer.</p>
+			</subchapter>
+			<subchapter title="Validation">
+				<p>Validation is currently not supported.</p>
+			</subchapter>
+			<subchapter title="Ajax">
+				<p>Ajax integration is currently not supported.</p>
+			</subchapter>
+			<subchapter title="Auth module">
+				<p>Auth module is not yet implemented, but will be presented in future versions as a
+					separate library or controller extension.</p>
+			</subchapter>
+			<subchapter title="Module support">
+				<p>Module support has no sense in Phoebius, because Phoebius is not a CMS but a
+					framework, whose applications may use even any PHP library.</p>
+			</subchapter>
+			<subchapter title="Event-driven development and AOP">
+				<p>Event-driven development forces strongly-coupled interfaces and a code mess, so
+					we won't support it.</p>
+			</subchapter>
 		</chapter>
 	</chapters>
 </document>

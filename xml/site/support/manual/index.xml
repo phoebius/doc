@@ -6,7 +6,7 @@
  *
  * **********************************************************************************************
  *
- * Copyright (c) 2009 phoebius.org
+ * Copyright (c) 2009 Scand Ltd.
  *
  * All rights reserved.
  *
@@ -17,7 +17,14 @@
 
 <index>
 	<doc xml="manual.xml" location=""></doc>
-	<ref link="/support/manual/orm/" name="Object-relational mapping">
-		<include xml="orm/index.xml" prefix="orm"></include>
+ <doc xml="configuration.xml" />
+ <doc xml="application.xml"></doc>
+ <doc xml="defining-a-model.xml" />
+ <doc xml="querying-entities.xml" />
+ <doc xml="request-routers.xml"></doc>
+ <doc xml="controllers.xml"></doc>
+ <doc xml="presentation-logic.xml"></doc>
+	<ref link="/support/manual/advanced/" name="Advanced topics">
+	 <include xml="advanced/index.xml" prefix="advanced"></include>
 	</ref>
 </index>

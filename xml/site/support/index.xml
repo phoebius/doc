@@ -6,7 +6,7 @@
  *
  * **********************************************************************************************
  *
- * Copyright (c) 2009 phoebius.org
+ * Copyright (c) 2009 Scand Ltd.
  *
  * All rights reserved.
  *
@@ -15,7 +15,7 @@
 
 <!DOCTYPE index SYSTEM "../../../dtd/index.dtd">
 
-<index>
+<index site-part="Support">
 	<doc xml="a-beginners-guide.xml"></doc>
 	<ref link="/support/manual/" name="The Manual">
 		<include xml="manual/index.xml" prefix="manual"></include>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	* ***********************************************************************************************
+	*
+	* Phoebius Framework
+	*
+	* **********************************************************************************************
+	*
+	* Copyright (c) 2010 Scand Ltd.
+	*
+	* All rights reserved.
+	*
+	*************************************************************************************************
+-->
+
+<!DOCTYPE document SYSTEM "../../../../dtd/document.dtd">
+
+<document>
+	<title>Application init</title>
+	<chapters>
+		<chapter>
+			<p> SiteApplication
+			</p>
+			<p>
+				<ul>
+					
+					<li> an invoked  wraps the environment state 
+						<link to="/support/api/classSiteApplication.html">
+							<code>SiteApplication</code>
+						</link>
+						(actually, a <link to="/support/api/classWebRequest.html">request</link>, a
+						<link to="/support/api/classWebResponse.html">response</link>, a <link
+							to="/support/api/classWebServerState.html">server state</link>) ;</li>
+					<li>A <link to="/support/api/classSiteApplication.html"
+						><code>SiteApplication</code></link> invokes a <link
+							to="/support/api/classChainedRouter.html">router</link> which lookups
+						the routes table for the rule most suitable for the <link
+							to="/support/api/classWebContext.html">request context</link>, and then
+						uses it to construct a <link to="/support/api/classRoute.html">
+							<code>Route</code></link>. <link
+								to="/support/manual/request-routers.html"><i>Learn more</i></link>.</li>
+					<li><link to="/support/api/classRoute.html">
+						<code>Route</code></link> is passed to the <link
+							to="/support/api/interfaceIRouteDispatcher.html">route
+							dispatcher</link>. The route dispatcher determines the handler for the
+						incoming request, and then invokes it. An <link
+							to="/support/class/classMvcDispatcher.html"
+							><code>MvcDispatcher</code></link> object is usually used thus a
+						controller class is used as request handler. <link
+							to="/support/manual/controllers.html"><i>Learn more</i></link>.</li>
+					<li>A controller object finally handles the request and produces an action
+						result. </li>
+				</ul>
+			</p>
+		</chapter>
+	</chapters>
+</document>

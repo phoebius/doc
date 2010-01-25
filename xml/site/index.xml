@@ -6,7 +6,7 @@
  *
  * **********************************************************************************************
  *
- * Copyright (c) 2009 phoebius.org
+ * Copyright (c) 2009 Scand Ltd.
  *
  * All rights reserved.
  *
@@ -16,12 +16,14 @@
 <!DOCTYPE index SYSTEM "../../dtd/index.dtd">
 
 <index site-part="Support">
+ <doc xml="about.xml" site-part="About"></doc>
+ <doc xml="highlights.xml"></doc>
+ <doc xml="why.xml"></doc>
+ <doc xml="download.xml" site-part="Download"></doc>
 	<doc xml="/support/support.xml" location="/support/">
 		<include xml="support/index.xml" prefix="support"/>
 	</doc>
-	<doc xml="highlights.xml"></doc>
 	<doc xml="roadmap.xml"></doc>
-	<doc xml="about.xml" site-part="About"></doc>
-	<doc xml="download.xml" site-part="Download"></doc>
+ <doc xml="services.xml"></doc>
 	<doc xml="sitemap.xml"></doc>
 </index>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	* ***********************************************************************************************
+	*
+	* Phoebius Framework
+	*
+	* **********************************************************************************************
+	*
+	* Copyright (c) 2010 Scand Ltd.
+	*
+	* All rights reserved.
+	*
+	*************************************************************************************************
+-->
+
+<!DOCTYPE document SYSTEM "../../../../dtd/document.dtd">
+
+<document>
+	<title>Request routers</title>
+	<chapters>
+		<chapter>
+			<p> 
+				1. Router
+				2. dispatcher
+				3. route
+			</p>
+		</chapter>
+	</chapters>
+</document>

@@ -6,7 +6,7 @@
  *
  * **********************************************************************************************
  *
- * Copyright (c) 2009 phoebius.org
+ * Copyright (c) 2009 Scand Ltd.
  *
  * All rights reserved.
  *
@@ -16,7 +16,7 @@
 <!DOCTYPE document SYSTEM "../../../dtd/document.dtd">
 
 <document>
-	<title>A Beginners&#146; Guide</title>
+	<title>A Beginners’ Guide</title>
 	<chapters>
 		<chapter title="Introduction">
 			<p> First of all, <i>welcome</i> to Phoebius framework. We see Phoebius as something

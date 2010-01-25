@@ -16,26 +16,27 @@
 <!DOCTYPE document SYSTEM "../../dtd/document.dtd">
 
 <document>
-	<title>Sitemap</title>
+	<title>Services</title>
 	<chapters>
 		<chapter>
 			<p>
+				Although Phoebius is open-source freely-distributed project, we at Scand Ltd.
+				provide various professional services, among them: 
 				<ul>
 					<li>
-						<link to="/support/">Support</link>
-						<ul>
-							<li><link to="/support/a-beginners-guide.html">A Beginners&#146; Guide</link></li>
-							<li><link to="/support/manual/">The Manual</link></li>
-							<li><link to="/support/api/">API Browser</link></li>
-						</ul>
+						consulting on advanced framework usage and its integration with existing solutions
 					</li>
 					<li>
-						<link to="/roadmap.html">Development Roadmap</link>
+						customization and extension of the framework 
 					</li>
 					<li>
-						<link to="/download.html">Downloads</link>
+						application development based on Phoebius 
 					</li>
 				</ul>
+			</p>
+			<p>
+				Feel free to contact us, our email is 
+				<link to="mailto:phoebius@scand.com">phoebius@scand.com</link>
 			</p>
 		</chapter>
 	</chapters>

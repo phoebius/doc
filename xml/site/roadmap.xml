@@ -6,7 +6,7 @@
  *
  * **********************************************************************************************
  *
- * Copyright (c) 2009 phoebius.org
+ * Copyright (c) 2009 Scand Ltd.
  *
  * All rights reserved.
  *
@@ -27,24 +27,23 @@
 			<p> Near-future releases of 1.0 branch are intended to improve the existing codebase,
 				fixing possible inconsistencies and providing more useful features across existing
 				solution. Among them are: <ul>
-					<li>new composite types for properties of ORM-related entities</li>
+					<li>new composite property types</li>
 					<li>querying one-to-many and many-to-many associations</li>
-					<li>more MVC views&#146; helpers</li>
+					<li>more helpers for MVC views</li>
 					<li>logging inside autonomic build scripts</li>
 					<li>implicit session handling</li>
 					<li>API to handle incoming requests more precisely</li>
 				</ul>
 			</p>
 			
-			<p> At the same time we are planning a huge set of features based on Phoebius&#146;
+			<p> At the same time we are planning a huge set of features based on Phoebius
 				heart - an ORM module - that are intended to automate more day-to-day routines the
 				developers need to code: <ul>
 					<li>transparent entity caching</li>
-					<li>querying composite types</li>
-					<li>mapping of forms to ORM-related entities</li>
-					<li>MVC filters</li>
+					<li>entity mapping to forms and vice versa</li>
+					<li>MVC action filters</li>
 					<li>AJAX integration and implicit intercommunication between client-side
-						front-end and backend</li>
+						front-ends and back-ends</li>
 				</ul> We support a feature-centric development, forking a separate branch for each
 				new feature, and then merging it back to master, so the upcoming releases are
 				produced as soon as major features are signed off. </p>

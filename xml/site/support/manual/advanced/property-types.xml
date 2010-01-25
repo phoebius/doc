@@ -6,7 +6,7 @@
 	*
 	* **********************************************************************************************
 	*
-	* Copyright (c) 2009 phoebius.org
+	* Copyright (c) 2009 Scand Ltd.
 	*
 	* All rights reserved.
 	*
@@ -16,7 +16,7 @@
 <!DOCTYPE document SYSTEM "../../../../../dtd/document.dtd">
 
 <document>
-	<title>Property Types</title>
+	<title>Property types</title>
 	<chapters>
 		<chapter>
 			<p> Each ORM-related entity (aka a persistent object) may have properties of various
@@ -43,7 +43,7 @@
 ...
 ]]></code-block> 
 				Primitive types may be set with the predefined attributes that will be
-				passed to: <ul>
+				passed to the property handler: <ul>
 					<li>
 						<code>size</code> attribute defines the size of the type; it may be applied
 						to <code>varchar</code>, <code>char</code> and <code>binary</code> primitive
@@ -66,6 +66,15 @@
 					to="/support/api/classDate.html">
 					<code>Date</code>
 				</link> class is the good example. </p>
+			<p> To use boxable primitve just set the name of the class as a property type - code
+				generator would smartly resolve the actual property type handler:
+				<code-block title="$app/var/domain.xml" lang="xml"><![CDATA[
+...
+<property name="created" type="Date" />
+...
+]]></code-block> 
+				This would be translated to <code>BoxablePropertyType</code>.
+			</p>
 			<p>
 				Other entities may be the types too. In this case a one-tone association is build
 			</p>
@@ -78,7 +87,8 @@
 class MyPropertyType extends OrmPropertyType 
 {
 	function __construct($typeParam1, $typeParam2){}
-	...
+	
+	... implementation of OrmPropertyType follows
 }
 ]]></code-block>
 				<code-block><![CDATA[

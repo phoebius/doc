@@ -6,7 +6,7 @@
  *
  * **********************************************************************************************
  *
- * Copyright (c) 2009 phoebius.org
+ * Copyright (c) 2009 Scand Ltd.
  *
  * All rights reserved.
  *
@@ -21,6 +21,15 @@
 		<chapter>
 			<p> Phoebius team tries its best to provide a comprehensive set of support, including
 				the step-to-step documentation and feedback. 
+				
+			</p>
+			
+			<p> 
+				We also provide <link to="/services.html">various professional services</link>.
+			</p>
+			
+			<p>
+				
 				<![CDATA[
 					<div class="block" style="margin-bottom:2em;" >
 					<div class="cn tl"></div>
@@ -29,12 +38,10 @@
 						<div class="i">
 				]]>
 				
-				<link to="/support/a-beginners-guide.html">
-					<![CDATA[
-								<img  class="icon" src="/images/icons/guide.gif" width="32" height="32" />
-								<h2>A Beginners&#146; Guide</h2>
-								]]>
-				</link>
+				<link to="/support/a-beginners-guide.html"><![CDATA[
+					<img  class="icon" src="/images/icons/guide.gif" width="32" height="32" />
+					<h2>A Beginners&#146; Guide</h2>
+]]></link>
 				<![CDATA[
 							<p>
 								This handy reference is intended to introduce you the common principles of Phoebius,

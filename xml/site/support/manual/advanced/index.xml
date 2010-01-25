@@ -6,22 +6,16 @@
  *
  * **********************************************************************************************
  *
- * Copyright (c) 2009 phoebius.org
+ * Copyright (c) 2009 Scand Ltd.
  *
  * All rights reserved.
  *
  *************************************************************************************************
 -->
 
-<!DOCTYPE document SYSTEM "../../../../../dtd/document.dtd">
+<!DOCTYPE index SYSTEM "../../../../../dtd/index.dtd">
 
-<document>
-	<title>Object relational mapping</title>
-	<chapters>
-		<chapter>
-			<p>
-				In development
-			</p>
-		</chapter>
-	</chapters>
-</document>
+<index>
+ <doc xml="advanced.xml" location=""></doc>
+	<doc xml="property-types.xml"></doc>
+</index>

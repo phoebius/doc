@@ -6,7 +6,7 @@
  *
  * **********************************************************************************************
  *
- * Copyright (c) 2009 phoebius.org
+ * Copyright (c) 2009 Scand Ltd.
  *
  * All rights reserved.
  *
@@ -40,8 +40,8 @@
 		>
 
 <!ENTITY % lists.class "ul|ol">
-	<!ELEMENT ul (%inline.class;|li)*>
-	<!ELEMENT ol (%inline.class;|li)*>
+	<!ELEMENT ul (li)*>
+	<!ELEMENT ol (li)*>
 		<!ELEMENT li (%inline.class;|%lists.class;|%block.class;)*>
 
 <!ENTITY % parsable.class  "%inline.class;|%lists.class;|%block.class;">

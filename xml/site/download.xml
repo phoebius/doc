@@ -6,7 +6,7 @@
  *
  * **********************************************************************************************
  *
- * Copyright (c) 2009 phoebius.org
+ * Copyright (c) 2009 Scand Ltd.
  *
  * All rights reserved.
  *
@@ -23,14 +23,14 @@
 				<![CDATA[
 						<div class="i">
 							<p>
-								<a href="/src/phoebius-v1.0.1.tar.gz">
-									<h2>Phoebius framework v1.0.1</h2>
+								<a href="/src/phoebius-v1.0.2.tar.gz">
+									<h2>Phoebius framework v1.0.2</h2>
 									
 									<img class="icon" src="images/icons/download.gif" width="32" height="32" />
 								</a>
 							</p>
 							
-							<p>December 22, 2009</p>
+							<p>February 1, 2010</p>
 							
 							<p>
 							It&#146;s features are: 
@@ -49,32 +49,43 @@
 		
 		<chapter title="Samples and usage examples">
 			<p>
-				<link to="/">phoebius.org</link> is written completely at Phoebius. We have
-				published the development repository called "phoebius-site" so everyone can watch on
-				how Phoebius can be used more efficiently. We believe, that the best documentation
-				is the successful production-ready application, so you may visit <link
-					to="http://git.phoebius.org/?p=phoebius-site.git;a=summary">the online
-					repository</link> or download <link
-						to="/src/phoebius-site-latest.tar.gz">the latest
-					sources</link> of this website to see the framework in action. </p>
+				<![CDATA[
+						<div class="i">
+							<p>
+								<a href="/src/phoebius-site-latest.tar.gz">
+									<h2>phoebius.org &#151; latest</h2>
+									
+									<img class="icon" src="images/icons/download.gif" width="32" height="32" />
+								</a>
+							</p>
+						</div>
+				]]>
+				
+				A <link to="/">phoebius.org</link> is written completely at Phoebius. We believe, that
+				the best documentation is the successful production-ready application, so you may
+				visit download <link to="/src/phoebius-site-latest.tar.gz">the latest sources</link>
+				of this website to see the framework in action. </p>
 			
-			<p> Another good way to learn the concepts of the framework quickly is to get the
+			<p> 
+				
+				<![CDATA[
+						<div class="i">
+							<p>
+								<a href="/src/phoebius-app-latest.tar.gz">
+									<h2>phoebius framework sandbox &#151; latest</h2>
+									
+									<img class="icon" src="images/icons/download.gif" width="32" height="32" />
+								</a>
+							</p>
+						</div>
+				]]>
+				
+				Another good way to learn the concepts of the framework quickly is to get the
 				<link to="/src/phoebius-app-latest.tar.gz">stub for
 					the typical application</link> which offers a unified directory structure
 				and provides various bootstrapping scripts. It also contains a few examples
 				on how to define the project domain, query and pass ORM-related entities,
 				and use them inside MVC stack.</p>
-			
-			<p>Find more at our online repositories: 
-				<link to="http://git.phoebius.org/">
-					<![CDATA[
-						<img src="http://git.phoebius.org/git-logo.png" align="absmiddle" width="72" height="27" alt="git" style="position:absolute;left:-90px;" />
-					]]>
-					git.phoebius.org
-				</link>
-			
-			
-			</p>
 		</chapter>
 	</chapters>
 </document>

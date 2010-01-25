@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	* ***********************************************************************************************
+	*
+	* Phoebius Framework
+	*
+	* **********************************************************************************************
+	*
+	* Copyright (c) 2010 Scand Ltd.
+	*
+	* All rights reserved.
+	*
+	*************************************************************************************************
+-->
+
+<!DOCTYPE document SYSTEM "../../../../dtd/document.dtd">
+
+<document>
+	<title>Configuration</title>
+	<chapters>
+		<chapter title="Scope of this document">
+			<p> This documented is intended to cover the following information: <ul>
+					<li>how to apply SCM to Phoebius-based application</li>
+					<li>how Phoebius bootstraps and handles incoming requests</li>
+					<li>how Phoebius-based application can be configured</li>
+				</ul>
+			</p>
+		</chapter>
+		<chapter title="Introduction">
+			<p> This document will tell you everything about configuration - which is very important
+				when dealing with SCM of huge projects. This covers (but not limited by) application
+				environment and tuning.</p>
+			<p> First of all, the definitions used in the document should be introduced. <ol>
+					<li><b>The framework</b> here is the complete distribution of Phoebius
+						framework, which is located in a separate directory. This directory is
+						usually called <code>$base</code> (base directory) for historical
+						reasons.</li>
+					<li><b>The application</b> here is a separate directory with the unified
+						directory structure where Phoebius-based scripts (tied with a specific
+						deployed Phoebius distribution) reside. This directory is usually called
+							<code>$app</code>. The application stub (aka sandbox) with the
+						predefined directory structure can be taken from the <link
+							to="/download.html">downloads section</link>.</li>
+					<li><b>The front controller</b> is a PHP script which receives the incoming
+						request. In most cases, it is an <code>index.php</code> script located in
+							<code>www</code> (or <code>public_html</code>) directory under the
+						application root.</li>
+				</ol>
+			</p>
+		</chapter>
+
+		<chapter title="Notation">
+			<p> Phoebius framework is object-oriented. This means that classes here are everything.
+				We really love how C# and Java helps us to solve the dependencies, and hate the tons
+				of <code>include</code>'s and <code>require</code>' we need to write in PHP. Thus we
+				decided to oversimplify this: <ol>
+					<li>you do not need to include scripts with classes you wish to use;</li>
+					<li>class files can be defined in a separate file which is located anywhere
+						under the directory which is specified inside the <link
+							to="http://php.net/set_include_path">
+							<code>include_path</code></link>. A file naming pattern is
+							<code>&lt;ClassName&gt;.class.php</code> (case-sensitive!).</li>
+				</ol> So, to create a new class, say, <code>MyController</code>, it is reasonable to
+				define it within <code>$app/lib/Mvc/MyController.class.php</code>. </p>
+		</chapter>
+
+
+		<chapter title="Dependecies">
+			<p> The first thing you should know when starting a new Phoebius project is that the
+				application is tied with a specific framework distribution, but certainly they are
+				independent and thus may be located separately. </p>
+			<p> Imagine that you've downloaded the latest Phoebius tarball and extracted it to
+					<code>$base</code> (say, <code>/var/www/phoebius-v1.0.2</code>). Then you get
+				the application sandbox and extract it to <code>$app</code> (say,
+					<code>/var/www/sites/phoebius.org</code>). There is only the one thing you
+				should consider when tying the application with the framework: the absolute path to
+				the framework. This gives you the following pros: <ul>
+					<li>you may host multiple applications that use a single framework distribution.
+						This simplifies deployment and updates</li>
+					<li>an application depends on a specific framework version. This protects you
+						from compatibility issues when the application becomes incompatible with the
+						newer version of the framework</li>
+				</ul>
+			</p>
+			<p> So, to tie and application with the framework, you need to include the framework
+				init-script at the beginning of the front controller: <code-block lang="php"><![CDATA[
+// $base contains the absolute path to the framework, e.g.:
+// $base = realpath(dirname(__FILE__) . '/../../phoebius');
+require $base . '/etc/app.init.php';
+]]></code-block> and that is all! Now you can use the core Phoebius library. </p>
+
+		</chapter>
+
+		<chapter title="Front-controller lifetime">
+			<p> In typical application a HTTP-request is passed to front-controller, and it does the following: <ul>
+					<li>sets up an absolute path where the application resides, and
+						assigns it to the <code>APP_ROOT</code> constant: <code-block><![CDATA[
+define('APP_ROOT', realpath(dirname(__FILE__) . '/..'));				
+]]></code-block></li>
+					<li>invokes the framework's init-script: <code-block><![CDATA[
+require (APP_ROOT . '/phoebius/etc/app.init.php'));
+]]></code-block> This stage helps to automate the process of bootstrapping the framework
+						environment: <ul>
+							<li>an absolute path to <code>$base/lib</code> is set up</li>
+							<li>transparent class autoloader invoked</li>
+							<li>various configuration constants set up to be used in the application
+								config</li>
+						</ul>
+					</li>
+					<li>applies the application config: <code-block><![CDATA[
+require (APP_ROOT . '/etc/config.php');
+]]></code-block> This config is environment-independed: it set up only application-wide settings,
+						like additional paths where class autoloader looks up the invoked classes; </li>
+					<li> (optionally) applies a host config, which is
+						environment-dependant. This config may define a database connections,
+						caching and debugging policies, and so on and so forth;</li>
+					<li> passes the request to the handler, usually to <link
+							to="/support/api/classSiteApplication.html"
+							><code>SiteApplication</code></link> which wraps the environment state
+						with <link to="/support/api/classWebContext.html">coherent object
+						API</link>. <link to="/support/manual/application.html"><i>Learn
+							more</i></link>
+					</li>
+				</ul>
+			</p>
+		</chapter>
+
+		<chapter title="Configuration">
+			<subchapter title="Application config">
+				<p> An application config (an <code>$app/etc/config.php</code> script) is the
+					application init script intended to set up environment-independent application
+					settings. These are settings that extend the application possibilities, can be
+					relative and can be used on any server. In other words, these settings are the
+					same even for completely different development and production environments. </p>
+				<p> The following settings can be treated as environment-independent: <ul>
+						<li>relative path to the directories where classes are looked up.
+							Application stub expands the <code>include_path</code> specifying two
+							more directories for user classes: <code>$app/lib</code> and
+								<code>$app/var/lib</code> (autogenerated classes).</li>
+						<li>maintainer's email where the crash dumps would be sent (a
+								<code>BUGS_EMAIL</code> constant)</li>
+						<li>various dependant libraries bootstrapping, if any</li>
+					</ul>
+				</p>
+				<p> This config can be easily tracked by the SCM you use. </p>
+			</subchapter>
+			<subchapter title="Host config">
+				<p> A host config is a PHP script, which defines host-dependant settings. It shall
+					be different for development and production environments. In most cases you put
+					here the following: <ul>
+						<li>slot configuration setting which affects framework performance. There
+							are three predefined presets: <ol>
+								<li><code>SLOT_PRESET_DEVELOPMENT</code> defines non-optimized
+									configuration and maximizes the verbosity of crash dumps and
+									logs;</li>
+								<li><code>SLOT_PRESET_TEST</code> is currently not used;</li>
+								<li><code>SLOT_PRESET_PRODUCTION</code> defines maximum
+									optimization</li>
+							</ol> To use the desired slot preset, just assign it to
+								<code>APP_SLOT_CONFIGURATION</code> constant: <code-block><![CDATA[
+define ('APP_SLOT_CONFIGURATION', SLOT_PRESET_DEVELOPMENT);
+]]></code-block>
+						</li>
+						<li>define the database connections: <code-block><![CDATA[
+DBPool::add(
+	"mydb1", 
+	MySqlDB::create()
+		->setName("mydb1')
+		->setUser('mysql')
+		->setPassword('')
+);
+
+DBPool::add(
+	"mydb2", 
+	PgSqlDb::create()
+		->setName("mydb2')
+		->setUser('postgres')
+		->setPassword('postgres')
+		->setHost('')
+);
+]]></code-block>
+						</li>
+						<li> tune autoloader to use or to skip cache: <code-block><![CDATA[
+// important during development
+Autoloader::getInstance()->clearCache();
+]]></code-block>
+						</li>
+					</ul>
+				</p>
+				<p> There are various ways to force the application to use the corresponding host
+					config. We appreciate using environment variable <code>APP_SLOT</code> to set
+					the name of the host config and the following naming to separate host configs:
+						<code>$app/cfg/&lt;host config name&gt;/config.php</code>. Then we
+					just invoke the corresponding host config using the environment variable: <code-block><![CDATA[
+require APP_ROOT . '/cfg/' . APP_SLOT . '/config.php';
+]]></code-block> If <code>APP_SLOT</code> environment variable is not passed to the script then the
+					framework init-script defines an <code>APP_SLOT</code> with the
+						<code>default</code> value. </p>
+			</subchapter>
+		</chapter>
+
+		<chapter title="Tips and tricks">
+			<subchapter title="Autoloading 3rdparty libraries">
+				<p> Many times you need to use the 3rdparty libraries, that certainly do not follow
+					the notations introduced by Phoebius, particularly an autoloading notation. Of
+					course, you can force autoloader to find the requested classes from 3rdparty
+					libraries easily by providing a <link
+						to="/support/api/interfaceIClassResolver.html"><code>class
+						resolver</code></link> that understands the notation your 3rdpary library
+					follows. </p>
+				<p> Say, you want to use a library that follows PEAR naming style. Phoebius already
+					provides a <link to="/support/api/classPearStyleClassResolver.html"><code>class
+							resolver</code></link> for that purposes. To use it, do the following: <ol>
+						<li>locate you library to $app/3rdparty/pear</li>
+						<li>expand the include_path: <code-block><![CDATA[
+set_include_path(
+	get_include_path()
+	. PATH_SEPARATOR . APP_ROOT . '/3rdparty/pear'
+);
+]]></code-block>
+						</li>
+						<li>add the corresponding <link
+								to="/support/api/classPearStyleClassResolver.html"><code>class
+									resolver</code></link> to autoloader within the application
+							config: <code-block title="$app/etc/config.php"><![CDATA[
+Autoloader::getInstance()
+	->addResolver(new PearStyleClassResolver)
+]]></code-block>
+						</li>
+					</ol>
+				</p>
+			</subchapter>
+
+		</chapter>
+
+		<chapter title="Conclusion">
+			<p> You have understand how the application can be preconfigured and expanded to fit the
+				SCM requirements. Not it is time to prepare the OO-environment of the application
+				and run it all -- see the <link to="/support/manual/application.html">application
+					init</link> document. </p>
+		</chapter>
+
+	</chapters>
+
+
+</document>

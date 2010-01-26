@@ -25,47 +25,12 @@
 					<li>how Phoebius-based application can be configured</li>
 				</ul>
 			</p>
-		</chapter>
-		<chapter title="Introduction">
-			<p> This document will tell you everything about configuration - which is very important
-				when dealing with SCM of huge projects. This covers (but not limited by) application
+			<p> It will tell you everything about configuration - which is very important when
+				dealing with SCM of huge projects. This covers (but not limited by) application
 				environment and tuning.</p>
-			<p> First of all, the definitions used in the document should be introduced. <ol>
-					<li><b>The framework</b> here is the complete distribution of Phoebius
-						framework, which is located in a separate directory. This directory is
-						usually called <code>$base</code> (base directory) for historical
-						reasons.</li>
-					<li><b>The application</b> here is a separate directory with the unified
-						directory structure where Phoebius-based scripts (tied with a specific
-						deployed Phoebius distribution) reside. This directory is usually called
-							<code>$app</code>. The application stub (aka sandbox) with the
-						predefined directory structure can be taken from the <link
-							to="/download.html">downloads section</link>.</li>
-					<li><b>The front controller</b> is a PHP script which receives the incoming
-						request. In most cases, it is an <code>index.php</code> script located in
-							<code>www</code> (or <code>public_html</code>) directory under the
-						application root.</li>
-				</ol>
-			</p>
 		</chapter>
 
-		<chapter title="Notation">
-			<p> Phoebius framework is object-oriented. This means that classes here are everything.
-				We really love how C# and Java helps us to solve the dependencies, and hate the tons
-				of <code>include</code>'s and <code>require</code>' we need to write in PHP. Thus we
-				decided to oversimplify this: <ol>
-					<li>you do not need to include scripts with classes you wish to use;</li>
-					<li>class files can be defined in a separate file which is located anywhere
-						under the directory which is specified inside the <link
-							to="http://php.net/set_include_path">
-							<code>include_path</code></link>. A file naming pattern is
-							<code>&lt;ClassName&gt;.class.php</code> (case-sensitive!).</li>
-				</ol> So, to create a new class, say, <code>MyController</code>, it is reasonable to
-				define it within <code>$app/lib/Mvc/MyController.class.php</code>. </p>
-		</chapter>
-
-
-		<chapter title="Dependecies">
+		<chapter title="Installation">
 			<p> The first thing you should know when starting a new Phoebius project is that the
 				application is tied with a specific framework distribution, but certainly they are
 				independent and thus may be located separately. </p>
@@ -92,9 +57,10 @@ require $base . '/etc/app.init.php';
 		</chapter>
 
 		<chapter title="Front-controller lifetime">
-			<p> In typical application a HTTP-request is passed to front-controller, and it does the following: <ul>
-					<li>sets up an absolute path where the application resides, and
-						assigns it to the <code>APP_ROOT</code> constant: <code-block><![CDATA[
+			<p> In typical application a HTTP-request is passed to front-controller, and it does the
+				following: <ul>
+					<li>sets up an absolute path where the application resides, and assigns it to
+						the <code>APP_ROOT</code> constant: <code-block><![CDATA[
 define('APP_ROOT', realpath(dirname(__FILE__) . '/..'));				
 ]]></code-block></li>
 					<li>invokes the framework's init-script: <code-block><![CDATA[
@@ -111,9 +77,9 @@ require (APP_ROOT . '/phoebius/etc/app.init.php'));
 require (APP_ROOT . '/etc/config.php');
 ]]></code-block> This config is environment-independed: it set up only application-wide settings,
 						like additional paths where class autoloader looks up the invoked classes; </li>
-					<li> (optionally) applies a host config, which is
-						environment-dependant. This config may define a database connections,
-						caching and debugging policies, and so on and so forth;</li>
+					<li> (optionally) applies a host config, which is environment-dependant. This
+						config may define a database connections, caching and debugging policies,
+						and so on and so forth;</li>
 					<li> passes the request to the handler, usually to <link
 							to="/support/api/classSiteApplication.html"
 							><code>SiteApplication</code></link> which wraps the environment state
@@ -126,6 +92,11 @@ require (APP_ROOT . '/etc/config.php');
 		</chapter>
 
 		<chapter title="Configuration">
+			<subchapter title="Activating front-controller">
+				<p>
+					TODO: .htaccess, etc
+				</p>
+			</subchapter>
 			<subchapter title="Application config">
 				<p> An application config (an <code>$app/etc/config.php</code> script) is the
 					application init script intended to set up environment-independent application

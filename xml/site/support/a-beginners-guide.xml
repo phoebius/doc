@@ -148,7 +148,7 @@
 	</entities>
 </domain>
 ]]></code-block> For more information, refer to <link
-					to="http://git.phoebius.org/?p=phoebius.git;a=blob;f=share/Orm/Domain/Meta/Xml/abstract.dtd;h=e2f654545eecdb3997aa8b3170f286344d41fad1;hb=e96ebe021c8ad6c7eddc989d3cf3e51f4ba95b1d"
+					to="http://git.phoebius.org/?p=phoebius.git;a=blob;f=share/Orm/Domain/Meta/Xml/abstract.dtd;hb=HEAD"
 					>/share/Orm/Domain/Meta/Xml/abstract.dtd</link>. </p>
 			<p> Then we tell the framework to produce the code according to the definition, by
 				calling the framework generator via the console and passing the absolute path to the

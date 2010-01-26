@@ -18,39 +18,119 @@
 <document>
 	<title>Application init</title>
 	<chapters>
-		<chapter>
-			<p> SiteApplication
+		<chapter title="Scope of this document">
+			<p> This document covers the information on how a <link
+					to="/support/manual/configuration.html">preconfigured application</link>
+				prepares the incoming request and passes it to the MVC application stack. </p>
+		</chapter>
+		
+		<chapter title="Application flow">
+			<p> A normal approach to a design of the front-controller is to configure the
+				application and then wrap the environment with classes to provide an object-oriented
+				API to request and response (see the <link
+					to="/support/api/interfaceIWebContext.html"><code>IWebContext</code></link>
+				contract). This dramatically unifies and simplifies further development of the MVC
+				stack which actually handles the request. </p>
+			<p>
+				A wrapped request is then can be passed to the MVC stack, where various routers/filters/actions
+				may be applied to handle the request and produce the response.
 			</p>
 			<p>
+				The problem is that PHP is a scripting language, and there are various things you cannot check
+				at compile time. At that time you need an application that can handle unexpected issues.
+			</p>
+			<p>
+				There is a <link to="/support/api/classSiteApplication.html">
+					<code>SiteApplication</code>
+				</link> classes that helps your applications to be more stable and predictable. It does the following:
 				<ul>
-					
-					<li> an invoked  wraps the environment state 
-						<link to="/support/api/classSiteApplication.html">
-							<code>SiteApplication</code>
-						</link>
-						(actually, a <link to="/support/api/classWebRequest.html">request</link>, a
-						<link to="/support/api/classWebResponse.html">response</link>, a <link
-							to="/support/api/classWebServerState.html">server state</link>) ;</li>
-					<li>A <link to="/support/api/classSiteApplication.html"
-						><code>SiteApplication</code></link> invokes a <link
-							to="/support/api/classChainedRouter.html">router</link> which lookups
-						the routes table for the rule most suitable for the <link
-							to="/support/api/classWebContext.html">request context</link>, and then
-						uses it to construct a <link to="/support/api/classRoute.html">
-							<code>Route</code></link>. <link
-								to="/support/manual/request-routers.html"><i>Learn more</i></link>.</li>
-					<li><link to="/support/api/classRoute.html">
-						<code>Route</code></link> is passed to the <link
-							to="/support/api/interfaceIRouteDispatcher.html">route
-							dispatcher</link>. The route dispatcher determines the handler for the
-						incoming request, and then invokes it. An <link
-							to="/support/class/classMvcDispatcher.html"
-							><code>MvcDispatcher</code></link> object is usually used thus a
-						controller class is used as request handler. <link
-							to="/support/manual/controllers.html"><i>Learn more</i></link>.</li>
-					<li>A controller object finally handles the request and produces an action
-						result. </li>
+					<li> accepts the instance of a <link to="/support/api/interfaceIRouter.html">
+							<code>IRouter</code></link>router that will look up for the handler that
+							corresponds the incoming request </li>
+					<li> wraps a standard incoming PHP request with the corresponding classes: <ul>
+							<li>
+								<code>$_SERVER</code> is wrapped with <link
+									to="/support/api/classWebServerState.html">
+									<code>WebServerState</code></link>
+							</li>
+							<li>
+								<code>$_GET</code>, <code>$_POST</code>, <code>$_COOKIE</code> and
+									<code>$_FILES</code> are wrapped with <link
+									to="/support/api/classWebRequest.html">
+									<code>WebRequest</code></link>
+							</li>
+							<li> an object of <link to="/support/api/classWebResponse.html"
+										><code>WebResponse</code></link> class representing response
+										is instantiated </li>
+							<li>
+								<code>WebRequest</code>, <code>WebResponse</code> and <code>WebServerState</code> are
+								then wrapped with 
+								<link to="/support/api/classWebContext.html">
+									<code>WebContext</code>
+								</link>
+							</li>
+						</ul>
+					</li>
+					<li>
+						defines a handler for <code>404</code> error which is triggered when
+						the router fails to find the route that corresponds the request. By 
+						default this handler <link to="/support/api/interfaceIRouter.html#a42acd7fff90c95886b2d97e547f9669e">takes the fallback route</link> defined by the router
+						and invokes it. You can overwrite 
+						<link
+							to="/support/api/classSiteApplication.html#af2bddf129d463a826ca6b0c258f7e509"
+						><code>SiteApplication::handle404()</code></link> to customize the logic.
+					</li>
+					<li> defines a handler for <code>500</code> error which occurs when your
+						application flow is terminated because of unexpected and unhanded PHP error.
+						By default this handler sends a crash dump to email defined by the
+							<code>BUGS_EMAIL</code> constant and prints a stack trace. You can
+						overwrite the failover stub 
+						<link
+							to="/support/api/classSiteApplication.html#afe1f624c7b61e88fb00c76dcbdfe7266">
+							<code>SiteApplication::handle500()</code>
+						</link> to customize the logic.
+					</li>
+					<li>
+						finally forces the router to look up the routes table for the route that
+						corresponds the incoming request, and invokes the attached dispatcher to handle
+						the request (<link to="/support/manual/request-routers.html"><i>learn more</i></link>).
+					</li>
 				</ul>
+				So the <code>SiteApplication</code> does all dirty work for you. All you need is to invoke it
+				in your front-controller:
+				<code-block title="index.php"><![CDATA[
+
+//
+// load the configuration files here
+//
+
+$application = new SiteApplication(new MyRouter);
+$application->run();
+]]></code-block>
+			</p>
+		</chapter>
+		
+		<chapter title="Best practices">
+			<p>
+				We strongly recommend you to create your own <code>SiteApplication</code> extending
+				the base class, and separate front-controllers that should produce responses
+				of different types. For example, developing an AJAX web-service you may define
+				two front-controllers. The first one is <code>index.php</code> may use the standard
+				<link to="/support/api/classSiteApplication.html">SiteApplication</link>
+				while another one front-controller, say, <code>ajax.php</code>, uses
+				a custom <code>SiteApplication</code> which defines the error handler
+				that handles unexpected errors and produces the result in AJAX-compliant format:
+				<code-block><![CDATA[
+class AjaxSiteApplication extends SiteApplication {
+	protected function handle500(Exception $e) {
+		echo json_encode(array(
+			'error' => $e->getCode()
+		));
+		
+		$this->notify500(BUGS_EMAIL, $e);
+	}
+}
+]]></code-block>
 			</p>
 		</chapter>
 	</chapters>

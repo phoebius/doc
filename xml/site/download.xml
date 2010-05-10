@@ -23,25 +23,25 @@
 				<![CDATA[
 						<div class="i">
 							<p>
-								<a href="/src/phoebius-v1.0.2.tar.gz">
-									<h2>Phoebius framework v1.0.2</h2>
+								<a href="/src/phoebius-v1.2.0.tar.gz">
+									<h2>Phoebius framework v1.2.0</h2>
 									
 									<img class="icon" src="images/icons/download.gif" width="32" height="32" />
 								</a>
 							</p>
 							
-							<p>February 1, 2010</p>
+							<p>May 1, 2010</p>
 							
 							<p>
 							It&#146;s features are: 
 								<ul>
-									<li>object relational mapping with scalable type system</li>
-									<li>ORM-related entities code generator</li>
-									<li>data access objects with various relational patterns</li>
-									<li>PHP-driven template engine similar to ASP.NET 
-									(<a href="http://msdn.microsoft.com/en-us/library/system.web.ui.aspx">System.Web.UI namespace</a>)</li>
+									<li>improved code generator</li>
+									<li>persistent collections API: one-to-many and many-to-many associations worker</li>
+									<li>optimized persistent object assembler</li>
 								</ul>
 							</p>
+							
+							<p>Phoebius v1.0.x branch is now deprecated and won't be supported in future.</p>
 						</div>
 					]]>
 			</p>

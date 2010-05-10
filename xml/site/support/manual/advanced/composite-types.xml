@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	* ***********************************************************************************************
+	*
+	* Phoebius Framework
+	*
+	* **********************************************************************************************
+	*
+	* Copyright (c) 2009 Scand Ltd.
+	*
+	* All rights reserved.
+	*
+	*************************************************************************************************
+-->
+
+<!DOCTYPE document SYSTEM "../../../../../dtd/document.dtd">
+
+<document>
+	<title>Composite types</title>
+	
+	<chapters>
+		<chapter>
+			<p> Phoebius framework v1.0.1 introduces inline composite types. You are now able to
+				define a property which points to a separate entity stored side-by-side with the
+				property's entity, reusing the common database table. This is useful to propagate
+				code reuse and moving the application code to the corresponding essences.</p>
+			<p>
+				The following part of 
+				<code>$app/var/domain.xml</code> defines three entities and different relations between them:
+				<code-block lang="php" title="$app/var/domain.xml"><![CDATA[
+...
+<entity name="UserGroup" has-dao="true">
+	<properties>
+		<identifier />
+		<property name="name" type="String" />
+	</properties>
+</entity>
+					
+<entity name="Address" has-dao="false">
+	<properties>
+		<property name="countryCode" type="varchar" size="2" />
+		<property name="city" type="String" />
+		<property name="street" type="String" />
+	</properties>
+</entity>
+
+<entity name="User" has-dao="true">
+	<properties>
+		<identifier />
+		<property name="login" type="String" />
+		<property name="address" type="Address" association="exactlyOne" />
+		<property name="group" type="UserGroup" association="zeroOrOne" />
+	</properties>
+</entity>		
+...
+]]></code-block>
+			</p>
+			<p>User and <code>UserGroup</code> are associated in 
+				<code>1:1</code> correspondence. In particular, this means
+				that two database tables are defined, and the table for <code>User</code> entity contains a
+				foreign key which refers to the <code>UserGroup</code> table and can be nullable (its association
+				is <code>zeroOrOne</code>).</p>
+			<p> Association mapping requires at least additional SQL query when assembling the
+				entity, and an explicit table join when referring the encapsulant: 
+				<code-block lang="php" title="assembling the entity"><![CDATA[
+// we need properties of a User entity only, avoid inner assemblies		
+User::dao()->setFetchStrategy(FetchStrategy::lazy());
+
+// query for fetching all superusers
+$query = 
+	User::query()
+		->where(
+			Expression::eq('group.name', 'root')
+		);
+		
+// retrieve them
+$superusers = $query->getList();
+
+// dump them
+foreach ($superusers as $superuser) {
+	// $superuser->getGroup() is defined but not fetched
+	echo $superuser->getLogin(), PHP_EOL;
+}
+]]></code-block>
+			
+			</p>
+			<p>
+				The following query is executed:
+				<code-block lang="php"><![CDATA[
+SELECT
+	user.login, user.address_country_code, user.address_city, user.address_street, user.group, 
+	user_group.id, user_group.name
+FROM 
+	user AS user 
+	INNER JOIN user_group AS user_group ON (user.group = user_group.id)
+WHERE 
+	user_group.name = 'root'
+]]></code-block>
+			</p>
+			<p> At the same time, Address entity is defined as storage-less: it is presented by a
+				class, whose objects cannot be stored in the database. Therefore the declaration of
+				a property which refers the Address type actually forces the ORM to expand the
+				User's database table with the additional columns. </p>
+			<p> Composite mapping provides a good abstraction and simple storage schema. You can
+				refer the composite type properties without performance impact:
+				<code-block lang="php"><![CDATA[
+// we need properties of a User entity only, avoid inner assemblies					
+User::dao()->setFetchStrategy(FetchStrategy::lazy());
+
+// get all users from the USA
+$query = 
+	User::query()
+		->where(
+			Expression::eq('address.countryCode', 'US')
+		);
+
+// acutally retrieve the list
+$usaCitizens = $query->getList();
+
+// dump it
+foreach ($usaCitizens as $citizen) {
+	echo $citizen->getLogin(), PHP_EOL;
+}
+]]></code-block> forces the following simple query to be executed:
+				<code-block lang="php"><![CDATA[
+SELECT
+	user.login, user.address_country_code, user.address_city, user.address_street, user.group
+FROM 
+	user
+WHERE 
+	user.address_country_code = 'US'
+]]></code-block>
+			</p>
+			<p> Of course, Phoebius allows you to nest composite types, query them and define
+			multiple properties of the same composite type. </p>
+			<p>
+				Composite association has the following known limitations:
+				<ul>
+					<li>a composite type cannot being associated as 
+						<code>zeroOrOne</code> (i.e. the property that contains the object cannot be nullable)</li>
+					<li> it cannot be referenced in a query: <code-block lang="php"><![CDATA[
+$address = new Address;
+$address->setCountryCode('US');
+
+User::query()
+	->where(
+		// do not know what columns to use in condition!
+		Expression::eq('address', $address) 
+	);		
+	]]></code-block> You need to specify the path to the final primitive property. </li>
+				</ul>
+			</p>
+			<p>Nevertheless, it can help you in simplifying various tasks, providing a good code
+				reuse across different components.</p>
+		</chapter>
+	</chapters>
+</document>

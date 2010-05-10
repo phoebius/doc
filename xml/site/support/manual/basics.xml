@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * ***********************************************************************************************
+ *
+ * Phoebius Framework
+ *
+ * **********************************************************************************************
+ *
+ * Copyright (c) 2009 Scand Ltd.
+ *
+ * All rights reserved.
+ *
+ *************************************************************************************************
+-->
+
+<!DOCTYPE document SYSTEM "../../../../dtd/document.dtd">
+
+<document>
+	<title>Basics</title>
+	<chapters>
+		<chapter title="Scope of this document">
+			<p> This document is intended to cover the basics.</p>
+		</chapter>
+
+		<chapter title="Encapsulation">
+			<p> Phoebius framework is object-oriented. This means that classes here are everything.
+				We really love how C# and Java helps us to solve the dependencies, and hate the tons
+				of <code>include</code>'s and <code>require</code>'s we need to write in PHP. Thus
+				we decided to oversimplify this: <ol>
+					<li>you do not need to include scripts with classes you wish to use;</li>
+					<li>class files must be defined in a separate file which is located anywhere
+						under the directory which is specified inside the <link
+							to="http://php.net/set_include_path">
+							<code>include_path</code></link>. A file naming pattern is
+							<code>&lt;ClassName&gt;.class.php</code> (case-sensitive!).</li>
+				</ol> So, to define a new class, say, <code>MyController</code>, it is reasonable to
+				put it within <code>$app/lib/Mvc/MyController.class.php</code> and it will be found
+				automatically on it's first usage (because <code>$app/lib</code> is added to
+					<code>include_path</code> by default). </p>
+			<p> Then a class loader, that is initialized in core init-script, takes care about the
+				look up. </p>
+		</chapter>
+
+		<chapter title="Fail-save code">
+			<p> An application flow is <b>exception-centric</b>: each PHP's error/warning/notice is
+				replaced with an <link to="/support/api/classExecutionContextException.html"
+					>exception</link> object. Such a concept helps to avoid tons of unnoticeable
+				inconsistencies (like an access to undefined index of an array) and thus making the
+				usage of an internal PHP function strong enough and unambiguous. The following
+				example proves that you won't forget to do the check: <code-block><![CDATA[
+try {
+	// suppressing errors via "@" won't help you here wrt. error verbosity
+	unlink('/path/to/nonexistent.file');
+}
+catch (ExecutionContextException $e) {
+	// handle this gracefully
+}
+]]></code-block> Of course, this functionality can be explicitly <link
+					to="/support/api/classExceptionizer.html#abc8fd10678ce163118dade48d4e7d3cf"
+					>turned off</link> when using a third-party library that does not know about the
+				exceptions or ignores notices and warnings (e.g., PEAR). </p>
+			<p> Phoebius defines two exceptions that are used to wrap internal errors: <ul>
+					<li>
+						<link to="/support/api/classExecutionContextException.html"
+								><code>ExecutionContextException</code></link> is used to replace
+						all PHP errors, warnings and notices except fatal. </li>
+					<li>
+						<link to="/support/api/classCompilationContextException.html"
+							>CompilationContextException</link> is used define a fatal error (this
+						also includes <code>E_USER_ERROR</code> triggered using <link
+							to="http://php.net/trigger_error">trigger_error</link>. This kind of
+						exception should be caught inside front-controller only and than handled as
+						unexpected error. This is done by <code>SiteApplication</code>, as described
+						by the "<link to="/support/manual/application.html">Application init</link>"
+						manual.</li>
+				</ul>
+			</p>
+		</chapter>
+
+		<chapter title="Assertions">
+			<p> In some cases you cannot rely on type-checks only: there are a lot of cases when you
+				need to be sured that the control flow is predictable. This is true especially for
+				loosely-typed languages.</p>
+			<p> For this reasons Phoebius introduces an assertion module: a set of easy-to-use
+				routines that may be used in every corner case. They are wrapped by an <link
+					to="/support/api/classAssert.html">
+					<code>Assert</code></link> class. Each of the public static method accepts an
+				expression to assert, the message to show if assertion fails, and an optional
+				arguments to be interpolated within a message through the 
+				<link to="http://php.net/sprintf"><code>sprintf</code></link> call.
+				For example: <code-block lang="php"><![CDATA[
+function setGreedy($flag) {
+	Assert::isBoolean(
+		$flag,
+		'greedyness should be boolean, %s is given',
+		TypeUtils::getName($flag) // may name a class, a scalar or even a null
+	);
+	
+	Assert::isTrue(
+		$this->mayHaveGreedyNess,
+		'you cannot set greedyness here'
+	);
+	
+	...
+}
+]]></code-block></p>
+			<p>
+				<code>Assert</code> gives the following methods to assert an expressions: <ul>
+					<li><code>isTrue</code>, <code>isFalse</code> to check whether expression is
+						true or false</li>
+					<li><code>isCallback</code> to determine whether an expression is callable</li>
+					<li><code>isEmpty</code>, <code>isNotEmpty</code> to determine whether
+						expression is empty or not (<code>empty()</code> operator is used, so all
+						types of variables are accepted)</li>
+					<li><code>isNull</code>, <code>isNotNull</code>,
+						<code>isScalarOrNull</code></li>
+					<li><code>isResource</code></li>
+					<li><code>isNumeric</code>, <code>isInteger</code>,
+							<code>isPositiveInteger</code>, <code>isFloat</code></li>
+					<li><code>isScalar</code></li>
+					<li><code>isBoolean</code></li>
+				</ul>
+			</p>
+			<p>There are also some extra methods, which stop the execution in any case: if they are
+				called then it is meant that assertion fails. They are <code>isUnreachable</code>
+				and <code>notImplemented</code>: <code-block lang="php"><![CDATA[
+try {
+	return do_some_stuff();
+	
+	Assert::isUnreachable();
+}
+catch (Exception $e) {
+	Assert::notImplemented(); // do not forget to implement!
+}
+]]></code-block>
+			</p>
+		</chapter>
+	</chapters>
+</document>

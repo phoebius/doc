@@ -16,12 +16,13 @@
 <!DOCTYPE index SYSTEM "../../../../dtd/index.dtd">
 
 <index>
-	<doc xml="manual.xml" location=""></doc>
+ <doc xml="manual.xml" location=""></doc>
+ <doc xml="basics.xml" />
  <doc xml="configuration.xml" />
  <doc xml="application.xml"></doc>
- <doc xml="defining-a-model.xml" />
+ <doc xml="model.xml" />
  <doc xml="querying-entities.xml" />
- <doc xml="request-routers.xml"></doc>
+ <doc xml="routers.xml"></doc>
  <doc xml="controllers.xml"></doc>
  <doc xml="presentation-logic.xml"></doc>
 	<ref link="/support/manual/advanced/" name="Advanced topics">

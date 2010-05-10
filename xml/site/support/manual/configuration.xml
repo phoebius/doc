@@ -19,14 +19,14 @@
 	<title>Configuration</title>
 	<chapters>
 		<chapter title="Scope of this document">
-			<p> This documented is intended to cover the following information: <ul>
+			<p> This document is intended to cover the following information: <ul>
 					<li>how to apply SCM to Phoebius-based application</li>
 					<li>how Phoebius bootstraps and handles incoming requests</li>
 					<li>how Phoebius-based application can be configured</li>
 				</ul>
 			</p>
-			<p> It will tell you everything about configuration - which is very important when
-				dealing with SCM of huge projects. This covers (but not limited by) application
+			<p> It will tell you everything about configuration, which is very important when
+				dealing with SCM of the huge projects. This covers (but not limited by) application
 				environment and tuning.</p>
 		</chapter>
 
@@ -35,32 +35,34 @@
 				application is tied with a specific framework distribution, but certainly they are
 				independent and thus may be located separately. </p>
 			<p> Imagine that you've downloaded the latest Phoebius tarball and extracted it to
-					<code>$base</code> (say, <code>/var/www/phoebius-v1.0.2</code>). Then you get
+					<code>$base</code> (say, <code>/var/www/phoebius-v1.2.0</code>). Then you get
 				the application sandbox and extract it to <code>$app</code> (say,
 					<code>/var/www/sites/phoebius.org</code>). There is only the one thing you
 				should consider when tying the application with the framework: the absolute path to
-				the framework. This gives you the following pros: <ul>
-					<li>you may host multiple applications that use a single framework distribution.
-						This simplifies deployment and updates</li>
+				the framework, which is <code>/var/www/phoebius-v1.2.0s</code>. This gives you the
+				following pros: <ul>
+					<li>you can host multiple applications using a single framework distribution.
+						This simplifies deployment and updates;</li>
 					<li>an application depends on a specific framework version. This protects you
 						from compatibility issues when the application becomes incompatible with the
 						newer version of the framework</li>
 				</ul>
 			</p>
-			<p> So, to tie and application with the framework, you need to include the framework
-				init-script at the beginning of the front controller: <code-block lang="php"><![CDATA[
+			<p> So, to tie and application with the framework, all you need is to include the
+				framework init-script at the beginning of the front controller: <code-block
+					lang="php"><![CDATA[
 // $base contains the absolute path to the framework, e.g.:
-// $base = realpath(dirname(__FILE__) . '/../../phoebius');
+// $base = realpath(dirname(__FILE__) . '/../../phoebius-v1.2.0');
 require $base . '/etc/app.init.php';
 ]]></code-block> and that is all! Now you can use the core Phoebius library. </p>
 
 		</chapter>
 
 		<chapter title="Front-controller lifetime">
-			<p> In typical application a HTTP-request is passed to front-controller, and it does the
-				following: <ul>
-					<li>sets up an absolute path where the application resides, and assigns it to
-						the <code>APP_ROOT</code> constant: <code-block><![CDATA[
+			<p> In typical application a HTTP-request is passed to front-controller (which is
+				usually <code>$app/www/index.php</code>), and it does the following: <ul>
+					<li>sets up an absolute path to a directory where the application resides, and
+						assigns it to the <code>APP_ROOT</code> constant: <code-block><![CDATA[
 define('APP_ROOT', realpath(dirname(__FILE__) . '/..'));				
 ]]></code-block></li>
 					<li>invokes the framework's init-script: <code-block><![CDATA[
@@ -75,7 +77,7 @@ require (APP_ROOT . '/phoebius/etc/app.init.php'));
 					</li>
 					<li>applies the application config: <code-block><![CDATA[
 require (APP_ROOT . '/etc/config.php');
-]]></code-block> This config is environment-independed: it set up only application-wide settings,
+]]></code-block> This config is environment-independed: it sets up only application-wide settings,
 						like additional paths where class autoloader looks up the invoked classes; </li>
 					<li> (optionally) applies a host config, which is environment-dependant. This
 						config may define a database connections, caching and debugging policies,
@@ -94,7 +96,17 @@ require (APP_ROOT . '/etc/config.php');
 		<chapter title="Configuration">
 			<subchapter title="Activating front-controller">
 				<p>
-					TODO: .htaccess, etc
+					When your front controller is written down and is located in a HTTP public folder,
+					it is time to direct the web server to it.
+				</p>
+				<p>
+					If you are using Apache, you can do this by a simple rewrite rule within <code>.htaccess</code>:
+					<code-block lang="plain" title="$app/www/.htaccess"><![CDATA[
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule .* index.php [L,QSA]
+]]></code-block>
 				</p>
 			</subchapter>
 			<subchapter title="Application config">
@@ -103,14 +115,15 @@ require (APP_ROOT . '/etc/config.php');
 					settings. These are settings that extend the application possibilities, can be
 					relative and can be used on any server. In other words, these settings are the
 					same even for completely different development and production environments. </p>
-				<p> The following settings can be treated as environment-independent: <ul>
+				<p> The following settings can be treated as environment-independent: 
+					<ul>
 						<li>relative path to the directories where classes are looked up.
 							Application stub expands the <code>include_path</code> specifying two
 							more directories for user classes: <code>$app/lib</code> and
 								<code>$app/var/lib</code> (autogenerated classes).</li>
 						<li>maintainer's email where the crash dumps would be sent (a
 								<code>BUGS_EMAIL</code> constant)</li>
-						<li>various dependant libraries bootstrapping, if any</li>
+						<li>bootstrap of various dependant libraries, if any</li>
 					</ul>
 				</p>
 				<p> This config can be easily tracked by the SCM you use. </p>
@@ -147,7 +160,7 @@ DBPool::add(
 		->setName("mydb2')
 		->setUser('postgres')
 		->setPassword('postgres')
-		->setHost('')
+		->setHost('') // use UDP instead of TCP/IP @ linux
 );
 ]]></code-block>
 						</li>

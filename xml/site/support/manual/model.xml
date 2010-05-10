@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	* ***********************************************************************************************
+	*
+	* Phoebius Framework
+	*
+	* **********************************************************************************************
+	*
+	* Copyright (c) 2010 Scand Ltd.
+	*
+	* All rights reserved.
+	*
+	*************************************************************************************************
+-->
+
+<!DOCTYPE document SYSTEM "../../../../dtd/document.dtd">
+
+<document>
+	<title>Defining a model</title>
+	<chapters>
+		<chapter title="Scope of this document">
+			<p> This document covers the most important stage of the application development: how
+				the project domain is defined, how its entities and their relations are mapped to
+				the data source, and how they are used inside the application stack. </p>
+		</chapter>
+		
+		<chapter title="Introduction">
+			<p>
+				Project domain definition is an important step towards the simplification 
+				of you application. Describing the essences you should deal with you 
+				let Phoebius to handle a common business logic implicitly and to provide you
+				a stratified architecture where you have to apply the persistent classes.
+			</p>
+			<p>
+				This achieved simply as follows:
+				<ul>
+					<li>
+						you create a project domain XML definition using the packaged DTD (see 
+						<link to="http://git.phoebius.org/?p=phoebius.git;a=blob;f=share/Orm/Domain/Meta/Xml/abstract.dtd;hb=HEAD"><code>$base/share/Orm/Domain/Meta/Xml/abstract.dtd</code></link> 
+					</li>
+					<li>
+						you tell Phoebius to use the XML file where you have defined a project domain, and
+						Phoebius generates a pure-PHP classes representing the entities
+					</li>
+					<li> profit: a generated classes are the model you can easily use, apply and query
+						within your application </li>
+				</ul>
+			</p>
+			<p>
+				The simplicity is achieved using the unification of everything you should care about.
+			</p>
+			<p>
+				The programmers who does not use object-relational mapping software think
+			</p>
+			<p>
+				Sounds simple, but this simplicity has a huge advantage of dealing with even huge
+				graphs of entities without messing up the code.
+			</p>
+		</chapter>
+		
+		<chapter title="Project domain definition">
+			<subchapter title=""></subchapter>
+		</chapter>
+		
+		
+		<!--
+			<code-block lang="bash">php $base/bin/make.php - -app-dir=$app $app/var/domain.xml</code-block> 
+		-->
+		
+		
+	</chapters>
+</document>

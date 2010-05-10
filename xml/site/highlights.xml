@@ -43,7 +43,6 @@
 							<th>PHP5</th>
 							<th>MVC</th>
 							<th>Multiple DB’s</th>
-							<th>ORM</th>
 							<th>DB Objects</th>
 							<th>ORM</th>
 							<th>Templates</th>
@@ -56,7 +55,6 @@
 						</tr>
 						<tr>
 							<td class="minus">&#150;</td>
-							<td class="plus">+</td>
 							<td class="plus">+</td>
 							<td class="plus">+</td>
 							<td class="plus">+</td>
@@ -89,7 +87,7 @@
 				</p>
 			</subchapter>
 			<subchapter title="Multiple DB’s">
-				<p>A database abstraction layer is implemented to support even any RDBMS as entity
+				<p>A database abstraction layer is implemented to support even any RDBMS as an entity
 					storage. PostgreSQL and MySQL are now implemented.</p>
 			</subchapter>
 			<subchapter title="DB Objects">

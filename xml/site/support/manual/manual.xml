@@ -23,7 +23,7 @@
 				wants to explore its rich feature set and develop object-oriented web applications
 				rapidly. </p>
 			<p> Phoebius is truly object-oriented full stack application framework that provides
-				object/relational mapping between PHP classes and RDBMS, defines infrastructure for
+				O/R mapping between PHP classes and RDBMS, defines infrastructure for
 				the unification of application flow and ables to route incoming requests inside MVC
 				stack. </p>
 			<p> This manual covers various principles of the framework, functionality to implement
@@ -40,82 +40,25 @@
 						reasons.</li>
 					<li><b>The application</b> here is a separate directory with the unified
 						directory structure where Phoebius-based scripts (tied with a specific
-						deployed Phoebius distribution) reside. This directory is usually called
-							<code>$app</code>. The application stub (aka sandbox) with the
+						Phoebius distribution) reside. This directory is usually called
+							<code>$app</code>. The application stub with the
 						predefined directory structure can be taken from the <link
 							to="/download.html">downloads section</link>.</li>
 					<li><b>The front controller</b> is a PHP script which receives the incoming
-						request. In most cases, it is an <code>index.php</code> script located in
-							<code>www</code> (or <code>public_html</code>) directory under the
-						application root.</li>
+						request and passes it to a Phoebius stack. In most cases, it is an
+							<code>$app/www/index.php</code>.</li>
 				</ul>
 			</p>
 		</chapter>
 
 		<chapter title="Quickstart">
 			<p> We've prepared a preconfigured sandbox where you can play around with Phoebius
-				framework without reading the reference manual. Just download the <link
-					to="/src/phoebius-app-latest.tar.gz">
-					<code>phoebius-app</code></link> or <link to="/src/phoebius-site-latest.tar.gz">
-					<code>phoebius-site</code></link> from the <link to="/download.html">downloads
-					section</link> - these are the best examples for the <link
+				framework. Just download the <link to="/src/phoebius-app-latest.tar.gz">
+					<code>phoebius-app</code></link>. You can also download the source code of the
+					<link to="/src/phoebius-site-latest.tar.gz">
+					<code>phoebius.org</code></link> website from the <link to="/download.html"
+					>downloads section</link> - these are the best examples for the <link
 					to="/support/a-beginners-guide.html">beginners' guide</link>. </p>
-		</chapter>
-
-		<chapter title="Encapsulation">
-			<p> Phoebius framework is object-oriented. This means that classes here are everything.
-				We really love how C# and Java helps us to solve the dependencies, and hate the tons
-				of <code>include</code>'s and <code>require</code>'s we need to write in PHP. Thus
-				we decided to oversimplify this: <ol>
-					<li>you do not need to include scripts with classes you wish to use;</li>
-					<li>class files can be defined in a separate file which is located anywhere
-						under the directory which is specified inside the <link
-							to="http://php.net/set_include_path">
-							<code>include_path</code></link>. A file naming pattern is
-							<code>&lt;ClassName&gt;.class.php</code> (case-sensitive!).</li>
-				</ol> So, to define a new class, say, <code>MyController</code>, it is reasonable to
-				put it within <code>$app/lib/Mvc/MyController.class.php</code>. </p>
-			<p> Then a class loader, that is initialized in core init-script, takes care about the
-				look up. </p>
-		</chapter>
-
-		<chapter title="Fail-save code">
-			<p> An application flow is <b>exception-centric</b>: each PHP's error/warning/notice is
-				replaced with an <link to="/support/api/classExecutionContextException.html"
-					>exception</link> object. Such a concept helps to avoid tons of unnoticeable
-				inconsistencies (like an access to undefined index of an array) and thus making the
-				usage of an internal PHP function strong enough and unambiguous. The following
-				example proves that you won't forget to do the check: <code-block><![CDATA[
-try {
-	unlink('/path/to/unexistant-file');
-}
-catch (ExecutionContextException $e) {}
-]]></code-block> Of course, this functionality can be explicitly <link
-					to="/support/api/classExceptionizer.html#abc8fd10678ce163118dade48d4e7d3cf"
-					>turned off</link> when using a third-party library that does not know about the
-				exceptions or ignores notices and warnings. </p>
-			<p> Phoebius defines two exceptions that are used to wrap internal errors: <ul>
-					<li>
-						<link to="/support/api/classExecutionContextException.html"
-								><code>ExecutionContextException</code></link> is used to replace
-						all PHP errors, warnings and notices except fatal. </li>
-					<li>
-						<link to="/support/api/classCompilationContextException.html"
-							>CompilationContextException</link> is used define a fatal error (this
-						also includes <code>E_USER_ERROR</code> triggered using <link
-							to="http://php.net/trigger_error">trigger_error</link>. This king of
-						exception should be caught inside front-controller only and that handled as
-						unexpected error. This is done by <code>SiteApplication</code>, as described
-						by the "<link to="/support/manual/application.html">Application init</link>"
-						manual.</li>
-				</ul>
-			</p>
-		</chapter>
-
-		<chapter title="Assertions">
-			<p>
-				Using the <code>Assert</code> factory class.
-			</p>
 		</chapter>
 	</chapters>
 </document>

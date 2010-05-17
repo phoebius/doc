@@ -145,9 +145,10 @@ RewriteRule .* index.php [L,QSA]
 define ('APP_SLOT_CONFIGURATION', SLOT_PRESET_DEVELOPMENT);
 ]]></code-block>
 						</li>
-						<li>define the database connections: <code-block><![CDATA[
+						<li>define the database connections: 
+							<code-block><![CDATA[
 DBPool::add(
-	"mydb1", 
+	"default", 
 	MySqlDB::create()
 		->setName("mydb1')
 		->setUser('mysql')
@@ -155,7 +156,7 @@ DBPool::add(
 );
 
 DBPool::add(
-	"mydb2", 
+	"additional", 
 	PgSqlDb::create()
 		->setName("mydb2')
 		->setUser('postgres')
@@ -218,8 +219,8 @@ Autoloader::getInstance()
 		</chapter>
 
 		<chapter title="Conclusion">
-			<p> You have understand how the application can be preconfigured and expanded to fit the
-				SCM requirements. Not it is time to prepare the OO-environment of the application
+			<p> You have understood how the application can be preconfigured and expanded to fit the
+				SCM requirements. Now it is time to prepare the OO-environment of the application
 				and run it all -- see the <link to="/support/manual/application.html">application
 					init</link> document. </p>
 		</chapter>

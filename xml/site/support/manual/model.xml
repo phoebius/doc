@@ -23,50 +23,723 @@
 				the project domain is defined, how its entities and their relations are mapped to
 				the data source, and how they are used inside the application stack. </p>
 		</chapter>
-		
+
 		<chapter title="Introduction">
-			<p>
-				Project domain definition is an important step towards the simplification 
-				of you application. Describing the essences you should deal with you 
-				let Phoebius to handle a common business logic implicitly and to provide you
-				a stratified architecture where you have to apply the persistent classes.
-			</p>
-			<p>
-				This achieved simply as follows:
-				<ul>
-					<li>
-						you create a project domain XML definition using the packaged DTD (see 
-						<link to="http://git.phoebius.org/?p=phoebius.git;a=blob;f=share/Orm/Domain/Meta/Xml/abstract.dtd;hb=HEAD"><code>$base/share/Orm/Domain/Meta/Xml/abstract.dtd</code></link> 
-					</li>
-					<li>
-						you tell Phoebius to use the XML file where you have defined a project domain, and
-						Phoebius generates a pure-PHP classes representing the entities
-					</li>
-					<li> profit: a generated classes are the model you can easily use, apply and query
-						within your application </li>
+			<p> Project domain definition is an important step towards the simplification of your
+				application. When you describe the essences you should deal with you let Phoebius to
+				handle a common business logic implicitly. </p>
+			<p> This achieved simply as follows: <ul>
+					<li> you create a project domain definition in XML using the packaged DTD (see
+							<link
+							to="http://git.phoebius.org/?p=phoebius.git;a=blob;f=share/Orm/Domain/Meta/Xml/abstract.dtd;hb=HEAD"
+								><code>$base/share/Orm/Domain/Meta/Xml/abstract.dtd</code></link>); </li>
+					<li> you ask Phoebius to generate a pure-PHP classes that represent the
+						described entities and the database structure you need for a selected RDBMS
+						simply by running a command; </li>
+					<li> profit: a generated classes are the model you can easily use, apply and
+						query within your application </li>
 				</ul>
 			</p>
-			<p>
-				The simplicity is achieved using the unification of everything you should care about.
-			</p>
-			<p>
-				The programmers who does not use object-relational mapping software think
-			</p>
-			<p>
-				Sounds simple, but this simplicity has a huge advantage of dealing with even huge
-				graphs of entities without messing up the code.
-			</p>
+			<p> The simplicity is achieved using the unification of everything you should care
+				about. </p>
+			<p> Sounds simple, but this simplicity has a huge advantage of dealing with even huge
+				graphs of entities without messing up the code. </p>
+			<p> In this article you will learn how to define a mapping schema. </p>
 		</chapter>
-		
-		<chapter title="Project domain definition">
-			<subchapter title=""></subchapter>
+
+		<chapter title="Defining a project domain">
+			<subchapter title="Basic definition">
+				<p> When the requirements specs are written and analyzed, you may write down the
+					definition of the project domain. For this purposes Phoebius provides a <link
+						to="http://git.phoebius.org/?p=phoebius.git;a=blob;f=share/Orm/Domain/Meta/Xml/abstract.dtd;hb=HEAD"
+							><code>DTD</code></link>. </p>
+				<p> Imaging that requirements specification of a simple blog project defines the two
+					essences: an <code>Author</code>, an <code>Entry</code> and a <code>Tag</code>.
+					A relation between <code>Entry</code> and <code>Author</code> is
+						<code>one-to-many</code>, and a relation between Entry and Tag is
+						<code>many-to-many</code>. </p>
+				<p> An <code>Author</code> essence has the following properties: <ul>
+						<li><code>id</code> (type: <code>Integer</code>)</li>
+						<li><code>name</code> (type: <code>String</code>)</li>
+						<li><code>entries</code> (type: collection of <code>Entry</code> objects
+							whose <code>author</code> property referes to the containing
+								<code>Author</code> object)</li>
+					</ul>
+				</p>
+				<p> An <code>Entry</code> essence has the following properties: <ul>
+						<li><code>id</code> (type: <code>Integer</code>)</li>
+						<li><code>title</code> (type: <code>String</code>)</li>
+						<li><code>text</code> (type: <code>String</code>)</li>
+						<li><code>author</code> (type: <code>Author</code>)</li>
+						<li><code>tags</code> (type: collection of <code>Tag</code> assigned to the
+							containing <code>Entry</code> object)</li>
+					</ul>
+				</p>
+				<p> A <code>Tag</code> essence has the following properties: <ul>
+						<li><code>id</code> (type: <code>Integer</code>)</li>
+						<li><code>name</code> (type: <code>String</code>)</li>
+						<li><code>entries</code> (type: collection of <code>Entry</code> assigned to
+							the containing <code>Tag</code> object)</li>
+					</ul>
+				</p>
+				<p> You may note, that we are currently not messing our heads with technical details
+					of those relations: we do not specify any foreign key definitions, we do not
+					introduce a proxy essence to provide a truly <code>many-to-many</code> relation
+					between <code>Entry</code> and <code>Tag</code>), and we won't care about it in
+					future because all this is transparently handled by Phoebius.</p>
+				<p> Now lets define all this essences in XML format and put the definition to
+						<code>$app/var/domain.xml</code>: <code-block title="$app/var/domain.xml"><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE domain SYSTEM "../externals/phoebius/share/Orm/Domain/Meta/Xml/abstract.dtd">
+
+<domain>
+	<entities>
+		<entity name="Author">
+			<properties>
+				<identifier />
+				<property name="name" type="String" />
+				<container name="entries" type="Entry" refs="author" />
+			</properties>
+		</entity> 
+		<entity name="Entry">
+			<properties>
+				<identifier />
+				<property name="title" type="String" />
+				<property name="text" type="String" />
+				<property name="author" type="Author" />
+				<container name="tags" type="Tag" refs="EntryTag" />
+			</properties>
+		</entity> 
+		<entity name="Tag">
+			<properties>
+				<identifier />
+				<property name="name" type="String" />
+				<container name="entries" type="Entry" refs="EntryTag" />
+			</properties>
+		</entity> 
+	</entities>
+</domain>
+]]></code-block>
+				</p>
+				<p> You see that an XML definition has no technical details and describe essences in
+					a human-readable language. That is a feature of Phoebius framework. </p>
+				<p> Each essence has an identifier property, which is used with its default
+					settings. By default it has an <code>id</code> name and is type of
+						<code>Integer</code> (without specifying its size - a default database size
+					of RDBMS will be used). </p>
+				<p> Other properties, like <code>title</code>, <code>text</code> and
+						<code>name</code> are scalar properties of primitive type
+						<code>String</code>. </p>
+				<p> A one-to-one relation between <code>Entry</code> and <code>Author</code> is
+					defined by a <code>Entry.author</code> property with a type of
+						<code>Author</code>. This simple definition tells us that an
+						<code>Entry</code> has a property <code>author</code> which refers to a
+					persistent entity <code>Author</code>. Internally, there will be a foreign key
+					in a table that will store an <code>Entry</code> objects, that will refer to a
+					primary key of a table that will store an <code>Author</code> objects. </p>
+				<p> There are also virtual properties that describe <code>one-to-many</code> and
+						<code>many-to-many</code> relations. These properties are called
+					"containers" because they allow a developer to manipulate a set of referring
+					objects. </p>
+				<p> An <code>Author.entries</code> property is somehow a reverse side of
+						<code>Entry.author</code> property and it represents a container of
+						<code>Entry</code> objects that refer to a corresponding <code>Author</code>
+					object. Such containers provide a wide API to manipulate the sets of referring
+					objects: you may create, modify and drop the sets writing less codeю </p>
+				<p> In case of defining a <code>one-to-many</code> association you set a name of a
+					referring entity to a <code>type</code> attribute and a name of a referring
+					property to a <code>refs</code> attribute. </p>
+				<p> An <code>Entry.tags</code> and <code>Tag.entries</code> c simultaneously define
+					a <code>many-to-many</code> association, but the difference to one-to-many
+					association is that we use a desireble name of virtual proxy helper entity as a
+					value for <code>refs</code> attribute: <code-block><![CDATA[
+...
+<container name="entries" type="Entry" refs="EntryTag" />
+...
+]]></code-block></p>
+				<p> In this case Phoebius understands that <code>EntryTag</code> is not a property
+					of an <code>Entry</code> object (and thus it is not a <code>one-to-many</code>
+					association) but the name of an entity that should be generated implicitly and
+					used as a bridge between two ends of <code>many-to-many</code> association. </p>
+			</subchapter>
+
+			<subchapter title="Defining an entity">
+				<p> There are some ways you may customize the entity definition. </p>
+				<p> When giving a name to a new entity, Phoebius automatically creates a name for
+					the table to use for storing objects. By default it puts all the letters into a
+					lower case prepending an unredscore to each uppercased character. For example, a
+						<code>UserGroup</code> entity would be stored in a <code>user_group</code>
+					table. </p>
+				<p> When mapping an existing database schema to Phoebius, you may set a custom
+					database table via the <code>db-table</code> attribute: <code-block><![CDATA[
+...
+<entity name="UserEntry" db-table="db_user_entry_tbl">
+...
+]]></code-block>
+				</p>
+				<p> An entity may also be non-persistant, i.e. it may have a class representation at
+					logical level but without corresponding physical level representation (a
+					database level) and thus cannot be stored or queried. A DDL for such entity
+					won't be generated. To achieve this, just set <code>false</code> to
+						<code>has-dao</code> attribute: <code-block><![CDATA[
+...
+<entity name="Primitive" has-dao="false">
+...
+]]></code-block> This technique is useful when you need to define a composite type for a complex
+					property of another entity, or generate a class that will be helpful by itself.
+				</p>
+			</subchapter>
 		</chapter>
-		
-		
-		<!--
-			<code-block lang="bash">php $base/bin/make.php - -app-dir=$app $app/var/domain.xml</code-block> 
-		-->
-		
-		
+
+		<chapter title="Defining properties">
+			<subchapter>
+				<p> Each property of an entity is defined in context of project domain, i.e. at the
+					top of the physical level that used to store its value. A property definition
+					contains a name, a type, the type options, value multiplicity, uniqueability,
+					visibility and (optionally) the name of the columns in the database to be used
+					for this property. A <code><![CDATA[<property>]]></code> node is used for that.
+					Additionally, there is a special type of property called <code>identifier</code>
+					and is represented by an <code><![CDATA[<identifier>]]></code> node: in
+					addition, it accepts a <code>generated</code> option which tells the ORM that
+					all new values are generated by the database. </p>
+				<p> The most important feature of Phoebius ORM is complex mapping: any property can
+					use multiple database columns internally. This achieved by a design of ORM type
+					system: a property type itself is responsible for mapping database cells to any
+					type or a class. </p>
+				<p> A property value may have one of the following multiplicity:
+						<code>zeroOrOne</code> and <code>exactlyOne</code>. If the property has
+						<code>zeroOrOne</code> multiplicity then it may contain <code>NULL</code>;
+					otherwise, <code>NULL</code> is not allowed. </p>
+				<p> A property type defines how much columns it needs in a database to store mapped
+					value. In that case Phoebius generates a corresponding DDL, prefixing the names
+					of the columns with the name of a property. For example, if the property type
+					requires two columns and you set it to a property named
+						<code>localAddress</code>, then Phoebius will reserve
+						<code>local_address_1</code> and <code>local_address_2</code> for this
+					property. </p>
+				<p> In case of tying Phoebius to an existing database, you may specify the database
+					column names for each column explicitly, just be sure that you gave as much
+					columns names as property needs: <code-block><![CDATA[
+<property name="counter" type="Integer" db-columns="entity_counter" />
+<property name="user" type="User" db-columns="entity_user_id_fk" /> 
+<property name="address" type="LocalAddress" db-columns="entity_local_address_city entity_local_address_country" /> 
+]]></code-block>
+				</p>
+			</subchapter>
+
+			<subchapter title="Visibility">
+				<p> An entity property may have one of the following visibility levels:
+						<code>transparent</code>, <code>readonly</code> and <code>full</code>, </p>
+				<p> A <code>transparent</code> visibility causes an Phoebius to hide getters and
+					setters in an entity do not use it in a mapping. It is usefull when you want to
+					define a column of the complex type in an XML definition and then present it in
+					the generated DDL, but you don't want ORM to handle it, e.g.: <code-block><![CDATA[
+<property name="childIds" column="child_ids" visibility="transparent" type="RawSqlType">
+	<param name="definition" value="int8[]">
+</property>
+]]></code-block> This type looks complex to be handled by the ORM, but it will be presented in the
+					DDL. </p>
+				<p> A <code>readonly</code> visibility caused ORM to read the values of the property
+					coming from the database and map them to the corresponding class, but ignore
+					when flushing the values back to the database. It is extremely useful when
+					dealing with database-generated values. For example, if one the columns is
+					filled by an update trigger then it is important to forbid updating this
+					property at logical level: <code-block><![CDATA[
+<!-- an insert/update database trigger may recalculate the number of children automatically -->
+<property name="childrenNumber" visibility="readonly" type="Integer" /> 
+]]></code-block>
+				</p>
+				<p> And finally a <code>full</code> visibility is a normal and a default state of a
+					property: all getters and setters are generated for it and ORM maps its values
+					to and from the database. </p>
+			</subchapter>
+		</chapter>
+
+		<chapter title="Property type system">
+			<subchapter>
+				<p> Phoebius provides a wide and extensible type system within O/R mapping level. A
+					good architecture allows a developer to define properties of complex types whose
+					values are stored in a multiple columns, it also allows to map values of any
+					complexity to custom types and classes. </p>
+				<p> Internally all this functionality is achieved by the descendants of <link
+						to="/support/api/classOrmPropertyType.html"
+						><code>OrmPropertyType</code></link> class - a property type handler, which
+					encapsulates the auxiliary information: how much columns a property needs, how
+					the values should be mapped, how the database value should be assembled to a
+					class and how this class should be disassembled back to the raw database value. </p>
+				<p> When you define a property of a some time, Phoebius smartly determines the
+					actual property type handler to use. </p>
+			</subchapter>
+
+
+			<subchapter title="Primitive property types">
+				<p> Primitive types represent native PHP values. They are treated as fundamental and
+					thus used as the base for other property types. All these types are defined by
+					the <link to="/support/api/classDBType.html">
+						<code>DBType</code>
+					</link> class constants. </p>
+				<p> There are the following primitive types are presented: <ul>
+						<li><code>boolean</code></li>
+						<li>integers: <code>int16</code>, <code>int32</code> and
+							<code>int64</code></li>
+						<li>unsigned integers: <code>uint16</code>, <code>uint32</code> and
+								<code>uint64</code></li>
+						<li>floating-point: <code>currency</code>, <code>decimal</code> and
+								<code>float</code></li>
+						<li>string: <code>binary</code>, <code>char</code> and
+							<code>varchar</code></li>
+					</ul>
+				</p>
+				<p>To use them just set the value of the constant you need to use: <code-block
+						title="$app/var/domain.xml" lang="xml"><![CDATA[
+...
+<property name="id" type="uint32" />
+<property name="text" type="varchar" size="255" />
+<property name="cost" type="currency" precision="12" scale="9" />
+...
+]]></code-block> Primitive types may be set with the predefined attributes that will be passed to
+					the property handler: <ul>
+						<li>
+							<code>size</code> attribute defines the size of the type; it may be
+							applied to <code>varchar</code>, <code>char</code> and
+								<code>binary</code> primitive types </li>
+						<li>
+							<code>precision</code> and <code>scale</code> attributes may be applied
+							to <code>currency</code>, <code>decimal</code> and <code>float</code>
+							types </li>
+					</ul>
+				</p>
+
+				<p> Internally Phoebius uses <link to="/support/api/classPrimitivePropertyType.html">
+						<code>PrimitivePropertyType</code></link> to wrap a <link
+						to="/support/api/classDBType.html">
+						<code>DBType</code>
+					</link> instance. </p>
+			</subchapter>
+
+			<subchapter title="Boxable property types">
+				<p> Types can handle boxable primitives. This covers case when the native PHP value
+					should be wrapped by the class which exposes various helper methods easing the
+					usage of it. </p>
+				<p> For instance, date and time may be presented as string, but when they are
+					encapsulated in a class that exposes helper methods to work with date and time,
+					then they become much more useful. For that purposes, Phoebius provides <link
+						to="/support/api/classDate.html">
+						<code>Date</code></link>, <link to="/support/api/classTime.html">
+						<code>Time</code></link> and <link to="/support/api/classTimestamp.html">
+						<code>Timestamp</code>
+					</link> classes, that can wrap time, date and datetime string appropriately. </p>
+				<p> To use a transparent mapping of a scalar to a box, you may specify the class
+					which implements <link to="/support/api/interfaceIBoxable.html">
+						<code>IBoxable</code>
+					</link>. This interface provides a contract for explicit mapping. </p>
+				<p> To use boxable primitve just set the name of the class as a property type - code
+					generator would smartly resolve the actual property type: <code-block
+						title="$app/var/domain.xml" lang="xml"><![CDATA[
+...
+<property name="created" type="Date" />
+...
+]]></code-block>. </p>
+				<p> Phoebius will check if the specified type implements <link
+						to="/support/api/interfaceIBoxable.html">
+						<code>IBoxable</code>
+					</link> and will use <link to="/support/api/classBoxablePropertyType.html">
+						<code>BoxablePropertyType</code></link> if needed. </p>
+				<p> The most important advantage of boxing is using an enumeration as a property
+					type. When you define an enumeration (a descendant of <link
+						to="/support/api/classEnumeration.html">
+						<code>Enumeration</code></link>. If you define an enumeration which
+					implements a <link to="/support/api/interfaceIBoxable.html"
+							><code>IBoxable</code></link> interface then you can refer to this
+					enumeration in property definition: <code-block><![CDATA[
+class Color extends Enumeration implements IBoxable
+{
+	const RED = 'color_red';
+	const WHITE = 'color_white';
+	const BLACK = 'color_black';
+	
+	static function cast($value)
+	{
+		return new self ($value);
+	}
+}
+]]></code-block></p>
+				<p> The only limitation is that Phoebius reserves a varchar datatype for storing the
+					enumeration value, so if you need to use a custom type then create your own
+					property type handler. </p>
+				<p> You may implement your own boxables too, just be sure that your new type can be
+					casted to a scalar value without a data loss. </p>
+			</subchapter>
+
+			<subchapter title="Composite property types">
+				<p> Phoebius framework v1.0.1 introduced a production-ready inline composite types.
+					You are now able to define a property which points to a separate entity stored
+					side-by-side with the property's entity, reusing a single database table. This
+					is useful to propagate code reuse and moving the application code to the
+					corresponding essences.</p>
+				<p> The following part of <code>$app/var/domain.xml</code> defines two entities:
+						<code-block lang="xml" title="$app/var/domain.xml"><![CDATA[
+<entity name="Address" has-dao="false">
+	<properties>
+		<property name="countryCode" type="varchar" size="2" />
+		<property name="city" type="String" />
+		<property name="street" type="String" />
+	</properties>
+</entity>
+
+<entity name="User" has-dao="true">
+	<properties>
+		<identifier />
+		<property name="login" type="String" />
+		<property name="address" type="Address" association="exactlyOne" />
+	</properties>
+</entity>		
+]]></code-block>
+				</p>
+				<p> At the same time, Address entity is defined as storage-less: it is presented by
+					a class, whose objects cannot be stored in the database
+						(<code>has-dao="false"</code>). Therefore the declaration of a property
+					which refers the Address type actually forces the ORM to expand the User's
+					database table with the additional columns. </p>
+				<p> Composite mapping provides a good abstraction and simple storage schema. You can
+					refer the composite type properties without performance impact: <code-block
+						lang="php"><![CDATA[
+
+// get all users from the USA
+$query = 
+	User::query()
+		->where(
+			Expression::eq('address.countryCode', 'US')
+		);
+
+// acutally retrieve the list
+$usaCitizens = $query->getList();
+
+// dump it
+foreach ($usaCitizens as $citizen) {
+	echo $citizen->getLogin(), PHP_EOL;
+}
+]]></code-block> forces the following simple query to be executed: <code-block lang="php"><![CDATA[
+SELECT
+	user.login, user.address_country_code, user.address_city, user.address_street, user.group
+FROM 
+	user
+WHERE 
+	user.address_country_code = 'US'
+]]></code-block>
+				</p>
+				<p> Of course, Phoebius allows you to nest composite types, query them and define
+					multiple properties of the same composite type. </p>
+				<p> Composite association has the following known limitations: <ul>
+						<li>a composite value cannot of <code>zeroOrOne</code> multiplicity (i.e. a
+							property that contains the object cannot be nullable)</li>
+						<li> it cannot be referenced in a query: <code-block lang="php"><![CDATA[
+$address = new Address;
+$address->setCountryCode('US');
+
+User::query()
+	->where(
+		// do not know what columns to use in condition!
+		Expression::eq('address', $address) 
+	);		
+	]]></code-block> You need to specify the path to the final primitive property. </li>
+					</ul>
+				</p>
+				<p>Nevertheless, it can help you in simplifying various tasks, providing a good code
+					reuse across different components.</p>
+				<p> Internally, a <link to="/support/api/classCompositePropertyType.html">
+						<code>CompositePropertyType</code>
+					</link> class is used. </p>
+			</subchapter>
+
+			<subchapter title="Associative property types">
+				<p> Associative property types allow a property to refer to another entity by the
+					identifier. In other words, it is a transparent implementation of the foreign
+					keys in a way when you are working with a referred object rather than with its
+					identifier.</p>
+				<p> Consider the following example: <code-block lang="php"
+						title="$app/var/domain.xml"><![CDATA[
+...
+<entity name="UserGroup" has-dao="true">
+	<properties>
+		<identifier />
+		<property name="name" type="String" />
+	</properties>
+</entity>
+
+<entity name="User" has-dao="true">
+	<properties>
+		<identifier />
+		<property name="login" type="String" />
+		<property name="group" type="UserGroup" association="zeroOrOne" />
+	</properties>
+</entity>		
+...
+]]></code-block>
+				</p>
+				<p>User and <code>UserGroup</code> are associated in <code>1:1</code>
+					correspondence. In particular, this means that two database tables are defined,
+					and the table for <code>User</code> entity contains a foreign key which refers
+					to the <code>UserGroup</code> table and can be nullable (its association is
+						<code>zeroOrOne</code>).</p>
+				<p> Association mapping requires at least additional SQL query when assembling the
+					entity: <code-block lang="php" title="assembling the entity"><![CDATA[
+// two queries are executed implicitly:
+// SELECT ... FROM "user" WHERE "user"."id". = 100
+// SELECT ... FROM "user_group" WHERE "user_group"."id" = ...
+$user = User::dao()->getEntityById(100);
+
+var_dump($user->getGroup()->getId());
+]]></code-block>
+				</p>
+				<p> This technique of cascade fetching may be avoided by setting another fetch
+					strategy: <code-block lang="php" title="assembling the entity"><![CDATA[
+User::dao()->setFetchStrategy(FetchStrategy::lazy());
+
+// only one query is executed:
+// SELECT ... FROM "user" WHERE "user"."id". = 100
+$user = User::dao()->getEntityById(100);
+
+// need to fetch a referred entity explicitly when using it
+var_dump($user->getGroup()->fetch()->getId());
+]]></code-block>
+				</p>
+				<p> In most cases, it is not needed because Phoebius uses an internal optimizations
+					to send less queries to the database. For example. if you fetch a set of
+						<code>User</code> objects (say, 100 objects) then Phoebius executes only 2
+					queries rather than 100+1 queries (1 for <code>User</code> object and 100 for
+					referred <code>UserGroup</code> objects): <code-block lang="php"
+						title="assembling the entity"><![CDATA[
+// SELECT ... FROM "user" WHERE "user"."id". = 100
+// SELECT ... from "user_group" WHERE "user_group"."id" IN ( ... )
+$user = User::dao()->getList()
+]]></code-block>
+				</p>
+
+				<p> Internally, a <link to="/support/api/classAssociationPropertyType.html">
+						<code>AssociationPropertyType</code></link> is used. </p>
+			</subchapter>
+
+			<subchapter title="Custom property types">
+				<p> You may implement your own types easily if you need a complex mapping logic. </p>
+
+				<p> Phoebius already provides a basis for you to avoid useless implementations. </p>
+				<p> If you need to map a scalar type to a class (say, to wrap a value with a class),
+					then <link to="/support/api/classBoxablePropertyType.html">
+						<code>BoxablePropertyType</code>
+					</link> is enough for do this. For example, if you need to work with date as an
+					obeject, it is enough to create a corresponding class and implement <link
+						to="/support/api/interfaceIBoxable.html"><code>IBoxable</code></link> as
+					follows: <code-block><![CDATA[
+class MyDate implements IBoxable
+{
+	private $dateAsString;
+	
+	static function case($value)
+	{
+		return new self ($value);
+	}
+	
+	function __construct($value)
+	{
+		$this->dateAsString = $value;
+	}
+	
+	function getValue()
+	{
+		return $this->dateAsString;
+	}
+	
+	function __toString()
+	{
+		return $this->getValue();
+	}
+	
+	... methods to handle date as string
+]]></code-block>
+				</p>
+
+				<p>The property definition will like this: <code-block><![CDATA[
+<property name="myDatePropertyName" type="MyDate" />
+]]></code-block></p>
+
+				<p> In such case <link to="/support/api/classDate.html"><code>Date</code></link>,
+						<link to="/support/api/classTime.html"><code>Time</code></link>, <link
+						to="/support/api/classTimestamp.html">
+						<code>Timestamp</code></link> are implemented. </p>
+
+				<p> By default, a plain string datatype is used to store the scalar value at the
+					database side. </p>
+
+				<p> In case when you need a custom implementation of the mapping and setting the
+					datasource, you may create your own property type handler extending the <link
+						to="/support/api/classOrmPropertyType.html"
+						><code>OrmPropertyType</code></link>. A contract that <link
+						to="/support/api/classOrmPropertyType.html"
+						><code>OrmPropertyType</code></link> class defines is self-descriptive so
+					its documentation should be enough to build your own composite type. </p>
+
+				<p> Say, you need to define a custom type for a column that will store a
+						<code>MyDate</code> value. Then you create a descendant, call it, say,
+						<code>MyDatePropertyType</code> and type it with the class using the <link
+						to="/support/api/classIOrmPropertyAssignable.html">
+						<code>IOrmPropertyAssignable</code></link> interface: <code-block><![CDATA[
+class MyDate implements IBoxable, IOrmPropertyAssignable
+{
+	// implementing IOrmPropertyAssignable
+	static function getOrmPropertyType()
+	{
+		return new MyDatePropertyType;
+	}
+}
+]]></code-block>
+				</p>
+
+				<p> All you need to know is that your <code>OrmPropertyType</code> descendants are
+					not the classes that encapsulate a mapped value: <code>OrmPropertyType</code> is
+					just an ORM layer workhorse which is responsible for mapping the database values
+					to the business classes. </p>
+
+				<p> In case when you need to make more abstract property type handler (that will
+					implement mapping for various types depending on property definition), you may
+					create a <link to="/support/api/classOrmPropertyType.html">
+						<code>OrmPropertyType</code>
+					</link> descendant, provide a public constructor and set the name of the type in
+					the definition: <code-block><![CDATA[
+class MyPropertyType extends OrmPropertyType 
+{
+	function __construct($typeParam1, $typeParam2)
+	{
+		...
+	}
+	
+	... implementation of OrmPropertyType contract follows
+}
+]]></code-block>
+				</p>
+				<p>To refer this property type in a definition and pass the custom values to the
+					constructor just use following example: <code-block><![CDATA[
+<property name="property1" type="MyPropertyType">
+	<param name="typeParam1" value="1">
+	<param name="typeParam2" value="2">
+</property>
+]]></code-block></p>
+			</subchapter>
+
+			<subchapter title="Unique keys">
+				<p> To make a property unique, you need to set the <code>unique</code> attribute
+					value to <code>false</code>: <code-block><![CDATA[
+<property name="color" type="Color" unique="true">
+]]></code-block>
+				</p>
+				<p> As you define entities in context of project domain, you cannot create unique
+					constraints over multiple properties, only a property value can be unique. </p>
+				<p> On the other hand, you <i>may</i> define a composite property as unique: in that
+					case, all columns that are used to store the composite type, will also be
+					presented in a unique index: <code-block><![CDATA[
+<entity name="Address" has-dao="false">
+	<properties>
+		<property name="countryCode" type="varchar" size="2" />
+		<property name="city" type="String" />
+		<property name="street" type="String" />
+	</properties>
+</entity>
+
+<entity name="User" has-dao="true">
+	<properties>
+		<identifier />
+		<property name="login" type="String" />
+		<property name="address" type="Address" association="exactlyOne" unique="true" />
+	</properties>
+</entity>		
+]]></code-block>
+				</p>
+				<p> Phoebius will generate DDL with the following unique index: <code-block><![CDATA[
+UNIQUE INDEX "user_idx" ON ( "address_country_code", "address_city", "address_street" )
+]]></code-block>
+				</p>
+			</subchapter>
+
+		</chapter>
+
+		<chapter title="Defining containers">
+			<p> Phoebius allows generating virtual properties, that represent a sets of referring
+				objects. </p>
+
+			<p> When you define a container entity, then you get the ability to manipulate sets of
+				those objects easily: fetch them, modify the set and drop it completely or by query.
+				The actual database queries are generated transparently, and the dependencies needed
+				to use table joins are resolved automatically. </p>
+
+			<p> An API to handle sets is provided by <link to="/support/api/classContainer.html"
+						><code>Container</code></link> class. </p>
+
+			<subchapter title="One-to-many containers">
+				<p/>
+
+				<p> For example, if you have an entity <code>Entry</code> which refers to entity
+						<code>Author</code> via an associative property type, then it is possible
+					that you will have to write a query to grab a set of <code>Entry</code> objects
+					that refer to a specific <code>Author</code> object. </p>
+				<p> To simplify this task, there are container properties introduced. Say, the
+					definition is the following: <code-block title="$app/var/domain.xml"><![CDATA[
+<entity name="Author">
+	<properties>
+		<identifier />
+		<property name="name" type="String" />
+		<container name="entries" type="Entry" refs="author" />
+	</properties>
+</entity> 
+<entity name="Entry">
+	<properties>
+		<identifier />
+		<property name="title" type="String" />
+		<property name="author" type="Author" />
+	</properties>
+</entity> 
+]]></code-block>
+				</p>
+				<p> Please note that a container property defines a name of an referring entity and
+					a name of its associative property. </p>
+				<p> This allows to work with the set of referring objects as follows: <code-block><![CDATA[
+$author = Author::dao()->getEntityById(100);
+
+$entriesContainer = $author->getEntries();
+
+// transparently execute: SELECT * FROM entry WHERE entry.author = 100
+$entries = $entriesContainer->getList();
+
+// transparently execute: DELETE FROM entry WHERE entry.author = 100
+$entriesContainer->drop();
+]]></code-block></p>
+				<p> Containers are not mandatory and can be omitted in the definition. </p>
+			</subchapter>
+
+			<subchapter title="Many-to-many containers">
+				<p> </p>
+				<p> This association requires a helper entity to be defined, which holds the actual
+					association between essences. You may define it explicitly as follows: <code-block><![CDATA[
+<entity name="EntryTag">
+	<properties>
+		<property name="entry" type="Entry" />
+		<property name="tag" type="Tag" />
+	</properties>
+</entity> 
+]]></code-block>
+				</p>
+				<p> But Phoebius allows an implicit generation of helper </p>
+			</subchapter>
+
+		</chapter>
+
+		<chapter title="Conclusion">
+			<p> You've learn how to define a project domain and its entities, how to map them to an
+				existing database, how to choose a appropriate property type and how to create your
+				own property types. </p>
+			<p> Now it is time to take a profit from this definition and generate the internal
+				structures, classes and DDL over this definition using <link to="codegen.html">code
+					generation tool</link>. </p>
+		</chapter>
+
 	</chapters>
 </document>

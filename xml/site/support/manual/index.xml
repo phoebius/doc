@@ -21,11 +21,14 @@
  <doc xml="configuration.xml" />
  <doc xml="application.xml"></doc>
  <doc xml="model.xml" />
+ <doc xml="codegen.xml"></doc>
  <doc xml="querying-entities.xml" />
  <doc xml="routers.xml"></doc>
  <doc xml="controllers.xml"></doc>
  <doc xml="presentation-logic.xml"></doc>
+ <!-- 
 	<ref link="/support/manual/advanced/" name="Advanced topics">
 	 <include xml="advanced/index.xml" prefix="advanced"></include>
 	</ref>
+ -->
 </index>

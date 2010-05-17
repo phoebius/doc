@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	* ***********************************************************************************************
+	*
+	* Phoebius Framework
+	*
+	* **********************************************************************************************
+	*
+	* Copyright (c) 2010 Scand Ltd.
+	*
+	* All rights reserved.
+	*
+	*************************************************************************************************
+-->
+
+<!DOCTYPE document SYSTEM "../../../../dtd/document.dtd">
+
+<document>
+	<title>Code generation</title>
+	<chapters>
+		<chapter title="Scope of this document">
+			<p> This document covers the most important stage of the application development: how
+				the project domain is defined, how its entities and their relations are mapped to
+				the data source, and how they are used inside the application stack. </p>
+		</chapter>
+
+		<chapter title="Generating classes and DDL">
+			<p>
+				<code-block lang="bash"><![CDATA[
+/var/www/app$ php externals/phoebius/bin/make.php --code --schema --db=default $app/var/domain.xml
+]]></code-block>
+			</p>
+		</chapter>
+
+
+	</chapters>
+</document>

@@ -367,6 +367,10 @@ class Color extends Enumeration implements IBoxable
 				<p> The only limitation is that Phoebius reserves a varchar datatype for storing the
 					enumeration value, so if you need to use a custom type then create your own
 					property type handler. </p>
+				<p>
+					<link to="/support/api/classWeekDay.html"><code>WeekDay</code></link>
+					is a good example of enumeration that can be used for that purposes.
+				</p>
 				<p> You may implement your own boxables too, just be sure that your new type can be
 					casted to a scalar value without a data loss. </p>
 			</subchapter>
@@ -594,6 +598,14 @@ class MyDate implements IBoxable, IOrmPropertyAssignable
 }
 ]]></code-block>
 				</p>
+				<p>
+					As a proof of concept, Phoebius provides a set of classes that represent
+					primitive types, <link to="/support/api/group__Core__Types.html">among them</link>: 
+					<link to="/support/api/classBoolean.html"><code>Boolean</code></link>, 
+					<link to="/support/api/classInteger.html"><code>Integer</code></link>,
+					<link to="/support/api/classString.html"><code>String</code></link> and 
+					<link to="/support/api/group__Core__Types.html">others</link>.
+				</p>
 
 				<p> All you need to know is that your <code>OrmPropertyType</code> descendants are
 					not the classes that encapsulate a mapped value: <code>OrmPropertyType</code> is
@@ -675,7 +687,8 @@ UNIQUE INDEX "user_idx" ON ( "address_country_code", "address_city", "address_st
 						><code>Container</code></link> class. </p>
 
 			<subchapter title="One-to-many containers">
-				<p/>
+				<p> One-to-many containers give the ability to work with sets of objects that refer
+					to a particular object (using one-to-one association). </p>
 
 				<p> For example, if you have an entity <code>Entry</code> which refers to entity
 						<code>Author</code> via an associative property type, then it is possible
@@ -716,9 +729,37 @@ $entriesContainer->drop();
 			</subchapter>
 
 			<subchapter title="Many-to-many containers">
-				<p> </p>
-				<p> This association requires a helper entity to be defined, which holds the actual
-					association between essences. You may define it explicitly as follows: <code-block><![CDATA[
+				<p> Many-to-many associations differ from one-to-many associations in a way of
+					storing the actual reference: the first one use a separate table for that. </p>
+				<p> In spite of the complexity of implementation, Phoebius tries its best to provide
+					a coherent API to handle these associations, which is the same as for
+					one-to-many containers. </p>
+				<p> To tie two entities using many-to-many association you need two define one
+					container for each entity, setting the name of a referring entity to the
+						<code>type</code> attribute and the common name of the association to the
+						<code>refs</code> attribute: <code-block><![CDATA[
+
+<entity name="Entry">
+	<properties>
+		<identifier />
+		<property name="title" type="String" />
+		<property name="author" type="Author" />
+		<container name="tags" type="Tag" refs="EntryTag" />
+	</properties>
+</entity> 
+
+<entity name="Tag">
+	<properties>
+		<identifier />
+		<property name="name" type="String" />
+		<container name="entries" type="Entry" refs="EntryTag" />
+	</properties>
+</entity> 
+]]></code-block>
+				</p>
+				<p> That will tell Phoebius to implicitly generate a proxy entity which will
+					actually represent the association. If we define a proxy entity manually, it may
+					like this: <code-block><![CDATA[
 <entity name="EntryTag">
 	<properties>
 		<property name="entry" type="Entry" />
@@ -727,7 +768,6 @@ $entriesContainer->drop();
 </entity> 
 ]]></code-block>
 				</p>
-				<p> But Phoebius allows an implicit generation of helper </p>
 			</subchapter>
 
 		</chapter>

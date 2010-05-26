@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	* ***********************************************************************************************
+	*
+	* Phoebius Framework
+	*
+	* **********************************************************************************************
+	*
+	* Copyright (c) 2010 Scand Ltd.
+	*
+	* All rights reserved.
+	*
+	*************************************************************************************************
+-->
+
+<!DOCTYPE document SYSTEM "../../../../../dtd/document.dtd">
+
+<document>
+	<title>Authentication layer</title>
+	<chapters>
+		<chapter title="Overview">
+			<p> Being a low-level framework, Phoebius provides a strong and stratified architecture
+			that encourage developers to extend the existent functionality. </p>
+			<p>
+				The current implementation of MVC does not provide an authorization layer, but 
+				at the same time it can be easily extended to conform the requirements of the project.
+			</p>
+			<p>
+				This document will should how the MVC stack is transparent to be overloaded.
+			</p>
+		</chapter>
+		
+		<chapter title="Authentication">
+			<p>
+				Authentication layer is a layer which catches the execution of the application flow
+				and checks whether client has permissions to access the requested page or not. If
+				the permission is granted then the application flow continues, otherwise another
+				action is executed (redirection to an authorization page, or displaying an
+				error with the message that access is denied).
+			</p>
+			<p>
+				<link to="/support/api/classActionBasedController.html"><code>ActionBasedController</code></link> class
+				provides a set of protected methods, that can be overloaded to change the normal application flow.
+				Among them is 
+				<link
+					to="/support/api/classActionBasedController.html#a8e8fb2be5600b89dca9a74074cfd76a9">
+					<code>ActionBasedController::processAction()</code>
+				</link> which accepts the action taken from the request (by the router) and the method found
+				according the action. Normally, <link
+					to="/support/api/classActionBasedController.html#a8e8fb2be5600b89dca9a74074cfd76a9">
+					<code>ActionBasedController::processAction()</code>
+				</link> just invokes the method returning the result of its execution
+			</p>
+			<p>
+				The method can be overloaded in a descendant class to prevent an unauthorized access to the methods of
+				the controller: <code-block title="AccessCheckController.class.php"><![CDATA[
+abstract class AccessCheckController extends ActionBasedController {
+
+	function showAccessDeied()
+	{
+		...
+	}
+
+	protected function processAction($action, ReflectionMethod $method) {
+	
+		/* check credentials here */
+		if (!isAuthorized($this->getTrace()->getRequest()) {
+			return $this->showAccessDenied();
+		
+			// also possible to redirect a client:
+			// a "login" route should be defined in a route table
+			//return $this->redirect("login");
+		}
+	
+		return parent::processAction($action, $method);
+	}
+}
+]]></code-block>
+			</p>
+			<p>
+				After that, you can use this class as a base for controller that should serve restricted are
+				of a web service (e.g., administration panel). In the following example, <code>action_showIndex</code> won't
+				be executed until <code>AccessCheckController::processAction</code> allow this:
+				<code-block title="AdminController.class.php"><![CDATA[
+class AdminController extends AccessCheckController {
+	function action_showIndex() 
+	{
+		...
+	}
+}
+]]></code-block>
+			</p>
+		</chapter>
+		<chapter title="Conclusion">
+			<p> You see that Phoebius provides a good interfaces to extend and overload the existing
+				functionality easily. Authorization layer can be added by reusing an existing method
+				of a controller, and letting you to decide, how to implement the actual
+				authorization and session management. </p>
+		</chapter>
+		
+		
+	</chapters>
+</document>

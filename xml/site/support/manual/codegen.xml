@@ -19,19 +19,96 @@
 	<title>Code generation</title>
 	<chapters>
 		<chapter title="Scope of this document">
-			<p> This document covers the most important stage of the application development: how
-				the project domain is defined, how its entities and their relations are mapped to
-				the data source, and how they are used inside the application stack. </p>
+			<p> This document explains the usage of codegen tool: its primary goal is to build a PHP
+				classes and database schema over a <link to="model.html">project domain
+					definition</link>. </p>
 		</chapter>
 
-		<chapter title="Generating classes and DDL">
-			<p>
-				<code-block lang="bash"><![CDATA[
-/var/www/app$ php externals/phoebius/bin/make.php --code --schema --db=default $app/var/domain.xml
+		<chapter title="Overview">
+			<p> To achieve the complete experience of Phoebius features, there is a tool that
+				generates code according to the XML definition of the project domain: <link
+					to="http://git.phoebius.org/?p=phoebius.git;a=blob;f=bin/make.php;hb=HEAD">
+					<code>$base/bin/make.php</code></link>
+			</p>
+			<p> This tool generates a complete database schema which is used to store the objects
+				within the selected RDBMS. Currently, it does not track schema changes so 
+				you need to use a 3rd party tool for that (we recommend LiquiBase for that). </p>
+			<p> It also creates a huge set of classes - various auxiliary classes and
+				business classes, - that simplify the development process hiding
+				most of the boring stuff inside: ORM auxiliary structures and mapping logic, query
+				construction and property encapsulation.  </p>
+		</chapter>
+
+		<chapter title="Using make.php">
+			<p> Starting from Phoebius framework v1.2.0 <code>$base/bin/make.php</code> has an
+				extremely easy command syntax: <code-block><![CDATA[
+  $ make.php [options] [domain-schema.xml]
+
+If domain-schema.xml is not specified then make.php uses \$app/var/domain.xml.
+\$app is treated as the current directory, if --app-dir option is not set.
+
+
+General options:
+
+  --app-dir=<dir>        an $app, a path to the directory where an application resides. Can be
+                         either an absolute path or a path relative to the current directory.
+
+                         Application directory should contain at least $app/etc/config.php.
+                         If not specified, the current directory is used.
+
+  --host-config=<name>   name of the host configuration resides at $app/cfg/<name>/config.php.
+
+  --dry-run              modify nothing, show the results only. Currently not implemented.
+
+  --help, -h             show this help.
+
+
+Code generator options:
+
+  --code                 generate and ORM over the defined schema: an auxiliary PHP classes
+                         and business-entities.
+
+  --regenerate-public    regenerate public files if already generated. This forces a --code option
+                         to be switched on automatically.
+
+  --public-dir=<dir>     write generated public class' files to <dir>. Default is lib/Domain.
+                         Path is treated as relative to the application directory ($app).
+
+  --auto-dir=<dir>       write generated internal class' files to <dir>. Default is var/lib/Domain.
+                         Path is treated as relative to the application directory ($app).
+
+
+Database schema generator options:
+
+  --schema               generate database schema. You should set the name of the database config
+                         either in domain-schema.xml (<domain db-schema="<name>">) or
+                         using the --db option explicitly.
+
+  --db=<name>            use this database to generate schema (should be added to DBPool). This
+                         can be set implicitly in domain-schema.xml (<domain db-schema="<name>">).
+                         This forces a --schema option to be switched on automatically.
+
+  --import               import schema to the database. Currently not implemented.
+
+  --schema-file=<file>   write database schema to <file>.
+                         Default is var/db/<db_driver>-<domain-schema_name>.sql.
+                         Path is treated as relative to the application directory ($app).
+                         This forces a --schema option to be switched on automatically.
+
 ]]></code-block>
 			</p>
+			<p> It accepts various options that turn on code and sql generators, and accepts the
+				path to an XML definition of the project domain to be processed. </p>
+			<p>The most common usage is the following: <code-block lang="bash"><![CDATA[
+/var/www/app$ php externals/phoebius/bin/make.php --code --schema --host-config=default --db=default var/domain.xml
+]]></code-block>
+			</p>
+			<p> This call forces Phoebius to generated PHP classes, putting them to the default
+				directories, and generate SQL schema over the database added within
+					<code>default</code> config to <link to="/support/api/classDBPool.html"
+						><code>DBPool</code></link> under the name <code>default</code>.
+					<code>$app/var/domain.xml</code> is used as primary xml definition. </p>
 		</chapter>
-
-
+		
 	</chapters>
 </document>

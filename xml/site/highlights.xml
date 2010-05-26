@@ -46,11 +46,11 @@
 							<th>DB Objects</th>
 							<th>ORM</th>
 							<th>Templates</th>
-							<th>Caching</th>
+						<!--	<th>Caching</th>
 							<th>Validation</th>
 							<th>Ajax</th>
 							<th>Auth Module</th>
-							<th>Modules</th>
+							<th>Modules</th> -->
 							<th>EDP</th>
 						</tr>
 						<tr>
@@ -61,11 +61,11 @@
 							<td class="plus">+</td>
 							<td class="plus">+</td>
 							<td class="plus">+</td>
+						<!--	<td class="minus">&#150;</td>
 							<td class="minus">&#150;</td>
 							<td class="minus">&#150;</td>
 							<td class="minus">&#150;</td>
-							<td class="minus">&#150;</td>
-							<td class="minus">&#150;</td>
+							<td class="minus">&#150;</td> -->
 							<td class="minus">&#150;</td>
 						</tr>
 					</table>
@@ -109,21 +109,31 @@
 			<subchapter title="Caching">
 				<p>Caching is not currently implemented, but it is planned to be provided in future
 					versions as it is easy to integrate it in the existing solution as a separate
-					layer.</p>
+					layer (by implementing <link to="/support/api/interfaceIOrmEntityAccessor.html">
+						<code>IOrmEntityAccessor</code></link>.</p>
 			</subchapter>
 			<subchapter title="Validation">
-				<p>Validation is currently not supported.</p>
+				<p>Validation is presented at MVC layer as a functionality that maps incoming
+					variables according to action method signature (see 
+					<link
+						to="/support/api/classActionBasedController.html#a34d374d74443da52c227a9e005027c2d"
+						><code>ActionBasedController::getClassValue()</code></link> for overloads.</p>
 			</subchapter>
 			<subchapter title="Ajax">
-				<p>Ajax integration is currently not supported.</p>
+				<p>Ajax can be supported by Phoebius in the same way ordinary HTTP requests are served. 
+					<link to="/support/manual/use-cases/ajax.html">Learn more</link> how an AJAX web service
+					can be implemented.</p>
 			</subchapter>
 			<subchapter title="Auth module">
 				<p>Auth module is not yet implemented, but will be presented in future versions as a
-					separate library or controller extension.</p>
+					separate library or controller extension. Phoebius has no restrictions on the
+					way the request is processed. <link to="/support/manual/use-cases/auth.html"
+						>Learn more</link> how the authentication layer may be integrated into
+					existing MVC stack. </p>
 			</subchapter>
 			<subchapter title="Module support">
 				<p>Module support has no sense in Phoebius, because Phoebius is not a CMS but a
-					framework, whose applications may use even any PHP library.</p>
+					low-level framework, whose applications may use even any PHP library.</p>
 			</subchapter>
 			<subchapter title="Event-driven development and AOP">
 				<p>Event-driven development forces strongly-coupled interfaces and a code mess, so

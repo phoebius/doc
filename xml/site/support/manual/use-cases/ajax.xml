@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * ***********************************************************************************************
+ *
+ * Phoebius Framework
+ *
+ * **********************************************************************************************
+ *
+ * Copyright (c) 2009 Scand Ltd.
+ *
+ * All rights reserved.
+ *
+ *************************************************************************************************
+-->
+
+<!DOCTYPE document SYSTEM "../../../../../dtd/document.dtd">
+
+<document>
+	<title>Ajax-integrated service</title>
+	<chapters>
+		<chapter title="Overview">
+			<p> An ajax-integrated web-service is a service which may handle various types of
+				requests: both simple HTML requests and background AJAX requests. </p>
+			<p> Say, a service should handle user requests and give a plain HTML as a result,
+				rendering it using the model. At the same time, a service should use the same tools
+				(a model, MVC) to handle background (AJAX) requests which differ from other requests
+				by the protocol. </p>
+			<p> Phoebius has no restrictions on what should be sent to the client; but, it provides
+				an architecture which helps a developer to make reusable applications even for
+				unknown requirements. </p>
+			<p> This article will explain, how to integrate a layer that will serve simple AJAX
+				requests and produce results in JSON. </p>
+		</chapter>
+
+		<chapter title="Reusing the MVC stack">
+			<subchapter>
+				<p> A common application stack is the following: <code-block><![CDATA[
+request -> routing over URL -> dispatcher -> controller -> action -> action result
+]]></code-block>
+				</p>
+				<p> To make application handle AJAX requests at the same stack, all we need to do is
+					the following: <ul>
+						<li>add a separate rule for ajax requests to catch them</li>
+						<li>introduce a separate abstract controller that will produce results with
+							AJAX protocol conformance</li>
+						<li>use action result that makes an AJAX-compliant response</li>
+					</ul>
+				</p>
+
+			</subchapter>
+
+			<subchapter title="Extending router">
+				<p> An application has no need of a separate front-controller to accept background
+					AJAX requests, it is enough to catch them via the internal routing system. </p>
+				<p> The easiest way to do this is to reserve a URL for AJAX requests in the
+					following form: <code-block><![CDATA[
+/ajax/<controller>/<action>/
+]]></code-block>
+				</p>
+				<p> A code for adding the route may look like that: <code-block><![CDATA[
+// $router instance of ChainedRouter
+$router->route(
+	'ajax',
+	'/ajax/(PublicAjax|AdminAjax):controller/:action/'
+);
+]]></code-block>
+				</p>
+				<p> This code forces router to raise a custom <code>PublicAjaxController</code> or
+						<code>AdminAjaxController</code> and then invoke an action which is
+					determined from the second particle of a path in the URL. For example, a URL
+						<code>/ajax/PublicAjax/getUserList/</code> will force
+						<code>PublicAjaxController::action_get_user_list()</code> to be invoked. </p>
+				<p> So, you see that AJAX requests can be routed similarly to other requests. </p>
+			</subchapter>
+
+			<subchapter title="Preparing the controller">
+				<p> This step is obligatory in case when the application should serve a lot of
+					different background requests. We recommend to implement an abstract controller
+					that will be a base for other ajax controllers. It will simplify the development
+					by providing the following features: <ul>
+						<li>an invoked action method may return an array and it will be wrapped as a
+							resulting data</li>
+						<li> an invoked action method may return a string and it will be treated as
+							an error message, occurred during request handling </li>
+						<li> it will catch all uncaught exceptions and unknwon method invocations
+							and build a correct error response to avoid AJAX crash (as AJAX protocol
+							is error-prone and requires stability in handling errors) </li>
+					</ul></p>
+				<p>To provide these features, <code>BaseAjaxController</code> just overloads the
+					methods introduced by the <link
+						to="/support/api/classActionBasedController.html">
+						<code>ActionBasedController</code></link>: <code-block
+						title="lib/BaseAjaxController.class.php"><![CDATA[
+abstract class BaseAjaxController extends ActionBasedController {
+
+	// allows your action methods (action_*) to return the
+	// following:
+	// 1. an array - then it is wrapped as a resulting adata
+	// 2. a string -then it is treated as an error message
+	protected function makeActionResult($actionResult)
+	{
+		if (is_array($actionResult)) {
+			return new JsonResult(array(
+				'protocol' => '1.0',
+				'response' => $actionResult
+			));
+		}
+		else if (is_string($actionResult) {
+			return new JsonResult(array(
+				'protocol' => '1.0',
+				'error' => true,
+				'msg' => $actionResult
+			));
+		}
+			
+		Assert::isUnreachable(
+			'Ajax result can be of array or error message only'
+		);
+	}
+	
+	// redirect all exceptions occurred within actions to a normal error
+	protected function processAction($action, ReflectionMethod $method)
+	{
+		try {
+			return parent::processAction($action, $method);
+		}
+		catch (Exception $e) {
+			return get_class($e) . ': ' . $e->getMessage();
+		}
+	}
+	
+	// if an unknown action is requested, then handle it too
+	protected function handleUnknownAction($action)
+	{
+		return 'unknown action: ' . $action;
+	}
+}
+
+
+]]></code-block>
+				</p>
+
+				<p> After that we can create controllers based on our custom
+						<code>BaseAjaxController</code>. Let say, that it we need two controllers:
+					one for public functions (<code>PublicAjaxController</code>) which serves the
+					requests without any restriction, and for administration functions
+						(<code>AdminAjaxController</code>) which will also check whether client is
+					authorized or not. </p>
+				<p>Public controller is ready to have actions. Let say, that it needs to have an
+					action that returns the list of ids and names of all users, defined in the
+					database: <code-block title="lib/PublicAjaxController.class.php"><![CDATA[
+
+class PublicAjaxController extends BaseAjaxController {
+
+	// handles /ajax/PublicAjax/get_user_list/
+	function action_get_user_list() {
+		$yield = array();
+		
+		$users = User::dao()->getList();
+		foreach ($users as $user) {
+			$yield[] = array(
+				'id' => $user->getId(),
+				'name' => $user->getName()
+			);
+		}
+		
+		return $yield;
+	}
+}
+
+]]></code-block>
+				</p>
+				<p> Administrator's controller needs to have an extra check: whether the client is
+					authorized or not, so it overloads a method that invokes an action method:
+						<code-block title="lib/AdminAjaxController.class.php"><![CDATA[
+class AdminAjaxController extends BaseAjaxController {
+	protected function processAction($action, ReflectionMethod $method) {
+	
+		/* check credentials here */
+		if (!isAuthorized($this->getTrace()->getRequest()) {
+			return 'client not authorized';
+		}
+	
+		return parent::processAction($action, $method);
+	}
+	
+	/* admin actions here */
+}
+]]></code-block>
+				</p>
+			</subchapter>
+
+			<subchapter title="Custom action result">
+				<p>In a mentioned example we used an <link to="/support/api/classJsonResult.html"
+							><code>JsonResult</code></link> to represent an array as JSON result.
+					You may want to implement your own, custom action results, that will produce
+					response according to other protocol, e.g. XML. All you need to do is implement
+						<link to="/support/api/interfaceIActionResult.html">
+						<code>IActionResult</code></link>.</p>
+			</subchapter>
+
+		</chapter>
+
+	</chapters>
+</document>

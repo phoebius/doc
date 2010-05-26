@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * ***********************************************************************************************
+ *
+ * Phoebius Framework
+ *
+ * **********************************************************************************************
+ *
+ * Copyright (c) 2010 Scand Ltd.
+ *
+ * All rights reserved.
+ *
+ *************************************************************************************************
+-->
+
+<!DOCTYPE document SYSTEM "../../../../../dtd/document.dtd">
+
+<document>
+	<title>Use-cases</title>
+	<chapters>
+		<chapter>
+			<p> Phoebius is a low-level framework: this means, that it may not provide some
+				important functionality, but at the same time it does not put the restrictions (both
+				ideological and architectural) on an extensions.</p>
+			<p>
+				Here we show you, how Phoebius may be used in various ways. Start with
+				reading about 
+				<link to="ajax.html">multi-purpose AJAX-integrated service</link>.
+			</p>
+		</chapter>
+	</chapters>
+</document>

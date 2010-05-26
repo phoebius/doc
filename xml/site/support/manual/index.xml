@@ -16,19 +16,19 @@
 <!DOCTYPE index SYSTEM "../../../../dtd/index.dtd">
 
 <index>
- <doc xml="manual.xml" location=""></doc>
- <doc xml="basics.xml" />
- <doc xml="configuration.xml" />
- <doc xml="application.xml"></doc>
- <doc xml="model.xml" />
- <doc xml="codegen.xml"></doc>
- <doc xml="querying-entities.xml" />
- <doc xml="routers.xml"></doc>
- <doc xml="controllers.xml"></doc>
- <doc xml="presentation-logic.xml"></doc>
- <!-- 
-	<ref link="/support/manual/advanced/" name="Advanced topics">
-	 <include xml="advanced/index.xml" prefix="advanced"></include>
-	</ref>
+ <doc xml="manual.xml" location=""/>
+ <doc xml="basics.xml"/>
+ <doc xml="configuration.xml"/>
+ <doc xml="application.xml"/>
+ <doc xml="model.xml"/>
+ <doc xml="codegen.xml"/>
+<!-- <doc xml="querying-entities.xml"/>
+ <doc xml="routers.xml"/>
+ <doc xml="controllers.xml"/>
+ <doc xml="presentation-logic.xml"/>
  -->
+	<ref link="/support/manual/use-cases/" name="Use-cases">
+	 <include xml="use-cases/index.xml" prefix="use-cases"></include>
+	</ref>
+ 
 </index>

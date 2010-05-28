@@ -98,6 +98,12 @@ class AdminController extends AccessCheckController {
 				authorization and session management. </p>
 		</chapter>
 		
-		
+		<chapter title="A real-world example">
+			<p>
+				<link to="/src/phoebius-ajax-example-latest.tar.gz">Download a basic
+					application</link> - a simple directory browser - with 
+				background AJAX requests and authentication to provide administration features.
+			</p>
+		</chapter>
 	</chapters>
 </document>

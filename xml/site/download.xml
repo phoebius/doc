@@ -65,6 +65,21 @@
 				the best documentation is the successful production-ready application, so you may
 				visit download <link to="/src/phoebius-site-latest.tar.gz">the latest sources</link>
 				of this website to see the framework in action. </p>
+			<p>
+				<![CDATA[
+						<div class="i">
+							<p>
+								<a href="/src/phoebius-ajax-example-latest.tar.gz">
+									<h2>AJAX-integrated application with authentication &#151; latest</h2>
+									
+									<img class="icon" src="images/icons/download.gif" width="32" height="32" />
+								</a>
+							</p>
+						</div>
+				]]> Basic example on how to build ab AJAX-integrated web service. This example is an
+				implementation of a simple directory browser with ability to be authorized and create
+				more directories via AJAX (<link to="http://jquery.com/">jQuery</link> is used as a
+				client-side library). </p>
 			
 			<p> 
 				

@@ -200,6 +200,15 @@ class AdminAjaxController extends BaseAjaxController {
 			</subchapter>
 
 		</chapter>
+		
+		<chapter title="A real-world example">
+			<p>
+				<link to="/src/phoebius-ajax-example-latest.tar.gz">Download a basic
+					application</link> - a simple directory browser - with 
+				background AJAX requests and ability to create new directories after successful
+				authorization.
+			</p>
+		</chapter>
 
 	</chapters>
 </document>

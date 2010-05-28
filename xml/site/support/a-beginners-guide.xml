@@ -407,5 +407,9 @@ $this->setMaster('master');
 			<p> Phoebius framework is modern solution intended to quick building of applications
 				that require self-documenting stratified code of high quality. </p>
 		</chapter>
+		<chapter title="More information">
+			<p> Download the <link to="/src/phoebius-ajax-example-latest.tar.gz">AJAX application
+					example</link> or read the <link to="/support/manual/">manual pages</link>. </p>
+		</chapter>
 	</chapters>
 </document>

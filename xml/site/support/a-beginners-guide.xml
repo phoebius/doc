@@ -268,9 +268,8 @@ class BlogController extends ActionBasedController
 				request <code>/?skip=20</code> will be passed to
 				<code>BlogController::action_skipPosts()</code> but <code>/?skip=abc</code> won't.
 				Integer here is the <link to="/support/api/classInteger.html">defined type</link>.
-				Future releases will expose this functionality and will be able to treat incoming
-				variables as ORM-related entity property identifiers, obtaining identified entities
-				from the database. </p>
+				You can also use types defined in a project domain: Phoebius will use incoming
+				variable value as the identifier to fetch the object. </p>
 
 		</chapter>
 		<chapter title="Applying a business logic">

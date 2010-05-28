@@ -116,8 +116,8 @@
 				<p>Validation is presented at MVC layer as a functionality that maps incoming
 					variables according to action method signature (see 
 					<link
-						to="/support/api/classActionBasedController.html#a34d374d74443da52c227a9e005027c2d"
-						><code>ActionBasedController::getClassValue()</code></link> for overloads.</p>
+						to="/support/a-beginners-guide.html#5602a3"
+						>the example</link>).</p>
 			</subchapter>
 			<subchapter title="Ajax">
 				<p>Ajax can be supported by Phoebius in the same way ordinary HTTP requests are served. 

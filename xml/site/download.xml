@@ -101,6 +101,9 @@
 				and provides various bootstrapping scripts. It also contains a few examples
 				on how to define the project domain, query and pass ORM-related entities,
 				and use them inside MVC stack.</p>
+		</chapter>
+		<chapter title="Public repositories">
+
 
 			<p>Find more at our online repositories:
 				<link to="http://git.phoebius.org/">

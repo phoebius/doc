@@ -103,15 +103,14 @@
 				and use them inside MVC stack.</p>
 		</chapter>
 		<chapter title="Public repositories">
-
-
-			<p>Find more at our online repositories:
-				<link to="http://git.phoebius.org/">
+			<p> Phoebius online repository is also availble at gitweb:
+				<link to="http://git.phoebius.org/?p=phoebius.git;a=summary">
 					<![CDATA[
 						<img src="http://git.phoebius.org/git-logo.png" align="absmiddle" width="72" height="27" alt="git" style="position:absolute;left:-90px;" />
 					]]>
 					git.phoebius.org
 				</link></p>
+				<p>Phoebius development repository is also available via readonly <code>git</code> protocol: <code>git://git.phoebius.org/phoebius.git</code></p>
 		</chapter>
 	</chapters>
 </document>

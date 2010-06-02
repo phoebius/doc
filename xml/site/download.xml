@@ -25,28 +25,28 @@
 							<p>
 								<a href="/src/phoebius-v1.2.0.tar.gz">
 									<h2>Phoebius framework v1.2.0</h2>
-									
+
 									<img class="icon" src="images/icons/download.gif" width="32" height="32" />
 								</a>
 							</p>
-							
+
 							<p>May 1, 2010</p>
-							
+
 							<p>
-							It&#146;s features are: 
+							It&#146;s features are:
 								<ul>
 									<li>improved code generator</li>
 									<li>persistent collections API: one-to-many and many-to-many associations worker</li>
 									<li>optimized persistent object assembler</li>
 								</ul>
 							</p>
-							
+
 							<p>Phoebius v1.0.x branch is now deprecated and won't be supported in future.</p>
 						</div>
 					]]>
 			</p>
 		</chapter>
-		
+
 		<chapter title="Samples and usage examples">
 			<p>
 				<![CDATA[
@@ -54,13 +54,13 @@
 							<p>
 								<a href="/src/phoebius-site-latest.tar.gz">
 									<h2>phoebius.org &#151; latest</h2>
-									
+
 									<img class="icon" src="images/icons/download.gif" width="32" height="32" />
 								</a>
 							</p>
 						</div>
 				]]>
-				
+
 				A <link to="/">phoebius.org</link> is written completely at Phoebius. We believe, that
 				the best documentation is the successful production-ready application, so you may
 				visit download <link to="/src/phoebius-site-latest.tar.gz">the latest sources</link>
@@ -71,7 +71,7 @@
 							<p>
 								<a href="/src/phoebius-ajax-example-latest.tar.gz">
 									<h2>AJAX-integrated application with authentication &#151; latest</h2>
-									
+
 									<img class="icon" src="images/icons/download.gif" width="32" height="32" />
 								</a>
 							</p>
@@ -80,27 +80,35 @@
 				implementation of a simple directory browser with ability to be authorized and create
 				more directories via AJAX (<link to="http://jquery.com/">jQuery</link> is used as a
 				client-side library). </p>
-			
-			<p> 
-				
+
+			<p>
+
 				<![CDATA[
 						<div class="i">
 							<p>
 								<a href="/src/phoebius-app-latest.tar.gz">
 									<h2>phoebius framework sandbox &#151; latest</h2>
-									
+
 									<img class="icon" src="images/icons/download.gif" width="32" height="32" />
 								</a>
 							</p>
 						</div>
 				]]>
-				
+
 				Another good way to learn the concepts of the framework quickly is to get the
 				<link to="/src/phoebius-app-latest.tar.gz">stub for
 					the typical application</link> which offers a unified directory structure
 				and provides various bootstrapping scripts. It also contains a few examples
 				on how to define the project domain, query and pass ORM-related entities,
 				and use them inside MVC stack.</p>
+
+			<p>Find more at our online repositories:
+				<link to="http://git.phoebius.org/">
+					<![CDATA[
+						<img src="http://git.phoebius.org/git-logo.png" align="absmiddle" width="72" height="27" alt="git" style="position:absolute;left:-90px;" />
+					]]>
+					git.phoebius.org
+				</link></p>
 		</chapter>
 	</chapters>
 </document>
